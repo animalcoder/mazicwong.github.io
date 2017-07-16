@@ -68,6 +68,180 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LINUX作业整理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/16/LINUX作业整理/" class="article-date">
+  <time datetime="2017-07-16T08:29:45.000Z" itemprop="datePublished">2017-07-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/16/LINUX作业整理/">LINUX作业整理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/07/16/LINUX作业整理/" data-id="cj56rtv3500055dschy54e5g0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-卡特兰数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/16/卡特兰数/" class="article-date">
+  <time datetime="2017-07-16T06:04:41.000Z" itemprop="datePublished">2017-07-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/16/卡特兰数/">卡特兰数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="卡特兰数"><a href="#卡特兰数" class="headerlink" title="卡特兰数"></a>卡特兰数</h2><p><a href="http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html" target="_blank" rel="external">http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html</a></p>
+<h3 id="hdu-1023-卡特兰数-大数"><a href="#hdu-1023-卡特兰数-大数" class="headerlink" title="hdu 1023 卡特兰数+大数"></a>hdu 1023 卡特兰数+大数</h3><p>递推关系：<br>当h(1)=h(2)=1:<br>    h(n) = h(1)<em>h(n-1)+h(2)</em>h(n-2)+…+h(n-1)<em>h(n)<br>当h(1)=1,h(2)=2:<br>    h(n) = h(n-1)</em>(4n-2)/(n+1)<br>    即h(n) = C(2n,n)/(n+1)</p>
+<p>应用：</p>
+<ol>
+<li>出栈次序<br>n个数顺序进栈，问出栈顺序</li>
+<li>二叉树构成问题<br>n个节点，问能构成多少种二叉树</li>
+<li>凸多边形的三角形划分<br>一个凸n边形划分成多个三角形，有几种分发</li>
+<li>矩阵链乘<br>括号匹配问题</li>
+<li>其他<br>01序列问题、n边形格子从左上角到右下角不跨过对角线问题</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/07/16/卡特兰数/" data-id="cj56rtv3300045dsckkpkx8hd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-大数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/15/大数据/" class="article-date">
+  <time datetime="2017-07-15T15:14:21.000Z" itemprop="datePublished">2017-07-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/15/大数据/">大数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##</p>
+<p>环境:<br>    系统: ubuntu 16.04<br>    <a href="http://www.powerxing.com/install-hadoop/" target="_blank" rel="external">参考教程</a></p>
+<h3 id="新建一个hadoop用户"><a href="#新建一个hadoop用户" class="headerlink" title="新建一个hadoop用户"></a>新建一个hadoop用户</h3><h3 id="安装jre-jdk"><a href="#安装jre-jdk" class="headerlink" title="安装jre,jdk"></a>安装jre,jdk</h3><h3 id="安装hadoop"><a href="#安装hadoop" class="headerlink" title="安装hadoop"></a>安装hadoop</h3><h3 id="单机配置-非分布式-运行wordcount实现单词计数"><a href="#单机配置-非分布式-运行wordcount实现单词计数" class="headerlink" title="单机配置(非分布式)运行wordcount实现单词计数"></a>单机配置(非分布式)运行wordcount实现单词计数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ hdfs dfs -mkdir ./input</div><div class="line">$ vi /usr/wordcount  //创建本地文件</div><div class="line">$ sudo ./bin/hdfs dfs -put /usr/wordcount ./input  //上传文件到hdfs</div><div class="line">$ sudo ./bin/hdfs dfs -ls ./input/    //查看上传后的文件情况</div><div class="line">$ sudo ./bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.3.jar wordcount ./input/wordcount ./output   //运行wordcount实例</div><div class="line">$ sudo ./bin/hdfs dfs -ls ./output/  //查看输出目录</div><div class="line">$  sudo ./bin/hdfs dfs -cat ./output/part-r-00000  //查看输出文件</div></pre></td></tr></table></figure>
+<h3 id="hadoop伪分布式配置"><a href="#hadoop伪分布式配置" class="headerlink" title="hadoop伪分布式配置"></a>hadoop伪分布式配置</h3><p>配置core-site.xml和hdfs-site.xml和hadoop-env.sh(在/etc/hadoop中,别忘了这个)<br>要执行hadoop命令的话要先对namenode执行格式化操作<br>注意点1：namenode格式化那里过不去，然后换成sudo命令，把hadoop-env.sh里的JAVA_HOME改成直接地址，然后就可以运行了<br>注意点2：开启namenode和datanode守护进程的时候，连ssh_localhost一直显示root的密码错误，然后出去把hadoop文件夹权限改成777，进来直接运行就没问题了<br>或者参照:<a href="http://www.cnblogs.com/hmy-blog/p/6500909.html" target="_blank" rel="external">http://www.cnblogs.com/hmy-blog/p/6500909.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/07/15/大数据/" data-id="cj56rtv3600065dscedv4kio9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/big-data/">big data</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ICPC计划" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/15/ICPC计划/" class="article-date">
+  <time datetime="2017-07-15T13:44:53.000Z" itemprop="datePublished">2017-07-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/15/ICPC计划/">ICPC计划</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##假期训练计划<br>暑假：7月17日-9月3日</p>
+<h3 id="关键"><a href="#关键" class="headerlink" title="关键"></a>关键</h3><ol>
+<li>读论文</li>
+<li>算法导论+挑战程序设计竞赛</li>
+</ol>
+<h3 id="具体内容"><a href="#具体内容" class="headerlink" title="具体内容"></a>具体内容</h3><ol>
+<li>贪心+DP</li>
+<li>博弈论+SG</li>
+<li>线段树+树状数组+各种树</li>
+<li>每天一套kuangbin专题</li>
+</ol>
+<p>Day1: 7/17 <a href="https://vjudge.net/contest/65959" target="_blank" rel="external">简单搜索</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/07/15/ICPC计划/" data-id="cj56rtv2s00005dscvegbt3ym" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plan/">plan</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/15/hello-world/" class="article-date">
@@ -103,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/15/hello-world/" data-id="cj55eryhc000020scj6tirou8" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/07/15/hello-world/" data-id="cj56rtv2y00025dsc4486003a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -122,9 +296,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -143,6 +331,22 @@
       <ul>
         
           <li>
+            <a href="/2017/07/16/LINUX作业整理/">LINUX作业整理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/16/卡特兰数/">卡特兰数</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/15/大数据/">大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/15/ICPC计划/">ICPC计划</a>
+          </li>
+        
+          <li>
             <a href="/2017/07/15/hello-world/">Hello World</a>
           </li>
         
@@ -158,7 +362,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 Mazic Wong<br>
+      &copy; 2017 MazicWong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
