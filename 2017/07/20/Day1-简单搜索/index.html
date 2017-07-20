@@ -5,16 +5,17 @@
   
   <title>Day1.简单搜索 | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Day1kuangbin专题1：简单搜索 分类  记录路径: poj3414, poj3984, 两点bfs: poj2150, uva11624,   学习 poj 3278一直过不了，跟网上代码基本一样，然后复制了那段代码，打了一些随机数出来，跑两遍，比较结果后才发现错误 12345678int main()&amp;#123;    freopen(&quot;in&quot;,&quot;w&quot;,stdout);    for">
+  <meta name="description" content="kuangbin专题1：简单搜索分类  记录路径: poj3414, poj3984, 两点bfs: poj2150, uva11624, fzu2150, hdu2612 简单dfs: poj1321, hdu1241(求连通块裸题) 简单bfs: (to[][]写明变化方向)直接模拟: hdu1495三维bfs: poj2251(朝6个方向变化)一维bfs: poj3278(朝3个方向变化)(">
+<meta name="keywords" content="search,kuangbin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day1.简单搜索">
 <meta property="og:url" content="mazicwong.github.io/2017/07/20/Day1-简单搜索/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="Day1kuangbin专题1：简单搜索 分类  记录路径: poj3414, poj3984, 两点bfs: poj2150, uva11624,   学习 poj 3278一直过不了，跟网上代码基本一样，然后复制了那段代码，打了一些随机数出来，跑两遍，比较结果后才发现错误 12345678int main()&amp;#123;    freopen(&quot;in&quot;,&quot;w&quot;,stdout);    for">
-<meta property="og:updated_time" content="2017-07-19T16:54:40.456Z">
+<meta property="og:description" content="kuangbin专题1：简单搜索分类  记录路径: poj3414, poj3984, 两点bfs: poj2150, uva11624, fzu2150, hdu2612 简单dfs: poj1321, hdu1241(求连通块裸题) 简单bfs: (to[][]写明变化方向)直接模拟: hdu1495三维bfs: poj2251(朝6个方向变化)一维bfs: poj3278(朝3个方向变化)(">
+<meta property="og:updated_time" content="2017-07-20T01:37:21.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Day1.简单搜索">
-<meta name="twitter:description" content="Day1kuangbin专题1：简单搜索 分类  记录路径: poj3414, poj3984, 两点bfs: poj2150, uva11624,   学习 poj 3278一直过不了，跟网上代码基本一样，然后复制了那段代码，打了一些随机数出来，跑两遍，比较结果后才发现错误 12345678int main()&amp;#123;    freopen(&quot;in&quot;,&quot;w&quot;,stdout);    for">
+<meta name="twitter:description" content="kuangbin专题1：简单搜索分类  记录路径: poj3414, poj3984, 两点bfs: poj2150, uva11624, fzu2150, hdu2612 简单dfs: poj1321, hdu1241(求连通块裸题) 简单bfs: (to[][]写明变化方向)直接模拟: hdu1495三维bfs: poj2251(朝6个方向变化)一维bfs: poj3278(朝3个方向变化)(">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -56,9 +57,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
@@ -89,34 +90,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a><strong>Day1</strong></h1><p><a href="https://vjudge.net/contest/65959#overview" target="_blank" rel="external">kuangbin专题1：简单搜索</a></p>
-<p>分类</p>
+        <h1 id="kuangbin专题1：简单搜索"><a href="#kuangbin专题1：简单搜索" class="headerlink" title="kuangbin专题1：简单搜索"></a><a href="https://vjudge.net/contest/65959#overview" target="_blank" rel="external">kuangbin专题1：简单搜索</a></h1><p>分类</p>
 <ul>
-<li>记录路径: poj3414, poj3984,</li>
-<li>两点bfs: poj2150, uva11624,</li>
+<li><strong>记录路径:</strong> poj3414, poj3984,</li>
+<li><strong>两点bfs:</strong> poj2150, uva11624, fzu2150, hdu2612</li>
+<li><strong>简单dfs:</strong> poj1321, hdu1241(求连通块裸题)</li>
+<li><strong>简单bfs:</strong> (to[][]写明变化方向)<br>直接模拟: hdu1495<br>三维bfs: poj2251(朝6个方向变化)<br>一维bfs: poj3278(朝3个方向变化)<strong>(经典格式)</strong><br>二位bfs: poj1426(朝2个方向变化)<br>其他bfs: poj3126(变化4个数,每个数9种变化)<pre><code>poj3087(只朝一个方向变化的bfs,这种题更应该归入暴力模拟吧)
+</code></pre>路径输出: poj3414(用数组模拟,bfs+路径输出)<pre><code>poj3984(bfs求最短路,pre记录之前状态,递归输出)
+</code></pre></li>
+<li><strong>状压配合搜索:</strong> poj3279, poj1321</li>
 </ul>
 <hr>
 <h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a><strong>学习</strong></h2><ol>
-<li><p>poj 3278一直过不了，跟网上代码基本一样，然后复制了那段代码，打了一些随机数出来，跑两遍，比较结果后才发现错误</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; rand()%<span class="number">100000</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; rand()%<span class="number">100000</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>bfs固定模板   5步+循环(越界+返回+回溯)<br>注意到要找到每种状态间的变化</p>
-</li>
 <li><p>dfs固定模板   递归深搜</p>
 <blockquote>
 <p>(dfs一般写为子程序，bfs一般用来找最短路)</p>
 </blockquote>
 </li>
-<li><p>bfs中step可以存在struct node{}中，也可以直接开数组存，直接开数组存一般是为了保存下访问该点时的路径深度(),例如下面两个’两点bfs’的题，</p>
+<li><p>poj 3278一直过不了，跟网上代码基本一样，然后复制了那段代码，打了一些随机数出来，跑两遍，比较结果后才发现错误</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; rand()%<span class="number">100000</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; rand()%<span class="number">100000</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>bfs中的Q只是用来过渡的，一个容器存放中间状态而已，真正要的在step</p>
+<li><p>bfs固定模板   5步+循环(越界+返回+回溯)<br>注意到要找到每种状态间的变化</p>
 </li>
+<li>bfs中step可以存在struct node{}中，也可以直接开数组存，直接开数组存一般是为了保存下访问该点时的路径深度(),例如下面两个’两点bfs’的题，</li>
+<li>bfs中的Q只是用来过渡的，一个容器存放中间状态而已，真正要的在step</li>
 <li><p>如果只存下地点的位置信息，有下面三种用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">struct node&#123;int x,y;&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">struct node&#123;int x,y;&#125;</div><div class="line">queue&lt;node&gt; Q;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">queue&lt;pair&lt;int,int&gt;&gt; Q</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct node&#123;</div><div class="line">    int x,y;</div><div class="line">    node()&#123;x=x,y=y&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<hr>
 <hr>
 <p>##<strong>题目</strong></p>
 <h2 id="poj-1321-dfs"><a href="#poj-1321-dfs" class="headerlink" title="poj 1321 dfs"></a>poj 1321 dfs</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
@@ -161,6 +166,7 @@
 <p><strong>这道题WA了无数次。最后问题出在有可能没有解，此时返回一个负数都可以通过，正数则不行，在bfs最后面补了一个return -1;然后通过了。有点坑</strong></p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: poj 3278.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月17日 星期一 18时35分10秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">int</span> n,k;</div><div class="line"><span class="keyword">bool</span> vis[maxn];</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> cur;</div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    node a,next;</div><div class="line">    <span class="built_in">queue</span>&lt;node&gt; Q;</div><div class="line">    a.cur=n, a.step=<span class="number">0</span>;</div><div class="line">    vis[a.cur]=<span class="number">1</span>;</div><div class="line">    Q.push(a);</div><div class="line">    <span class="keyword">while</span>(!Q.empty())</div><div class="line">    &#123;</div><div class="line">        a = Q.front();</div><div class="line">        Q.pop();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                next.cur=a.cur+<span class="number">1</span>;</div><div class="line">                next.step=a.step+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (i==<span class="number">1</span>)</div><div class="line">            &#123;</div><div class="line">                next.cur=a.cur<span class="number">-1</span>;</div><div class="line">                next.step=a.step+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (i==<span class="number">2</span>)</div><div class="line">            &#123;</div><div class="line">                next.cur=(a.cur&lt;&lt;<span class="number">1</span>);</div><div class="line">                next.step=a.step+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (next.cur&lt;<span class="number">0</span> || next.cur&gt;=maxn) <span class="comment">//排除出界情况(可以呼略的剪枝)</span></div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span> (vis[next.cur])</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span> (next.cur==k)</div><div class="line">                <span class="keyword">return</span> next.step;</div><div class="line">            vis[next.cur]=<span class="number">1</span>;</div><div class="line">            Q.push(next);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//?????</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    freopen(<span class="string">"out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="keyword">if</span> (n&gt;=k)</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; n-k &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">cout</span> &lt;&lt; bfs() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
 <h2 id="poj-3279-状压"><a href="#poj-3279-状压" class="headerlink" title="poj 3279 状压"></a>poj 3279 状压</h2><h3 id="题意-3"><a href="#题意-3" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 一片矩形地，每个块的属性是0和1,一只奶牛可以翻转每个块，她落在某个位置，则该位置及四周均翻转一次<br>  求最少步数使得上面都变为0</p>
 </blockquote>
@@ -170,6 +176,7 @@
 <li>直接状压解法，存下2^n种情况，对每一种solve()一遍，然后找出最小的次数(跟法1其实差不多?)<br>其实这里传入状态st进行处理，可以把st看成是第一行再上面一行的状态，这样可以容易理解点。(代码实现起来会更方面，mp[0][1-m]存st的状态，取出状态用((st&gt;&gt;j)&amp;1) )</li>
 </ul>
 </blockquote>
+<hr>
 <h2 id="poj-1426-两个方向的dfs-amp-amp-打表"><a href="#poj-1426-两个方向的dfs-amp-amp-打表" class="headerlink" title="poj 1426 两个方向的dfs &amp;&amp; 打表"></a>poj 1426 两个方向的dfs &amp;&amp; 打表</h2><h3 id="题意-4"><a href="#题意-4" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 找一个数m,满足是n的倍数且其十进制均由0和1组成</p>
 <h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路:"></a>思路:</h3><ul>
@@ -177,6 +184,7 @@
 <li>跟法1意义，不过深搜暴力后打了个表过啦，不过要注意的是，数组很大，开的时候用<code>unsigned long long a[200];</code> 在输出的时候应该用<code>printf(&quot;%I64llu&quot;,a[n]);</code> 一开始写成%I64ull过不了.</li>
 </ul>
 </blockquote>
+<hr>
 <h2 id="poj-3126-经典bfs-素数筛选-类似poj3278-经典bfs"><a href="#poj-3126-经典bfs-素数筛选-类似poj3278-经典bfs" class="headerlink" title="poj 3126 经典bfs+素数筛选(类似poj3278,经典bfs)"></a>poj 3126 经典bfs+素数筛选(类似poj3278,经典bfs)</h2><ul>
 <li>变形:每次4个数，每个数共有9种变化<h3 id="题意-5"><a href="#题意-5" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 给两个数字，要求从一个变到另一个，每次只能改变一个数字，且每次变更完后都是素数，求最小需要改变多少次</p>
@@ -184,6 +192,7 @@
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="poj-3087-bfs-模拟"><a href="#poj-3087-bfs-模拟" class="headerlink" title="poj 3087 bfs+模拟"></a>poj 3087 bfs+模拟</h2><ul>
 <li>变形:只有一个方向的变化(其实这种不应该归入bfs，因为每次变化只朝着一个方向，直接暴力模拟题而已,可以参考知乎上关于 <strong>‘暴力模拟’&amp;‘贪心’&amp;‘dp’区别</strong> 的最高赞答案)<h3 id="题意-6"><a href="#题意-6" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 给s1,s2,ee串,长度为c和2c，然后把s1,s2交错叠放(s2最下面一张放最下面),的到新s12,再将s12下面C个字符赋给s1,上面c个给s2,重复直到s12为ee,求最少次数</p>
@@ -191,6 +200,7 @@
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="poj-3414-bfs-路径输出-不用队列，改用数组进行模拟"><a href="#poj-3414-bfs-路径输出-不用队列，改用数组进行模拟" class="headerlink" title="poj 3414 bfs+路径输出(不用队列，改用数组进行模拟)"></a>poj 3414 bfs+路径输出(不用队列，改用数组进行模拟)</h2><ul>
 <li>变形:六个方向<h3 id="题意-7"><a href="#题意-7" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 两杯水，三种操作，’倒满‘&amp;&amp;’倒空‘&amp;&amp;’a倒入b中直接a空或b满‘<br> 找最少次数使得有一个水杯恰好剩下C</p>
@@ -198,6 +208,7 @@
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="fzu-2150-两个起点的bfs"><a href="#fzu-2150-两个起点的bfs" class="headerlink" title="fzu 2150 两个起点的bfs"></a>fzu 2150 两个起点的bfs</h2><ul>
 <li>变形:四个方向<h3 id="题意-8"><a href="#题意-8" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 矩形框内有某些草地，要求同时在两个地方点火(两地方可以重复)，目的是烧完所有草地，问最短时间，不能烧完输出-1</p>
@@ -213,6 +224,7 @@
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="uva-11624-两个起点的bfs"><a href="#uva-11624-两个起点的bfs" class="headerlink" title="uva 11624 两个起点的bfs"></a>uva 11624 两个起点的bfs</h2><ul>
 <li>变形:四个方向<h3 id="题意-9"><a href="#题意-9" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 地图内一个点着火，火跟人速度一样，人需要避开火和障碍物到达边缘，问最短路</p>
@@ -220,6 +232,7 @@
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="poj-3984-bfs-记录路径"><a href="#poj-3984-bfs-记录路径" class="headerlink" title="poj 3984  bfs+记录路径"></a>poj 3984  bfs+记录路径</h2><ul>
 <li>变形:4个方向<h3 id="题意-10"><a href="#题意-10" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 矩形,左上角到右下角的最短路,并输出路径</p>
@@ -227,6 +240,7 @@
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="hdu-1241-dfs求连通块裸题"><a href="#hdu-1241-dfs求连通块裸题" class="headerlink" title="hdu 1241 dfs求连通块裸题"></a>hdu 1241 dfs求连通块裸题</h2><ul>
 <li>变形:8个方向<h3 id="题意-11"><a href="#题意-11" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 给一片矩形地，找连通块数,horizontally,vertically,diagonally都叫连通</p>
@@ -234,20 +248,23 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="hdu-1495-求连通块裸题"><a href="#hdu-1495-求连通块裸题" class="headerlink" title="hdu 1495 求连通块裸题"></a>hdu 1495 求连通块裸题</h2><ul>
+<hr>
+<h2 id="hdu-1495-简单bfs"><a href="#hdu-1495-简单bfs" class="headerlink" title="hdu 1495 简单bfs"></a>hdu 1495 简单bfs</h2><ul>
 <li>变形:6个方向<h3 id="题意-12"><a href="#题意-12" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 给一个可乐容量s，两个杯子容量a,b，目的是要用最少次数平分这个可乐</p>
 <h3 id="思路-11"><a href="#思路-11" class="headerlink" title="思路:"></a>思路:</h3><p> 有明确的初始态和终止态，和六个变化的方向，明显bfs<br> 初始(s,a,b)= (s,0,0)<br> 终止(s,a,b)= (s&gt;&gt;1,s&gt;&gt;1,0)  (假定a为大号杯)<br> 六个方向:  s-&gt;a  s-&gt;b  a-&gt;b  a-&gt;s  b-a  b-&gt;s</p>
 </blockquote>
 </li>
 </ul>
-<h2 id="hdu-2612-求连通块裸题"><a href="#hdu-2612-求连通块裸题" class="headerlink" title="hdu 2612 求连通块裸题"></a>hdu 2612 求连通块裸题</h2><ul>
+<hr>
+<h2 id="hdu-2612-两点bfs"><a href="#hdu-2612-两点bfs" class="headerlink" title="hdu 2612 两点bfs"></a>hdu 2612 两点bfs</h2><ul>
 <li>变形:6个方向<h3 id="题意-13"><a href="#题意-13" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p> 两人走迷宫，有很多个出口，要求到达同一个出口会面，且总花费时间最少</p>
 <h3 id="思路-12"><a href="#思路-12" class="headerlink" title="思路:"></a>思路:</h3><p> 对两个人分别bfs，找出其到每一点的时间，然后枚举所有出口，找到最短时间</p>
 </blockquote>
 </li>
 </ul>
+<hr>
 <h2 id="hdu-1043-八数码问题-bfs-反响搜索-离线打表"><a href="#hdu-1043-八数码问题-bfs-反响搜索-离线打表" class="headerlink" title="hdu 1043 八数码问题-bfs(反响搜索+离线打表)"></a>hdu 1043 八数码问题-bfs(反响搜索+离线打表)</h2><ul>
 <li>变形:6个方向<h3 id="题意-14"><a href="#题意-14" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
 <p>经典八数码，走成1-8x最少几步</p>
@@ -255,14 +272,15 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="补充-八数码八重境界"><a href="#补充-八数码八重境界" class="headerlink" title="补充: 八数码八重境界"></a>补充: <a href="http://www.cnblogs.com/goodness/archive/2010/05/04/1727141.html" target="_blank" rel="external">八数码八重境界</a></h3><p>###<a href="http://www.cnblogs.com/zufezzt/p/5659276.html" target="_blank" rel="external">八数码八重境界代码</a></p>
-
+<h3 id="补充-八数码八重境界"><a href="#补充-八数码八重境界" class="headerlink" title="补充: 八数码八重境界"></a>补充: <a href="http://www.cnblogs.com/goodness/archive/2010/05/04/1727141.html" target="_blank" rel="external">八数码八重境界</a></h3><h3 id="八数码八重境界代码"><a href="#八数码八重境界代码" class="headerlink" title="八数码八重境界代码"></a><a href="http://www.cnblogs.com/zufezzt/p/5659276.html" target="_blank" rel="external">八数码八重境界代码</a></h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/20/Day1-简单搜索/" data-id="cj5b93tyf0000bbscc3h4dj8j" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/07/20/Day1-简单搜索/" data-id="cj5broqgz00044uscbg9wd62c" class="article-share-link">Partager</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/search-kuangbin/">search,kuangbin</a></li></ul>
+
     </footer>
   </div>
   
@@ -271,7 +289,7 @@
   
   
     <a href="/2017/07/16/LINUX作业整理/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">LINUX作业整理</div>
     </a>
   
@@ -289,9 +307,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search-kuangbin/">search,kuangbin</a></li></ul>
     </div>
   </div>
 
@@ -299,9 +317,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a>
+      <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search-kuangbin/" style="font-size: 10px;">search,kuangbin</a>
     </div>
   </div>
 
@@ -318,7 +336,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -355,7 +373,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 MazicWong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
