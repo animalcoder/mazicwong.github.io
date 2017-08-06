@@ -5,16 +5,20 @@
   
   <title>LINUX作业整理 | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="blog">
+  <meta name="description" content="1.Linux 1.1正则表达式 1.2统计home下的文件夹数量 1.3进程监视 1.4 1.5 1.6     作业1 正则表达式 regular expression  写出下面模式的作用 :2,8s/\&amp;lt;four\&amp;gt;/4/g  功能:第2到8行的所有单词four替换为4像:four::这种可以,但是fouraa这种不可以,因为单词是fouraa不是four2,8s   2~8">
+<meta name="keywords" content="Linux,homework">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LINUX作业整理">
 <meta property="og:url" content="mazicwong.github.io/2017/07/16/LINUX作业整理/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="blog">
-<meta property="og:updated_time" content="2017-07-16T08:30:08.949Z">
+<meta property="og:description" content="1.Linux 1.1正则表达式 1.2统计home下的文件夹数量 1.3进程监视 1.4 1.5 1.6     作业1 正则表达式 regular expression  写出下面模式的作用 :2,8s/\&amp;lt;four\&amp;gt;/4/g  功能:第2到8行的所有单词four替换为4像:four::这种可以,但是fouraa这种不可以,因为单词是fouraa不是four2,8s   2~8">
+<meta property="og:image" content="mazicwong.github.io/2017/07/16/LINUX作业整理/raw.githubusercontent.com">
+<meta property="og:image" content="mazicwong.github.io/2017/07/16/LINUX作业整理/raw.githubusercontent.com">
+<meta property="og:updated_time" content="2017-08-05T01:48:07.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LINUX作业整理">
-<meta name="twitter:description" content="blog">
+<meta name="twitter:description" content="1.Linux 1.1正则表达式 1.2统计home下的文件夹数量 1.3进程监视 1.4 1.5 1.6     作业1 正则表达式 regular expression  写出下面模式的作用 :2,8s/\&amp;lt;four\&amp;gt;/4/g  功能:第2到8行的所有单词four替换为4像:four::这种可以,但是fouraa这种不可以,因为单词是fouraa不是four2,8s   2~8">
+<meta name="twitter:image" content="mazicwong.github.io/2017/07/16/LINUX作业整理/raw.githubusercontent.com">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -89,13 +93,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <ul>
+<li><a href="#1">1.Linux</a><ul>
+<li><a href="#1.1">1.1正则表达式</a></li>
+<li><a href="#1.2">1.2统计home下的文件夹数量</a></li>
+<li><a href="#1.3">1.3进程监视</a></li>
+<li><a href="#1.4">1.4</a></li>
+<li><a href="#1.5">1.5</a></li>
+<li><a href="#1.6">1.6</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1.1"> 作业1 正则表达式 regular expression</h2>
+
+<h4 id="写出下面模式的作用"><a href="#写出下面模式的作用" class="headerlink" title="写出下面模式的作用"></a>写出下面模式的作用</h4><blockquote>
+<p><code>:2,8s/\&lt;four\&gt;/4/g</code></p>
+<blockquote>
+<p>功能:第2到8行的所有单词four替换为4<br>像:four::这种可以,但是<code>fouraa</code>这种不可以,因为单词是<code>fouraa</code>不是<code>four</code><br>2,8s   2~8 替换<br>\&lt;     匹配单词词首<br>>     匹配单词词尾<br>g      全部替换</p>
+</blockquote>
+<p><code>:/\(a[bc]\{2}\)[^abc]\+\1</code><br>&gt;<br>&gt;</p>
+<blockquote>
+<p>功能:找到开头和结尾都含有 abb/abc/acb/acc,并且中间含有一个及以上不是<br>a/b/c 的字符</p>
+</blockquote>
+</blockquote>
+<h2 id="1.2"> 作业2 统计home下的文件夹数量</h2><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ` ls -l /home/mazic | grep ^d|awk <span class="string">'&#123;print $8&#125;'</span> `;</div><div class="line"><span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$i</span>; ls -l <span class="variable">$i</span>|wc -l; <span class="keyword">done</span></div></pre></td></tr></table></figure><br><br>1. ls 是查看文件夹内所有文件的命令<br>2. wc -l 是统计文件行数的命令<br>3. 以上两个命令叠加,相当于统计文件夹下文件总数<br><br><strong>可执行文件写入/home/mazic/Desktop/mazic</strong><br><br><strong>*<br><h2 id="1.3"> 作业3 进程监视</h2>
+</strong>进程监视:<strong><br><br>&gt; 重定向 &gt;<br>&gt; 追加方式 &gt;&gt;<br><br><br>在 Linux 中,当在前台运行某个作业时,终端被该作业占据;而在后台运行作业时,它不会占据终端。可以使用&amp;命令把作业放到后台执行。实际上,这样是将命令放入到一个作业队列中了:
+
+</strong>&amp;方式<strong><br>当在前台运行某个作业时,终端被该作业占据;而在后台运行作业时,它不会占据<br>终端。可以使用&amp;命令把作业放到后台执行。该命令的一般形式为:<br><br><code>命令 &amp;</code><br><code>command &gt;33333 2&gt;&amp;1 &amp;</code><br>2&gt;&amp;1 表示所有的标准输出和错误输出都将被重定向到一个叫做 33333 的文件中<br><br><img src="raw.githubusercontent.com" alt="Alt text"><br><br><img src="raw.githubusercontent.com" alt="Alt work"><br><br><br>*</strong><br><h2 id="1.4"> 作业4 正则表达式 regular expression</h2>
+
+
+<hr>
+<h2 id="1.5"> 作业5 makefile共享库</h2><br>上次实验,我们将读写操作写成单独文件,本实验中,将该文件<br>编译成共享库,利用 dlopen,dlsym,dlclose 函数,动态加载该共享<br>库实现相同的功能。<br>要求编写 Makefile 自动编译脚本<br><br>用makefile编译成动态共享库<br><br><br><em>*</em><br><h2 id="1.6"> 作业6 正则表达式 regular expression</h2>
+
+
+<hr>
+<h2 id="1.7"> 作业7 正则表达式 regular expression</h2>
+
+
+<hr>
+<h2 id="1.8"> 作业8 正则表达式 regular expression</h2>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/16/LINUX作业整理/" data-id="cj5j1wvqg00046ksccusyrjd0" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/07/16/LINUX作业整理/" data-id="cj60xjh5s00012jscm185bzue" class="article-share-link">Partager</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/homework/">homework</a></li></ul>
+
     </footer>
   </div>
   
@@ -133,7 +178,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search-kuangbin/">search kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath-kuangbin/">shortestPath kuangbin</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
     </div>
   </div>
 
@@ -143,7 +188,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search-kuangbin/" style="font-size: 10px;">search kuangbin</a> <a href="/tags/shortestPath-kuangbin/" style="font-size: 10px;">shortestPath kuangbin</a>
+      <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
     </div>
   </div>
 
@@ -152,7 +197,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
   </div>
 
@@ -165,23 +210,23 @@
       <ul>
         
           <li>
-            <a href="/2017/07/23/Day2-最短路/">Day2-最短路</a>
+            <a href="/2017/08/04/图的表示法/">图的表示法</a>
           </li>
         
           <li>
-            <a href="/2017/07/22/调试/">调试</a>
+            <a href="/2017/08/01/LCA+RMQ/">LCA+RMQ</a>
           </li>
         
           <li>
-            <a href="/2017/07/20/Day1-简单搜索/">Day1.简单搜索</a>
+            <a href="/2017/08/01/cf427/">cf427</a>
           </li>
         
           <li>
-            <a href="/2017/07/16/LINUX作业整理/">LINUX作业整理</a>
+            <a href="/2017/07/29/cf426/">cf426</a>
           </li>
         
           <li>
-            <a href="/2017/07/16/卡特兰数/">卡特兰数</a>
+            <a href="/2017/07/25/cf425/">cf425</a>
           </li>
         
       </ul>

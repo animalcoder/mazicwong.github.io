@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>cf427 | mazicwong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="codeforces Round #427 div2835A题意:  简单公式  123456789101112131415161718192021222324252627282930/*************************************************************************	&amp;gt; File Name: 1.cpp	&amp;gt; Author">
+<meta name="keywords" content="codeforces,dp,greedy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cf427">
+<meta property="og:url" content="mazicwong.github.io/2017/08/01/cf427/index.html">
+<meta property="og:site_name" content="mazicwong">
+<meta property="og:description" content="codeforces Round #427 div2835A题意:  简单公式  123456789101112131415161718192021222324252627282930/*************************************************************************	&amp;gt; File Name: 1.cpp	&amp;gt; Author">
+<meta property="og:updated_time" content="2017-08-01T16:16:37.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cf427">
+<meta name="twitter:description" content="codeforces Round #427 div2835A题意:  简单公式  123456789101112131415161718192021222324252627282930/*************************************************************************	&amp;gt; File Name: 1.cpp	&amp;gt; Author">
+  
+    <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mazicwong</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录日常</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cf427" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/01/cf427/" class="article-date">
+  <time datetime="2017-08-01T11:54:23.000Z" itemprop="datePublished">2017-08-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cf427
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="codeforces-Round-427-div2"><a href="#codeforces-Round-427-div2" class="headerlink" title="codeforces Round #427 div2"></a>codeforces Round #427 div2</h1><h2 id="835A"><a href="#835A" class="headerlink" title="835A"></a><a href="http://codeforces.com/problemset/problem/835/A" target="_blank" rel="external">835A</a></h2><p>题意:</p>
+<blockquote>
+<p>简单公式</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 1.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月31日 星期一 22时31分58秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> s,v1,v2,t1,t2;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;s,&amp;v1,&amp;v2,&amp;t1,&amp;t2);</div><div class="line">    <span class="keyword">int</span> a=s*v1+<span class="number">2</span>*t1;</div><div class="line">    <span class="keyword">int</span> b=s*v2+<span class="number">2</span>*t2;</div><div class="line">    <span class="keyword">if</span> (a&lt;b)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"First"</span>);</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a&gt;b)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Second"</span>);</div><div class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Friendship"</span>);   </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="835B-贪心"><a href="#835B-贪心" class="headerlink" title="835B 贪心"></a><a href="http://codeforces.com/problemset/problem/835/B" target="_blank" rel="external">835B 贪心</a></h2><p>题意:</p>
+<blockquote>
+<p>给一个k(1 ≤ k ≤ 1e9)和n(1 ≤ n &lt; 1e100000),<br>要另n每一位相加的和大于等于k,问至少需要改动n的几个位</p>
+</blockquote>
+<p>思路:</p>
+<blockquote>
+<p>开map存下n中0~9出现的次数,然后从0开始转成9贪心出最优情况就可以了  </p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 2.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月31日 星期一 22时32分33秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</div><div class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mp;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> k;</div><div class="line">    <span class="built_in">string</span> str;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; k &gt;&gt; str;</div><div class="line">    mp.clear();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">        mp[i]=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.size();i++)</div><div class="line">    &#123;</div><div class="line">        mp[str[i]-<span class="string">'0'</span>]++;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> cnt=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (mp[i])</div><div class="line">        &#123;</div><div class="line">            cnt += mp[i]*i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span> (cnt &gt;= k)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"0"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">    cnt = k-cnt;</div><div class="line">    <span class="keyword">while</span>(cnt&gt;<span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (mp[i]*(<span class="number">9</span>-i) &gt;= cnt)</div><div class="line">        &#123;</div><div class="line">            ans += (cnt/(<span class="number">9</span>-i));</div><div class="line">            <span class="keyword">if</span> (cnt%(<span class="number">9</span>-i)!=<span class="number">0</span>)</div><div class="line">                ans++;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            cnt -= (mp[i]*(<span class="number">9</span>-i));</div><div class="line">            ans += mp[i];</div><div class="line">        &#125;</div><div class="line">        i++;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="835C-dp二维前缀和-预处理"><a href="#835C-dp二维前缀和-预处理" class="headerlink" title="835C dp二维前缀和+预处理"></a><a href="http://codeforces.com/problemset/problem/835/C" target="_blank" rel="external">835C dp二维前缀和+预处理</a></h2><p>题意:</p>
+<blockquote>
+<p>给出n个点(100*100的矩阵中),每个点给出坐标和初始权值,<br>给出常数c(1 ≤ c ≤ 10),每一秒钟,所有点的权值会增加1,直到超过c,则变为0<br>q次询问,每次给出时间t和两个点的坐标,<br>问到时间t时,这两个点围成的矩形内所有点的权值和是多少</p>
+</blockquote>
+<p>思路:</p>
+<blockquote>
+<p>明显,每个点权值变化的循环节是(c+1),<br>c最大是10,所以可以预处理出所有11种情况(事实上c+1种情况就可以了)<br>所以开一个二维前缀和循环数组,dp[k][i][j]表示第k秒,从[1,1]到[i,j]的权值总和,<br>最后问[x1,y1][x2,y2]就<code>dp[x2][y2]-dp[x2][y1-1]-dp[x1-1][y2]+dp[x1-1][y1-1]</code></p>
+</blockquote>
+<p>注意:</p>
+<blockquote>
+<ol>
+<li>最后的坐标范围写成10*10了,莫名WA.有点可惜</li>
+<li>mp开出来就memset一下..有时候开出来不是初值全0的,又WA了一发..</li>
+</ol>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 3.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月31日 星期一 23时01分34秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">int</span> t,x1,y1,x2,y2;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> mp[<span class="number">11</span>][<span class="number">105</span>][<span class="number">105</span>];</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> n,q,c;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;q,&amp;c);</div><div class="line">    <span class="keyword">int</span> xx,yy,ss;</div><div class="line">    <span class="built_in">memset</span>(mp,<span class="number">0</span>,<span class="keyword">sizeof</span>(mp));</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;xx,&amp;yy,&amp;ss);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">10</span>;k++)</div><div class="line">        &#123;</div><div class="line">            mp[k][xx][yy] += ((ss+k)%(c+<span class="number">1</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">10</span>;k++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">100</span>;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">100</span>;j++)</div><div class="line">            &#123;</div><div class="line">                mp[k][i][j] = mp[k][i][j] - mp[k][i<span class="number">-1</span>][j<span class="number">-1</span>] + mp[k][i][j<span class="number">-1</span>] + mp[k][i<span class="number">-1</span>][j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(q--)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;t,&amp;x1,&amp;y1,&amp;x2,&amp;y2);</div><div class="line">        t%=(c+<span class="number">1</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,mp[t][x2][y2]-mp[t][x2][y1<span class="number">-1</span>]-mp[t][x1<span class="number">-1</span>][y2]+mp[t][x1<span class="number">-1</span>][y1<span class="number">-1</span>]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="835D-dp处理字符串"><a href="#835D-dp处理字符串" class="headerlink" title="835D  dp处理字符串"></a><a href="http://codeforces.com/problemset/problem/835/D" target="_blank" rel="external">835D  dp处理字符串</a></h2><p>题意:</p>
+<blockquote>
+<p>定义k-回文串为:<br>若一个字符串为回文串，则该字符串为1-回文串<br>若一个字符串为回文串，且其左半部分（奇数长度则不包括中间字符）与右半部分均为k-1-回文串，则该串为k-回文串<br>给出一个长度为n的字符串，问这个字符串的子串中有多少个k-回文串(k [1..n]) n&lt;=5000  </p>
+</blockquote>
+<p>思路:</p>
+<blockquote>
+<p>设dp[i,j]表示str[i…j]这一段对应的k值是多少。注意到若一个串是k-回文串，则其一定是k-1-回文串<br>str[i,j]是回文串当且仅当str[i+1,j-1]是回文串且str[i]==str[j]  </p>
+<blockquote>
+<p><strong>状态</strong>: <code>dp[l][r]</code>: maximum k such that substring[l,r] is k-palindrome<br><strong>边界</strong>: <code>dp[l][l]=1 &amp;&amp; dp[l][l+1]=1|0</code><br><strong>转移</strong>: <code>if (str[l]!=str[r] || dp[l+1][r-1]==0) dp[l][r]=0</code><br>      <code>else dp[l][r]=dp[l][m]+1  ( m=(l+r)/2-1 )</code>  </p>
+</blockquote>
+</blockquote>
+<p>注意:</p>
+<blockquote>
+<p><code>for (int i=n-1;i&gt;=0;i--)</code> 会提示segmentation fault</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 4.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月01日 星期二 09时36分08秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5e3</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">int</span> dp[maxn][maxn];<span class="comment">//状态,边界,状态转移</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> cnt[maxn];<span class="comment">//最大到最小,k-palindrome的个数</span></div><div class="line"><span class="keyword">bool</span> vis[maxn][maxn];<span class="comment">//</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">    <span class="keyword">char</span> str[maxn];</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,str+<span class="number">1</span>);</div><div class="line">    <span class="keyword">int</span> n=<span class="built_in">strlen</span>(str+<span class="number">1</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        vis[i][i]=vis[i][i<span class="number">-1</span>]=<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len=<span class="number">1</span>;len&lt;n;len++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i+len&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> j=i+len;</div><div class="line">            <span class="keyword">if</span> (str[i]==str[j] &amp;&amp; vis[i+<span class="number">1</span>][j<span class="number">-1</span>])</div><div class="line">                vis[i][j]=<span class="number">1</span>;</div><div class="line">            <span class="keyword">else</span> vis[i][j]=<span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) dp[i][i]=<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len=<span class="number">1</span>;len&lt;n;len++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i+len&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> j=i+len;</div><div class="line">            <span class="keyword">if</span>(vis[i][j])</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> m = (i+j+<span class="number">1</span>)/<span class="number">2</span><span class="number">-1</span>;</div><div class="line">                dp[i][j] = dp[i][m]+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt));</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i;j&lt;=n;j++)</div><div class="line">            cnt[dp[i][j]]++;<span class="comment">//最大为k时,每种k对应的个数</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=n;i&gt;=<span class="number">1</span>;i--) cnt[i]+=cnt[i+<span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        <span class="built_in">printf</span>(i==n?<span class="string">"%d"</span>:<span class="string">"%d "</span>,cnt[i]);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/01/cf427/" data-id="cj60xjh6800082jsc1edrrwiz" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/greedy/">greedy</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/01/LCA+RMQ/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          LCA+RMQ
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/29/cf426/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">cf426</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/04/图的表示法/">图的表示法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/01/LCA+RMQ/">LCA+RMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/01/cf427/">cf427</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/29/cf426/">cf426</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/25/cf425/">cf425</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 MazicWong<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
