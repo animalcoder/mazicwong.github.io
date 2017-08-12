@@ -68,6 +68,190 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hdu-6113-dfs边界-连通块" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/12/hdu-6113-dfs边界-连通块/" class="article-date">
+  <time datetime="2017-08-12T13:46:14.000Z" itemprop="datePublished">2017-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/12/hdu-6113-dfs边界-连通块/">hdu 6113 dfs边界+连通块</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6113" target="_blank" rel="external">hdu6113 度度熊的01世界  (dfs判边界+连通块)</a></p>
+<p>Problem Description<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">度度熊是一个喜欢计算机的孩子，在计算机的世界中，所有事物实际上都只由0和1组成。</div><div class="line">现在给你一个n*m的图像，你需要分辨他究竟是0，还是1，或者两者均不是。</div><div class="line">图像0的定义：存在1字符且1字符只能是由一个连通块组成，存在且仅存在一个由0字符组成的连通块完全被1所包围。</div><div class="line">图像1的定义：存在1字符且1字符只能是由一个连通块组成，不存在任何0字符组成的连通块被1所完全包围。</div><div class="line">连通的含义是，只要连续两个方块有公共边，就看做是连通。</div><div class="line">完全包围的意思是，该连通块不与边界相接触。</div></pre></td></tr></table></figure></p>
+<p>Input<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">本题包含若干组测试数据。  </div><div class="line">每组测试数据包含:</div><div class="line">第一行两个整数n,m表示图像的长与宽。  </div><div class="line">接下来n行m列将会是只有01组成的字符画。  </div><div class="line">满足1&lt;=n,m&lt;=100</div></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果这个图是1的话，输出1；如果是0的话，输出0，都不是输出-1。</div></pre></td></tr></table></figure></p>
+<p>Sample Input<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">32 32</div><div class="line">00000000000000000000000000000000</div><div class="line">00000000000111111110000000000000</div><div class="line">00000000001111111111100000000000</div><div class="line">00000000001111111111110000000000</div><div class="line">00000000011111111111111000000000</div><div class="line">00000000011111100011111000000000</div><div class="line">00000000111110000001111000000000</div><div class="line">00000000111110000001111100000000</div><div class="line">00000000111110000000111110000000</div><div class="line">00000001111110000000111110000000</div><div class="line">00000001111110000000011111000000</div><div class="line">00000001111110000000001111000000</div><div class="line">00000001111110000000001111100000</div><div class="line">00000001111100000000001111000000</div><div class="line">00000001111000000000001111000000</div><div class="line">00000001111000000000001111000000</div><div class="line">00000001111000000000000111000000</div><div class="line">00000000111100000000000111000000</div><div class="line">00000000111100000000000111000000</div><div class="line">00000000111100000000000111000000</div><div class="line">00000001111000000000011110000000</div><div class="line">00000001111000000000011110000000</div><div class="line">00000000111000000000011110000000</div><div class="line">00000000111110000011111110000000</div><div class="line">00000000111110001111111100000000</div><div class="line">00000000111111111111111000000000</div><div class="line">00000000011111111111111000000000</div><div class="line">00000000111111111111100000000000</div><div class="line">00000000011111111111000000000000</div><div class="line">00000000001111111000000000000000</div><div class="line">00000000001111100000000000000000</div><div class="line">00000000000000000000000000000000</div><div class="line">32 32</div><div class="line">00000000000000000000000000000000</div><div class="line">00000000000000001111110000000000</div><div class="line">00000000000000001111111000000000</div><div class="line">00000000000000011111111000000000</div><div class="line">00000000000000111111111000000000</div><div class="line">00000000000000011111111000000000</div><div class="line">00000000000000011111111000000000</div><div class="line">00000000000000111111110000000000</div><div class="line">00000000000000111111100000000000</div><div class="line">00000000000001111111100000000000</div><div class="line">00000000000001111111110000000000</div><div class="line">00000000000001111111110000000000</div><div class="line">00000000000001111111100000000000</div><div class="line">00000000000011111110000000000000</div><div class="line">00000000011111111110000000000000</div><div class="line">00000001111111111111000000000000</div><div class="line">00000011111111111111000000000000</div><div class="line">00000011111111111111000000000000</div><div class="line">00000011111111111110000000000000</div><div class="line">00000000001111111111000000000000</div><div class="line">00000000000000111111000000000000</div><div class="line">00000000000001111111000000000000</div><div class="line">00000000000111111110000000000000</div><div class="line">00000000000011111111000000000000</div><div class="line">00000000000011111111000000000000</div><div class="line">00000000000011111111100000000000</div><div class="line">00000000000011111111100000000000</div><div class="line">00000000000000111111110000000000</div><div class="line">00000000000000001111111111000000</div><div class="line">00000000000000001111111111000000</div><div class="line">00000000000000000111111111000000</div><div class="line">00000000000000000000000000000000</div><div class="line">3 3</div><div class="line">101</div><div class="line">101</div><div class="line">011</div><div class="line">``` </div><div class="line"></div><div class="line"></div><div class="line">Sample Output</div></pre></td></tr></table></figure></p>
+<p>0<br>1<br>-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Source</div></pre></td></tr></table></figure></p>
+<p>2017”百度之星”程序设计大赛 - 初赛（A）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">***</div><div class="line">**题意**:  </div><div class="line">判断01组成的图形是1，还是0，或者都不是。  </div><div class="line">0: 一个1组成的连通块,1内有一个0组成的连通块,(0不能在边界)  </div><div class="line">1: 一个1组成的连通块,1中不能有0  </div><div class="line">-1: 1的连通块数为0或者&gt;=2,或者1的内部有0  </div><div class="line"></div><div class="line">**思路**:  </div><div class="line">题目说1内的0不会到边界,所以先判1内的0不在边界,先把边界的所有0搜一遍,剩下1和1里面的0,统计1和0堆数,确定答案</div><div class="line"></div><div class="line">***</div><div class="line"></div><div class="line">```cpp</div><div class="line">/*************************************************************************</div><div class="line">	&gt; File Name: 6.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月12日 星期六 15时36分46秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">using namespace std;</div><div class="line">int n,m;</div><div class="line">const int maxn = 100+5;</div><div class="line">/*</div><div class="line"> * 0: 一个1组成的连通块,1内有一个0组成的连通块,(0不能在边界)</div><div class="line"> * 1: 一个1组成的连通块,1中不能有0</div><div class="line"> * -1: 1的连通块数为0或者&gt;=2,或者1的内部有0</div><div class="line"> * 判1内的0不在边界,先把边界的所有0搜一遍,剩下1和1里面的0,统计1和0堆数,确定答案</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line">char mp[maxn][maxn];</div><div class="line">bool vis[maxn][maxn];</div><div class="line">int to[4][2]=&#123;</div><div class="line">    &#123;0,1&#125;,&#123;1,0&#125;,&#123;0,-1&#125;,&#123;-1,0&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">void dfs(int i,int j,char s)</div><div class="line">&#123;</div><div class="line">    int nx,ny;</div><div class="line">    vis[i][j]=1;</div><div class="line">    for (int k=0;k&lt;4;k++)</div><div class="line">    &#123;</div><div class="line">        nx = i+to[k][0];</div><div class="line">        ny = j+to[k][1];</div><div class="line">        if (nx&gt;=0 &amp;&amp; nx&lt;n &amp;&amp; ny&gt;=0 &amp;&amp; ny&lt;m &amp;&amp; mp[nx][ny]==s &amp;&amp; !vis[nx][ny])</div><div class="line">            dfs(nx,ny,s);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    freopen(&quot;in6&quot;,&quot;r&quot;,stdin);</div><div class="line">    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)</div><div class="line">    &#123;</div><div class="line">        memset(vis,0,sizeof(vis));</div><div class="line">        for (int i=0;i&lt;n;i++)</div><div class="line">            scanf(&quot;%s&quot;,mp[i]);</div><div class="line">        </div><div class="line">        //处理4个边界的0</div><div class="line">        for (int i=0;i&lt;m;i++)</div><div class="line">        &#123;</div><div class="line">            if (mp[0][i]==&apos;0&apos;)</div><div class="line">                dfs(0,i,&apos;0&apos;);</div><div class="line">            if (mp[n-1][i]==&apos;0&apos;)</div><div class="line">                dfs(n-1,i,&apos;0&apos;);</div><div class="line">        &#125;</div><div class="line">        for(int i=0;i&lt;n;i++)</div><div class="line">        &#123;</div><div class="line">            if (mp[i][0]==&apos;0&apos;)</div><div class="line">                dfs(i,0,&apos;0&apos;);</div><div class="line">            if (mp[i][m-1]==&apos;0&apos;)</div><div class="line">                dfs(i,m-1,&apos;0&apos;);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        //搜连通块</div><div class="line">        int cnt0=0,cnt1=0;</div><div class="line">        for (int i=0;i&lt;n;i++)</div><div class="line">        &#123;</div><div class="line">            for (int j=0;j&lt;m;j++)</div><div class="line">            &#123;</div><div class="line">                if (!vis[i][j])</div><div class="line">                &#123;</div><div class="line">                    if(mp[i][j]==&apos;0&apos;)</div><div class="line">                        cnt0++;</div><div class="line">                    else cnt1++;</div><div class="line">                    dfs(i,j,mp[i][j]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if (cnt1==1 &amp;&amp; cnt0==0) puts(&quot;1&quot;);</div><div class="line">        else if (cnt1==1 &amp;&amp; cnt0==1) puts(&quot;0&quot;);</div><div class="line">        else puts(&quot;-1&quot;);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/12/hdu-6113-dfs边界-连通块/" data-id="cj69dpvcb00080xsc08p6z3uk" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dfs/">dfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/百度之星/">百度之星</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-KMP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/12/KMP/" class="article-date">
+  <time datetime="2017-08-11T18:14:06.000Z" itemprop="datePublished">2017-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/12/KMP/">KMP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/12/KMP/" data-id="cj69dpvc500050xsc3kvk5hi4" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-尺取法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/11/尺取法/" class="article-date">
+  <time datetime="2017-08-10T17:54:47.000Z" itemprop="datePublished">2017-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/11/尺取法/">尺取法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>挑战程序竞赛 P146</p>
+<p>挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。  </p>
+<p>尺取法：像尺子一样取一段,设置左右端点,不断右移右端点和左端点,直到找到最优解<br>之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法  </p>
+<p>应用：(优化枚举区间效率)</p>
+<ol>
+<li>求有一定限制的区间个数或最短的区间等等  </li>
+<li>最短的覆盖所有点的子序列 poj3320</li>
+</ol>
+<p>模板如下:四步<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void solve()</div><div class="line">&#123;</div><div class="line">    int ans = INF;</div><div class="line">    int s=0,t=0,sum=0;//左右端点和前缀和</div><div class="line">    while(1)</div><div class="line">    &#123;</div><div class="line">        while(t&lt;n &amp;&amp; sum&lt;S)</div><div class="line">            sum += a[t++];//右端点右移</div><div class="line">        if (sum&lt;S) break;</div><div class="line">        ans = min(ans,t-s);</div><div class="line">        sum -= a[s++];//左端点右移</div><div class="line">    &#125;</div><div class="line">    if (ans == INF) ans=0;</div><div class="line">    printf(&quot;%d\n&quot;,ans);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="poj3061"><a href="#poj3061" class="headerlink" title="poj3061"></a>poj3061</h3><p>题意：给定一个序列，找出最短的子序列长度，使得其和大于或等于S。<br>思路：当区间和小于S时右端点向右移动，和大于等于S时，左端点向右移动以进一步找到最短的区间，如果右端点移动到区间末尾其和还不大于等于S.结束枚举</p>
+<h3 id="poj3320"><a href="#poj3320" class="headerlink" title="poj3320"></a>poj3320</h3><p>题意:一本书有n页，每一页都一个知识点，求去最少的连续页数覆盖所有的知识点。<br>思路:一样,右端点移动到满足的位置,此时,如果该区间的子区间满足条件,左端点移动,使得子区间更短(用map和set方便处理数据)</p>
+<h3 id="hdu6103"><a href="#hdu6103" class="headerlink" title="hdu6103"></a>hdu6103</h3><p><a href="http://blog.csdn.net/archger/article/details/77073334" target="_blank" rel="external">参考</a><br>题意:<br>给出字符串s，寻找其两个长度相同且不重叠的子串，使得两个字符串<code>每位的ascii差值(一个从前往后,一个从后往前)</code>之和不大于m，且字符串长度最长。<br>思路:<br>这是第六次多校的题目,直接暴力过不掉,复杂度O(n^2),刚好处理<code>区间最优子序列</code>可以用尺取法,节省枚举所有区间的时间;<br>因为字符串的长度为5000，所以可以枚举两个子串的对称轴，预处理出一个<code>num[]</code>数组,表示对称轴左右元素的ascii差值;然后对其区间进行尺取法，这样只需要o(n^2)的复杂度即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/11/尺取法/" data-id="cj69dpvcm000k0xscfabf6d83" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/区间/">区间</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用技巧/">常用技巧</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/09/字符串/" class="article-date">
+  <time datetime="2017-08-09T13:23:44.000Z" itemprop="datePublished">2017-08-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/09/字符串/">字符串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#1">1.KMP</a></li>
+<li><a href="#2">2.扩展KMP</a></li>
+<li><a href="#3">3.manacher最长回文子串</a></li>
+<li><a href="#4">4.AC自动机</a></li>
+<li><a href="#5">5.后缀数组</a></li>
+<li><a href="#6">6.后缀自动机</a></li>
+<li><a href="#7">7.字符串HASH</a></li>
+</ul>
+<h1 id="1"> KMP </h1>
+
+
+<h1 id="2"> 扩展KMP </h1>
+
+
+
+<h1 id="3"> manacher最长回文子串 </h1>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/09/字符串/" data-id="cj69dpvdh001u0xscggp9mcol" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-图的表示法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/04/图的表示法/" class="article-date">
@@ -102,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/04/图的表示法/" data-id="cj60xjh6b000a2jsceyx5il31" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/04/图的表示法/" data-id="cj69dpvcn000n0xscwht5axi2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
@@ -159,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/01/LCA+RMQ/" data-id="cj60xjh6e000f2jsc466xhkrk" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/01/LCA+RMQ/" data-id="cj69dpvck000i0xsclhaa3kv6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LCA/">LCA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RMQ/">RMQ</a></li></ul>
@@ -243,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/01/cf427/" data-id="cj60xjh6800082jsc1edrrwiz" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/01/cf427/" data-id="cj69dpvc900070xscwxzrq2qp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/greedy/">greedy</a></li></ul>
@@ -319,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/29/cf426/" data-id="cj60xjh6400072jscn7hb75r5" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/07/29/cf426/" data-id="cj69dpvce000a0xscp9l4ylz7" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/segment-tree/">segment_tree</a></li></ul>
@@ -375,7 +559,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/25/cf425/" data-id="cj60xjh5x00032jsc2d6l5fc8" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/07/25/cf425/" data-id="cj69dpvch000f0xscyrjmkh7h" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -571,405 +755,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/23/Day2-最短路/" data-id="cj60xjh6100052jsccqyc5dz7" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/07/23/Day2-最短路/" data-id="cj69dpvbx00010xsca8sfgihj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shortestPath/">shortestPath</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-调试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/22/调试/" class="article-date">
-  <time datetime="2017-07-22T13:24:41.000Z" itemprop="datePublished">2017-07-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/22/调试/">调试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>gdb</p>
-<blockquote>
-<p>file a.out<br>r run<br>c continue<br>b breakpoint<br>s,n step_into/step_over<br>p print (p i)<br>display<br>q quit</p>
-</blockquote>
-</li>
-<li><p>输出调试 cout</p>
-</li>
-</ol>
-<ol>
-<li>输出调试高级版<blockquote>
-<p>开头  <code>#define D(x) x</code><br>然后调试语句用  <code>D(调试语句)</code><br>最后要提交的时候将定义改为  <code>#define D(x)</code></p>
-</blockquote>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/22/调试/" data-id="cj60xjh6k000k2jscbsmdbwum" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Day1-简单搜索" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/Day1-简单搜索/" class="article-date">
-  <time datetime="2017-07-19T16:40:22.000Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/Day1-简单搜索/">Day1.简单搜索</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="kuangbin专题1：简单搜索"><a href="#kuangbin专题1：简单搜索" class="headerlink" title="kuangbin专题1：简单搜索"></a><a href="https://vjudge.net/contest/65959#overview" target="_blank" rel="external">kuangbin专题1：简单搜索</a></h1><p>分类</p>
-<ul>
-<li><strong>记录路径:</strong> poj3414, poj3984,</li>
-<li><strong>两点bfs:</strong> poj2150, uva11624, fzu2150, hdu2612</li>
-<li><strong>简单dfs:</strong> poj1321, hdu1241(求连通块裸题)</li>
-<li><strong>简单bfs:</strong> (to[][]写明变化方向)<br>直接模拟: hdu1495<br>三维bfs: poj2251(朝6个方向变化)<br>一维bfs: poj3278(朝3个方向变化)<strong>(经典格式)</strong><br>二位bfs: poj1426(朝2个方向变化)<br>其他bfs: poj3126(变化4个数,每个数9种变化)<pre><code>poj3087(只朝一个方向变化的bfs,这种题更应该归入暴力模拟吧)
-</code></pre>路径输出: poj3414(用数组模拟,bfs+路径输出)<pre><code>poj3984(bfs求最短路,pre记录之前状态,递归输出)
-</code></pre></li>
-<li><strong>状压配合搜索:</strong> poj3279, poj1321</li>
-</ul>
-<hr>
-<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a><strong>学习</strong></h2><ol>
-<li><p>dfs固定模板   递归深搜</p>
-<blockquote>
-<p>(dfs一般写为子程序，bfs一般用来找最短路)</p>
-</blockquote>
-</li>
-<li><p>poj 3278一直过不了，跟网上代码基本一样，然后复制了那段代码，打了一些随机数出来，跑两遍，比较结果后才发现错误</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; rand()%<span class="number">100000</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; rand()%<span class="number">100000</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>bfs固定模板   5步+循环(越界+返回+回溯)<br>注意到要找到每种状态间的变化</p>
-</li>
-<li>bfs中step可以存在struct node{}中，也可以直接开数组存，直接开数组存一般是为了保存下访问该点时的路径深度(),例如下面两个’两点bfs’的题，</li>
-<li>bfs中的Q只是用来过渡的，一个容器存放中间状态而已，真正要的在step</li>
-<li><p>如果只存下地点的位置信息，有下面三种用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">struct node&#123;int x,y;&#125;</div><div class="line">queue&lt;node&gt; Q;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">queue&lt;pair&lt;int,int&gt;&gt; Q</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct node&#123;</div><div class="line">    int x,y;</div><div class="line">    node()&#123;x=x,y=y&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<hr>
-<hr>
-<p>##<strong>题目</strong></p>
-<h2 id="poj-1321-dfs"><a href="#poj-1321-dfs" class="headerlink" title="poj 1321 dfs"></a>poj 1321 dfs</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p>给个map，往里面放棋子，问有多少种情况能使得所有棋子放不同行不同列（类似八皇后变形）</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h3><p>   逐行深搜<br>    回溯的处理要写好，然后记得分成放跟不放这两种情况，基本就是这几个要点</p>
-<p>(dfs一般写为子程序，bfs一般用来找最短路)</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: poj 1321.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月16日 星期日 23时46分42秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">10</span>;</div><div class="line"><span class="keyword">char</span> mp[maxn][maxn];<span class="comment">//棋盘</span></div><div class="line"><span class="keyword">bool</span> visit[maxn];<span class="comment">//一列是否放过棋子</span></div><div class="line"><span class="keyword">int</span> n,k;</div><div class="line"><span class="keyword">int</span> ans;<span class="comment">//方案数</span></div><div class="line"></div><div class="line"><span class="comment">//k&lt;=n，有两种情况，dfs中分开讨论，记得避免越界</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> row,<span class="keyword">int</span> cnt)</span> <span class="comment">//逐行深搜，row是当前行，cnt是已经填充的棋子数</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (k==cnt) <span class="comment">//判等时保持变化量写右边 :) 习惯</span></div><div class="line">    &#123;</div><div class="line">        ans++;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (row&gt;n)  <span class="comment">//因为有dfs(row+1,cnt),这里要避免搜索越界，很多搜索都会有</span></div><div class="line">        <span class="keyword">return</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</div><div class="line">    &#123;<span class="comment">//对一行进行深搜</span></div><div class="line">        <span class="keyword">if</span> (visit[j]==<span class="number">0</span> &amp;&amp; mp[row][j]==<span class="string">'#'</span>)</div><div class="line">        &#123;</div><div class="line">            visit[j]=<span class="literal">true</span>; <span class="comment">//假设在这里放下棋子，然后再遍历下一行</span></div><div class="line">            dfs(row+<span class="number">1</span>,cnt+<span class="number">1</span>); <span class="comment">//</span></div><div class="line">            visit[j]=<span class="literal">false</span>; <span class="comment">//回溯后，上面的状态已经记录了，还原标记</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    dfs(row+<span class="number">1</span>,cnt); <span class="comment">//这里是难点，上面已经把放下棋子情况搜了一遍，并且已经回溯了</span></div><div class="line">                    <span class="comment">//这里再搜一遍不放棋子的，不要漏掉这种</span></div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k &amp;&amp; n!=<span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        ans=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</div><div class="line">                <span class="built_in">cin</span>&gt;&gt;mp[i][j];</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">memset</span>(visit,<span class="number">0</span>,<span class="keyword">sizeof</span>(visit));</div><div class="line">        dfs(<span class="number">1</span>,<span class="number">0</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>插一下。。。这题也可以用状压做<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: poj 1321 状压dp.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月17日 星期一 11时21分28秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//状压写法</span></div><div class="line"><span class="comment">//状态转移：当前行不加棋子，加棋子</span></div><div class="line"><span class="comment">//dp[i][j]：i行数，j棋子状态(1有，0无)</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">10</span>;</div><div class="line"><span class="keyword">int</span> n,k;</div><div class="line"><span class="keyword">char</span> mp[maxn][maxn];</div><div class="line"><span class="keyword">int</span> cnt[<span class="number">1</span>&lt;&lt;maxn];</div><div class="line"><span class="keyword">int</span> dp[maxn][<span class="number">1</span>&lt;&lt;maxn]; <span class="comment">//i行数，j加不加棋子</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(n)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (n%<span class="number">2</span>)</div><div class="line">            ans++;</div><div class="line">        n/=<span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in.txt","r",stdin);</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;maxn);i++)</div><div class="line">        cnt[i]=check(i);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k &amp;&amp; n!=<span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</div><div class="line">                <span class="built_in">cin</span>&gt;&gt;mp[i][j];</div><div class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;(<span class="number">1</span>&lt;&lt;n);j++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (cnt[j]&lt;=k)</div><div class="line">                &#123;</div><div class="line">                    dp[i][j]+=dp[i<span class="number">-1</span>][j];  <span class="comment">//获取前n-1行的</span></div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> p=<span class="number">1</span>;p&lt;=n;p++) <span class="comment">//更新本行</span></div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">if</span> ( ((<span class="number">1</span>&lt;&lt;(p<span class="number">-1</span>))&amp;j) &amp;&amp; mp[i][p]==<span class="string">'#'</span>)</div><div class="line">                        &#123;</div><div class="line">                            dp[i][j]+=dp[i<span class="number">-1</span>][(~(<span class="number">1</span>&lt;&lt;p<span class="number">-1</span>))&amp;j];</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++)</div><div class="line">            <span class="keyword">if</span> (cnt[i]==k)</div><div class="line">                ans += dp[n][i];</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="poj-2251-三维bfs"><a href="#poj-2251-三维bfs" class="headerlink" title="poj 2251 三维bfs"></a>poj 2251 三维bfs</h2><ul>
-<li>变形:六个方向变化<h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 3维面，从S到E求最短路</p>
-<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路:"></a>思路:</h3><p> 3维bfs,只是把平时的4个方向改成6个方向<br>学好这种3维方向变化的写法to[6][3]</p>
-<h3 id="借鉴点"><a href="#借鉴点" class="headerlink" title="借鉴点:"></a>借鉴点:</h3><p> 状态更新时to的写法</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: poj 2251.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月17日 星期一 16时07分08秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">30</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">char</span> mp[maxn][maxn][maxn];</div><div class="line"><span class="keyword">int</span> vis[maxn][maxn][maxn];</div><div class="line"><span class="keyword">int</span> sx,sy,sz;</div><div class="line"><span class="keyword">int</span> ex,ey,ez;</div><div class="line"><span class="keyword">int</span> k,n,m; <span class="comment">//level,row,column;</span></div><div class="line"><span class="keyword">int</span> to[<span class="number">6</span>][<span class="number">3</span>] = &#123;</div><div class="line">    &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;,</div><div class="line">    &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>&#125;,</div><div class="line">    &#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x,y,z;</div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (x&lt;<span class="number">0</span> || y&lt;<span class="number">0</span> || z&lt;<span class="number">0</span> || x&gt;=k || y&gt;=n || z&gt;=m)</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (mp[x][y][z] == <span class="string">'#'</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (vis[x][y][z])</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    node a,next;</div><div class="line">    <span class="built_in">queue</span>&lt;node&gt; Q;</div><div class="line">    a.x=sx, a.y=sy, a.z=sz;</div><div class="line">    a.step=<span class="number">0</span>;</div><div class="line">    vis[sx][sy][sz]=<span class="number">1</span>;</div><div class="line">    Q.push(a);</div><div class="line">    <span class="keyword">while</span>(!Q.empty())</div><div class="line">    &#123;</div><div class="line">        a = Q.front();</div><div class="line">        Q.pop();</div><div class="line">        <span class="keyword">if</span> (a.x==ex &amp;&amp; a.y==ey &amp;&amp; a.z==ez)</div><div class="line">            <span class="keyword">return</span> a.step;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">6</span>;i++)</div><div class="line">        &#123;</div><div class="line">            next = a;</div><div class="line">            next.x = a.x+to[i][<span class="number">0</span>];</div><div class="line">            next.y = a.y+to[i][<span class="number">1</span>];</div><div class="line">            next.z = a.z+to[i][<span class="number">2</span>];</div><div class="line">            <span class="keyword">if</span> (check(next.x,next.y,next.z))</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            vis[next.x][next.y][next.z]=<span class="number">1</span>;</div><div class="line">            next.step = a.step+<span class="number">1</span>;</div><div class="line">            Q.push(next);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;k&gt;&gt;n&gt;&gt;m &amp;&amp; k!=<span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">scanf</span>(<span class="string">"%s"</span>,mp[i][j]);</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> tt=<span class="number">0</span>;tt&lt;m;tt++)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span> (mp[i][j][tt] == <span class="string">'S'</span>)</div><div class="line">                    &#123;</div><div class="line">                        sx=i,sy=j,sz=tt;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (mp[i][j][tt] == <span class="string">'E'</span>)</div><div class="line">                    &#123;</div><div class="line">                        ex=i,ey=j,ez=tt;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="keyword">int</span> ans = bfs();</div><div class="line">        <span class="keyword">if</span> (ans)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"Escaped in %d minute(s).\n"</span>,ans);</div><div class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Trapped!\n"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="poj-3278-一维bfs-经典格式了"><a href="#poj-3278-一维bfs-经典格式了" class="headerlink" title="poj 3278 一维bfs (经典格式了)"></a>poj 3278 一维bfs (经典格式了)</h2><ul>
-<li>变形:三种操作,用for做个判断<h3 id="题意-2"><a href="#题意-2" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p>一条线，从n出发到达k点，三种操作</p>
-<ul>
-<li>x+1</li>
-<li>x-1</li>
-<li>x*2</li>
-</ul>
-<p>问最短到达次数</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
-<ul>
-<li>一维bfs求最短路,固定套路(5步+while)</li>
-<li>开始以为这道题应该不用bfs也能做，前期操作一直递增，然后到临界点的时候判断一下取最优解就可以;<br>不过，也有可能是先减少然后翻倍这样反而获得最优解,所以最后还是老老实实写bfs</li>
-</ul>
-<blockquote>
-<p>(dfs一般写为子程序，bfs一般用来找最短路)</p>
-</blockquote>
-</blockquote>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意:"></a><strong>注意:</strong></h3><blockquote>
-<p><strong>这道题WA了无数次。最后问题出在有可能没有解，此时返回一个负数都可以通过，正数则不行，在bfs最后面补了一个return -1;然后通过了。有点坑</strong></p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: poj 3278.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年07月17日 星期一 18时35分10秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">int</span> n,k;</div><div class="line"><span class="keyword">bool</span> vis[maxn];</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> cur;</div><div class="line">    <span class="keyword">int</span> step;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    node a,next;</div><div class="line">    <span class="built_in">queue</span>&lt;node&gt; Q;</div><div class="line">    a.cur=n, a.step=<span class="number">0</span>;</div><div class="line">    vis[a.cur]=<span class="number">1</span>;</div><div class="line">    Q.push(a);</div><div class="line">    <span class="keyword">while</span>(!Q.empty())</div><div class="line">    &#123;</div><div class="line">        a = Q.front();</div><div class="line">        Q.pop();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (i==<span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                next.cur=a.cur+<span class="number">1</span>;</div><div class="line">                next.step=a.step+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (i==<span class="number">1</span>)</div><div class="line">            &#123;</div><div class="line">                next.cur=a.cur<span class="number">-1</span>;</div><div class="line">                next.step=a.step+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (i==<span class="number">2</span>)</div><div class="line">            &#123;</div><div class="line">                next.cur=(a.cur&lt;&lt;<span class="number">1</span>);</div><div class="line">                next.step=a.step+<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (next.cur&lt;<span class="number">0</span> || next.cur&gt;=maxn) <span class="comment">//排除出界情况(可以呼略的剪枝)</span></div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span> (vis[next.cur])</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span> (next.cur==k)</div><div class="line">                <span class="keyword">return</span> next.step;</div><div class="line">            vis[next.cur]=<span class="number">1</span>;</div><div class="line">            Q.push(next);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//?????</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    freopen(<span class="string">"out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="keyword">if</span> (n&gt;=k)</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; n-k &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">cout</span> &lt;&lt; bfs() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="poj-3279-状压"><a href="#poj-3279-状压" class="headerlink" title="poj 3279 状压"></a>poj 3279 状压</h2><h3 id="题意-3"><a href="#题意-3" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 一片矩形地，每个块的属性是0和1,一只奶牛可以翻转每个块，她落在某个位置，则该位置及四周均翻转一次<br>  求最少步数使得上面都变为0</p>
-</blockquote>
-<h3 id="思路-一开始没想出来这题怎么是搜索，看了网上的题解。dalao们真强"><a href="#思路-一开始没想出来这题怎么是搜索，看了网上的题解。dalao们真强" class="headerlink" title="思路: 一开始没想出来这题怎么是搜索，看了网上的题解。dalao们真强"></a>思路: 一开始没想出来这题怎么是搜索，看了网上的题解。dalao们真强</h3><blockquote>
-<ul>
-<li>第一行2^n种情况遍历一遍，然后推下去每一行，都使得上一行为0,最后根据尾行是否全0来判断能否成立。<br>感觉有点像状压。。而且数据量也可以接受指数级。。搜了一下，真有状压解法。继续学习。</li>
-<li>直接状压解法，存下2^n种情况，对每一种solve()一遍，然后找出最小的次数(跟法1其实差不多?)<br>其实这里传入状态st进行处理，可以把st看成是第一行再上面一行的状态，这样可以容易理解点。(代码实现起来会更方面，mp[0][1-m]存st的状态，取出状态用((st&gt;&gt;j)&amp;1) )</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="poj-1426-两个方向的dfs-amp-amp-打表"><a href="#poj-1426-两个方向的dfs-amp-amp-打表" class="headerlink" title="poj 1426 两个方向的dfs &amp;&amp; 打表"></a>poj 1426 两个方向的dfs &amp;&amp; 打表</h2><h3 id="题意-4"><a href="#题意-4" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 找一个数m,满足是n的倍数且其十进制均由0和1组成</p>
-<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路:"></a>思路:</h3><ul>
-<li>因为都是0,1,所以从1开始，每次两种变形，(t<em>10)和(t</em>10+1)，然后再判断是否满足，注意不要越界(超过unsigned long long 就回溯就行了，肯定有解的)</li>
-<li>跟法1意义，不过深搜暴力后打了个表过啦，不过要注意的是，数组很大，开的时候用<code>unsigned long long a[200];</code> 在输出的时候应该用<code>printf(&quot;%I64llu&quot;,a[n]);</code> 一开始写成%I64ull过不了.</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="poj-3126-经典bfs-素数筛选-类似poj3278-经典bfs"><a href="#poj-3126-经典bfs-素数筛选-类似poj3278-经典bfs" class="headerlink" title="poj 3126 经典bfs+素数筛选(类似poj3278,经典bfs)"></a>poj 3126 经典bfs+素数筛选(类似poj3278,经典bfs)</h2><ul>
-<li>变形:每次4个数，每个数共有9种变化<h3 id="题意-5"><a href="#题意-5" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 给两个数字，要求从一个变到另一个，每次只能改变一个数字，且每次变更完后都是素数，求最小需要改变多少次</p>
-<h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路:"></a>思路:</h3><p> 很明显，这题本质上也可以看成是最短路问题,直接搜索出答案</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="poj-3087-bfs-模拟"><a href="#poj-3087-bfs-模拟" class="headerlink" title="poj 3087 bfs+模拟"></a>poj 3087 bfs+模拟</h2><ul>
-<li>变形:只有一个方向的变化(其实这种不应该归入bfs，因为每次变化只朝着一个方向，直接暴力模拟题而已,可以参考知乎上关于 <strong>‘暴力模拟’&amp;‘贪心’&amp;‘dp’区别</strong> 的最高赞答案)<h3 id="题意-6"><a href="#题意-6" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 给s1,s2,ee串,长度为c和2c，然后把s1,s2交错叠放(s2最下面一张放最下面),的到新s12,再将s12下面C个字符赋给s1,上面c个给s2,重复直到s12为ee,求最少次数</p>
-<h3 id="思路-5"><a href="#思路-5" class="headerlink" title="思路:"></a>思路:</h3><p> 很明显的bfs,直接模拟，node中存的step是最终答案，然后还要判断该状态是否出现过(用<code>map&lt;string,int&gt; vis;</code>判断,相当于之前的vis[maxn])，如果出现过，就直接return -1了</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="poj-3414-bfs-路径输出-不用队列，改用数组进行模拟"><a href="#poj-3414-bfs-路径输出-不用队列，改用数组进行模拟" class="headerlink" title="poj 3414 bfs+路径输出(不用队列，改用数组进行模拟)"></a>poj 3414 bfs+路径输出(不用队列，改用数组进行模拟)</h2><ul>
-<li>变形:六个方向<h3 id="题意-7"><a href="#题意-7" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 两杯水，三种操作，’倒满‘&amp;&amp;’倒空‘&amp;&amp;’a倒入b中直接a空或b满‘<br> 找最少次数使得有一个水杯恰好剩下C</p>
-<h3 id="思路-6"><a href="#思路-6" class="headerlink" title="思路:"></a>思路:</h3><p> 每一种状态有六个状态可以到达，关键在于输出路径，直接bfs搜索<br> 分别用六个数字表示6种对应状态，然后存储数字，方便输出</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="fzu-2150-两个起点的bfs"><a href="#fzu-2150-两个起点的bfs" class="headerlink" title="fzu 2150 两个起点的bfs"></a>fzu 2150 两个起点的bfs</h2><ul>
-<li>变形:四个方向<h3 id="题意-8"><a href="#题意-8" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 矩形框内有某些草地，要求同时在两个地方点火(两地方可以重复)，目的是烧完所有草地，问最短时间，不能烧完输出-1</p>
-<h3 id="思路-7"><a href="#思路-7" class="headerlink" title="思路:"></a>思路:</h3><ul>
-<li><p>第一眼:找连通块</p>
-<blockquote>
-<p>2:退出<br>=2:各自遍历,在已知连通块内求下深度<br>=1:同一连通块内搞</p>
-</blockquote>
-</li>
-<li><p>网上大部分解法都是暴力找每两个草堆，找出bfs需要的时间,再判断搞定这两个草堆是否已经全部搞定，因为数据量就10,这种方法完全可行，</p>
-</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="uva-11624-两个起点的bfs"><a href="#uva-11624-两个起点的bfs" class="headerlink" title="uva 11624 两个起点的bfs"></a>uva 11624 两个起点的bfs</h2><ul>
-<li>变形:四个方向<h3 id="题意-9"><a href="#题意-9" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 地图内一个点着火，火跟人速度一样，人需要避开火和障碍物到达边缘，问最短路</p>
-<h3 id="思路-8"><a href="#思路-8" class="headerlink" title="思路:"></a>思路:</h3><p>第一眼:找连通块<br>注意:单起点一般用vis记录访问过的点，然后node中记录step<br>两起点的话，一般用step1[],step2[]分别记录两个人抵达点时的深度</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="poj-3984-bfs-记录路径"><a href="#poj-3984-bfs-记录路径" class="headerlink" title="poj 3984  bfs+记录路径"></a>poj 3984  bfs+记录路径</h2><ul>
-<li>变形:4个方向<h3 id="题意-10"><a href="#题意-10" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 矩形,左上角到右下角的最短路,并输出路径</p>
-<h3 id="思路-9"><a href="#思路-9" class="headerlink" title="思路:"></a>思路:</h3><p> bfs求最短路，用pre记录每一个状态之前的状态，然后输出路径  </p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="hdu-1241-dfs求连通块裸题"><a href="#hdu-1241-dfs求连通块裸题" class="headerlink" title="hdu 1241 dfs求连通块裸题"></a>hdu 1241 dfs求连通块裸题</h2><ul>
-<li>变形:8个方向<h3 id="题意-11"><a href="#题意-11" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 给一片矩形地，找连通块数,horizontally,vertically,diagonally都叫连通</p>
-<h3 id="思路-10"><a href="#思路-10" class="headerlink" title="思路:"></a>思路:</h3><p> 对所有点做一遍8个方向的dfs,注意访问过就变为石头</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="hdu-1495-简单bfs"><a href="#hdu-1495-简单bfs" class="headerlink" title="hdu 1495 简单bfs"></a>hdu 1495 简单bfs</h2><ul>
-<li>变形:6个方向<h3 id="题意-12"><a href="#题意-12" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 给一个可乐容量s，两个杯子容量a,b，目的是要用最少次数平分这个可乐</p>
-<h3 id="思路-11"><a href="#思路-11" class="headerlink" title="思路:"></a>思路:</h3><p> 有明确的初始态和终止态，和六个变化的方向，明显bfs<br> 初始(s,a,b)= (s,0,0)<br> 终止(s,a,b)= (s&gt;&gt;1,s&gt;&gt;1,0)  (假定a为大号杯)<br> 六个方向:  s-&gt;a  s-&gt;b  a-&gt;b  a-&gt;s  b-a  b-&gt;s</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="hdu-2612-两点bfs"><a href="#hdu-2612-两点bfs" class="headerlink" title="hdu 2612 两点bfs"></a>hdu 2612 两点bfs</h2><ul>
-<li>变形:6个方向<h3 id="题意-13"><a href="#题意-13" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p> 两人走迷宫，有很多个出口，要求到达同一个出口会面，且总花费时间最少</p>
-<h3 id="思路-12"><a href="#思路-12" class="headerlink" title="思路:"></a>思路:</h3><p> 对两个人分别bfs，找出其到每一点的时间，然后枚举所有出口，找到最短时间</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<h2 id="hdu-1043-八数码问题-bfs-反响搜索-离线打表"><a href="#hdu-1043-八数码问题-bfs-反响搜索-离线打表" class="headerlink" title="hdu 1043 八数码问题-bfs(反响搜索+离线打表)"></a>hdu 1043 八数码问题-bfs(反响搜索+离线打表)</h2><ul>
-<li>变形:6个方向<h3 id="题意-14"><a href="#题意-14" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
-<p>经典八数码，走成1-8x最少几步</p>
-<h3 id="思路-13"><a href="#思路-13" class="headerlink" title="思路:"></a>思路:</h3><p>共有9!种状态(9个数全排列就是了),然后用123456780倒推所有能走到该状态的状态<br>因为有多组数据,所以没办法在线bfs(会重复多次),则采用计算出输入状态的<strong>康托逆展开</strong>的hash值,<br>就可以直接输出对应的路径</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="补充-八数码八重境界"><a href="#补充-八数码八重境界" class="headerlink" title="补充: 八数码八重境界"></a>补充: <a href="http://www.cnblogs.com/goodness/archive/2010/05/04/1727141.html" target="_blank" rel="external">八数码八重境界</a></h3><h3 id="八数码八重境界代码"><a href="#八数码八重境界代码" class="headerlink" title="八数码八重境界代码"></a><a href="http://www.cnblogs.com/zufezzt/p/5659276.html" target="_blank" rel="external">八数码八重境界代码</a></h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/20/Day1-简单搜索/" data-id="cj60xjh5n00002jsc16nxki1j" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/search/">search</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LINUX作业整理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/16/LINUX作业整理/" class="article-date">
-  <time datetime="2017-07-16T08:29:45.000Z" itemprop="datePublished">2017-07-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/16/LINUX作业整理/">LINUX作业整理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#1">1.Linux</a><ul>
-<li><a href="#1.1">1.1正则表达式</a></li>
-<li><a href="#1.2">1.2统计home下的文件夹数量</a></li>
-<li><a href="#1.3">1.3进程监视</a></li>
-<li><a href="#1.4">1.4</a></li>
-<li><a href="#1.5">1.5</a></li>
-<li><a href="#1.6">1.6</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="1.1"> 作业1 正则表达式 regular expression</h2>
-
-<h4 id="写出下面模式的作用"><a href="#写出下面模式的作用" class="headerlink" title="写出下面模式的作用"></a>写出下面模式的作用</h4><blockquote>
-<p><code>:2,8s/\&lt;four\&gt;/4/g</code></p>
-<blockquote>
-<p>功能:第2到8行的所有单词four替换为4<br>像:four::这种可以,但是<code>fouraa</code>这种不可以,因为单词是<code>fouraa</code>不是<code>four</code><br>2,8s   2~8 替换<br>\&lt;     匹配单词词首<br>>     匹配单词词尾<br>g      全部替换</p>
-</blockquote>
-<p><code>:/\(a[bc]\{2}\)[^abc]\+\1</code><br>&gt;<br>&gt;</p>
-<blockquote>
-<p>功能:找到开头和结尾都含有 abb/abc/acb/acc,并且中间含有一个及以上不是<br>a/b/c 的字符</p>
-</blockquote>
-</blockquote>
-<h2 id="1.2"> 作业2 统计home下的文件夹数量</h2><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ` ls -l /home/mazic | grep ^d|awk <span class="string">'&#123;print $8&#125;'</span> `;</div><div class="line"><span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$i</span>; ls -l <span class="variable">$i</span>|wc -l; <span class="keyword">done</span></div></pre></td></tr></table></figure><br><br>1. ls 是查看文件夹内所有文件的命令<br>2. wc -l 是统计文件行数的命令<br>3. 以上两个命令叠加,相当于统计文件夹下文件总数<br><br><strong>可执行文件写入/home/mazic/Desktop/mazic</strong><br><br><strong>*<br><h2 id="1.3"> 作业3 进程监视</h2>
-</strong>进程监视:<strong><br><br>&gt; 重定向 &gt;<br>&gt; 追加方式 &gt;&gt;<br><br><br>在 Linux 中,当在前台运行某个作业时,终端被该作业占据;而在后台运行作业时,它不会占据终端。可以使用&amp;命令把作业放到后台执行。实际上,这样是将命令放入到一个作业队列中了:
-
-</strong>&amp;方式<strong><br>当在前台运行某个作业时,终端被该作业占据;而在后台运行作业时,它不会占据<br>终端。可以使用&amp;命令把作业放到后台执行。该命令的一般形式为:<br><br><code>命令 &amp;</code><br><code>command &gt;33333 2&gt;&amp;1 &amp;</code><br>2&gt;&amp;1 表示所有的标准输出和错误输出都将被重定向到一个叫做 33333 的文件中<br><br><img src="raw.githubusercontent.com" alt="Alt text"><br><br><img src="raw.githubusercontent.com" alt="Alt work"><br><br><br>*</strong><br><h2 id="1.4"> 作业4 正则表达式 regular expression</h2>
-
-
-<hr>
-<h2 id="1.5"> 作业5 makefile共享库</h2><br>上次实验,我们将读写操作写成单独文件,本实验中,将该文件<br>编译成共享库,利用 dlopen,dlsym,dlclose 函数,动态加载该共享<br>库实现相同的功能。<br>要求编写 Makefile 自动编译脚本<br><br>用makefile编译成动态共享库<br><br><br><em>*</em><br><h2 id="1.6"> 作业6 正则表达式 regular expression</h2>
-
-
-<hr>
-<h2 id="1.7"> 作业7 正则表达式 regular expression</h2>
-
-
-<hr>
-<h2 id="1.8"> 作业8 正则表达式 regular expression</h2>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/16/LINUX作业整理/" data-id="cj60xjh5s00012jscm185bzue" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/homework/">homework</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-卡特兰数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/16/卡特兰数/" class="article-date">
-  <time datetime="2017-07-16T06:04:41.000Z" itemprop="datePublished">2017-07-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/16/卡特兰数/">卡特兰数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="卡特兰数"><a href="#卡特兰数" class="headerlink" title="卡特兰数"></a>卡特兰数</h2><p><a href="http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html" target="_blank" rel="external">http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html</a></p>
-<h3 id="hdu-1023-卡特兰数-大数"><a href="#hdu-1023-卡特兰数-大数" class="headerlink" title="hdu 1023 卡特兰数+大数"></a>hdu 1023 卡特兰数+大数</h3><p>递推关系：<br>当h(1)=h(2)=1:<br>    h(n) = h(1)<em>h(n-1)+h(2)</em>h(n-2)+…+h(n-1)<em>h(n)<br>当h(1)=1,h(2)=2:<br>    h(n) = h(n-1)</em>(4n-2)/(n+1)<br>    即h(n) = C(2n,n)/(n+1)</p>
-<p>应用：</p>
-<ol>
-<li>出栈次序<br>n个数顺序进栈，问出栈顺序</li>
-<li>二叉树构成问题<br>n个节点，问能构成多少种二叉树</li>
-<li>凸多边形的三角形划分<br>一个凸n边形划分成多个三角形，有几种分发</li>
-<li>矩阵链乘<br>括号匹配问题</li>
-<li>其他<br>01序列问题、n边形格子从左上角到右下角不跨过对角线问题</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/16/卡特兰数/" data-id="cj60xjh6c000c2jsc5oq50o59" class="article-share-link">Partager</a>
-      
-      
     </footer>
   </div>
   
@@ -993,7 +783,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
     </div>
   </div>
 
@@ -1003,7 +793,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
+      <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
     </div>
   </div>
 
@@ -1025,23 +815,23 @@
       <ul>
         
           <li>
+            <a href="/2017/08/12/hdu-6113-dfs边界-连通块/">hdu 6113 dfs边界+连通块</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/12/KMP/">KMP</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/尺取法/">尺取法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/字符串/">字符串</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/04/图的表示法/">图的表示法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/01/LCA+RMQ/">LCA+RMQ</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/01/cf427/">cf427</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/29/cf426/">cf426</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/25/cf425/">cf425</a>
           </li>
         
       </ul>
