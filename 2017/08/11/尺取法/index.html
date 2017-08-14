@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>卡特兰数 | mazicwong</title>
+  <title>尺取法 | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="卡特兰数http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html hdu 1023 卡特兰数+大数递推关系：当h(1)=h(2)=1:    h(n) = h(1)h(n-1)+h(2)h(n-2)+…+h(n-1)h(n)当h(1)=1,h(2)=2:    h(n) = h(n-1)(4n-2)/(n+1)    即h(n)">
+  <meta name="description" content="挑战程序竞赛 P146 挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。   尺取法：像尺子一样取一段,设置左右端点,不断右移右端点和左端点,直到找到最优解之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法   应用：(优化枚举区间效率)  求有一">
+<meta name="keywords" content="常用技巧,尺取法,区间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="卡特兰数">
-<meta property="og:url" content="mazicwong.github.io/2017/07/16/卡特兰数/index.html">
+<meta property="og:title" content="尺取法">
+<meta property="og:url" content="mazicwong.github.io/2017/08/11/尺取法/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="卡特兰数http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html hdu 1023 卡特兰数+大数递推关系：当h(1)=h(2)=1:    h(n) = h(1)h(n-1)+h(2)h(n-2)+…+h(n-1)h(n)当h(1)=1,h(2)=2:    h(n) = h(n-1)(4n-2)/(n+1)    即h(n)">
-<meta property="og:updated_time" content="2017-07-16T13:41:11.355Z">
+<meta property="og:description" content="挑战程序竞赛 P146 挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。   尺取法：像尺子一样取一段,设置左右端点,不断右移右端点和左端点,直到找到最优解之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法   应用：(优化枚举区间效率)  求有一">
+<meta property="og:updated_time" content="2017-08-10T17:58:34.920Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="卡特兰数">
-<meta name="twitter:description" content="卡特兰数http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html hdu 1023 卡特兰数+大数递推关系：当h(1)=h(2)=1:    h(n) = h(1)h(n-1)+h(2)h(n-2)+…+h(n-1)h(n)当h(1)=1,h(2)=2:    h(n) = h(n-1)(4n-2)/(n+1)    即h(n)">
+<meta name="twitter:title" content="尺取法">
+<meta name="twitter:description" content="挑战程序竞赛 P146 挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。   尺取法：像尺子一样取一段,设置左右端点,不断右移右端点和左端点,直到找到最优解之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法   应用：(优化枚举区间效率)  求有一">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -67,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-卡特兰数" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-尺取法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/07/16/卡特兰数/" class="article-date">
-  <time datetime="2017-07-16T06:04:41.000Z" itemprop="datePublished">2017-07-16</time>
+    <a href="/2017/08/11/尺取法/" class="article-date">
+  <time datetime="2017-08-10T17:54:47.000Z" itemprop="datePublished">2017-08-11</time>
 </a>
     
   </div>
@@ -81,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      卡特兰数
+      尺取法
     </h1>
   
 
@@ -89,42 +90,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="卡特兰数"><a href="#卡特兰数" class="headerlink" title="卡特兰数"></a>卡特兰数</h2><p><a href="http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html" target="_blank" rel="external">http://www.cnblogs.com/kuangbin/archive/2012/03/21/2410516.html</a></p>
-<h3 id="hdu-1023-卡特兰数-大数"><a href="#hdu-1023-卡特兰数-大数" class="headerlink" title="hdu 1023 卡特兰数+大数"></a>hdu 1023 卡特兰数+大数</h3><p>递推关系：<br>当h(1)=h(2)=1:<br>    h(n) = h(1)<em>h(n-1)+h(2)</em>h(n-2)+…+h(n-1)<em>h(n)<br>当h(1)=1,h(2)=2:<br>    h(n) = h(n-1)</em>(4n-2)/(n+1)<br>    即h(n) = C(2n,n)/(n+1)</p>
-<p>应用：</p>
+        <p>挑战程序竞赛 P146</p>
+<p>挑战书上面的话说，尺取法通常是对数组保存一对下标，即所选取的区间的左右端点，然后根据实际情况不断地推进区间左右端点以得出答案。  </p>
+<p>尺取法：像尺子一样取一段,设置左右端点,不断右移右端点和左端点,直到找到最优解<br>之所以需要掌握这个技巧，是因为尺取法比直接暴力枚举区间效率高很多，尤其是数据量大的时候，所以尺取法是一种高效的枚举区间的方法  </p>
+<p>应用：(优化枚举区间效率)</p>
 <ol>
-<li>出栈次序<br>n个数顺序进栈，问出栈顺序</li>
-<li>二叉树构成问题<br>n个节点，问能构成多少种二叉树</li>
-<li>凸多边形的三角形划分<br>一个凸n边形划分成多个三角形，有几种分发</li>
-<li>矩阵链乘<br>括号匹配问题</li>
-<li>其他<br>01序列问题、n边形格子从左上角到右下角不跨过对角线问题</li>
+<li>求有一定限制的区间个数或最短的区间等等  </li>
+<li>最短的覆盖所有点的子序列 poj3320</li>
 </ol>
+<p>模板如下:四步<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void solve()</div><div class="line">&#123;</div><div class="line">    int ans = INF;</div><div class="line">    int s=0,t=0,sum=0;//左右端点和前缀和</div><div class="line">    while(1)</div><div class="line">    &#123;</div><div class="line">        while(t&lt;n &amp;&amp; sum&lt;S)</div><div class="line">            sum += a[t++];//右端点右移</div><div class="line">        if (sum&lt;S) break;</div><div class="line">        ans = min(ans,t-s);</div><div class="line">        sum -= a[s++];//左端点右移</div><div class="line">    &#125;</div><div class="line">    if (ans == INF) ans=0;</div><div class="line">    printf(&quot;%d\n&quot;,ans);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="poj3061"><a href="#poj3061" class="headerlink" title="poj3061"></a>poj3061</h3><p>题意：给定一个序列，找出最短的子序列长度，使得其和大于或等于S。<br>思路：当区间和小于S时右端点向右移动，和大于等于S时，左端点向右移动以进一步找到最短的区间，如果右端点移动到区间末尾其和还不大于等于S.结束枚举</p>
+<h3 id="poj3320"><a href="#poj3320" class="headerlink" title="poj3320"></a>poj3320</h3><p>题意:一本书有n页，每一页都一个知识点，求去最少的连续页数覆盖所有的知识点。<br>思路:一样,右端点移动到满足的位置,此时,如果该区间的子区间满足条件,左端点移动,使得子区间更短(用map和set方便处理数据)</p>
+<h3 id="hdu6103"><a href="#hdu6103" class="headerlink" title="hdu6103"></a>hdu6103</h3><p><a href="http://blog.csdn.net/archger/article/details/77073334" target="_blank" rel="external">参考</a><br>题意:<br>给出字符串s，寻找其两个长度相同且不重叠的子串，使得两个字符串<code>每位的ascii差值(一个从前往后,一个从后往前)</code>之和不大于m，且字符串长度最长。<br>思路:<br>这是第六次多校的题目,直接暴力过不掉,复杂度O(n^2),刚好处理<code>区间最优子序列</code>可以用尺取法,节省枚举所有区间的时间;<br>因为字符串的长度为5000，所以可以枚举两个子串的对称轴，预处理出一个<code>num[]</code>数组,表示对称轴左右元素的ascii差值;然后对其区间进行尺取法，这样只需要o(n^2)的复杂度即可。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/07/16/卡特兰数/" data-id="cj6cfegpa001vp5sc1x5k7spu" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/11/尺取法/" data-id="cj6cfego4000lp5sc6hqqn8k1" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/区间/">区间</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用技巧/">常用技巧</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2017/07/16/LINUX作业整理/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/12/KMP/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          LINUX作业整理
+          KMP
         
       </div>
     </a>
   
   
-    <a href="/2017/07/15/大数据/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/08/09/字符串/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">大数据</div>
+      <div class="article-nav-title">字符串</div>
     </a>
   
 </nav>
