@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: segment_tree | mazicwong</title>
+  <title>线段树 | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mazicwong">
-<meta property="og:url" content="mazicwong.github.io/tags/segment-tree/index.html">
+  <meta name="description" content="线段树: 高效解决连续区间的动态查询问题总结:区间查询最值和区间求和两种问题,其实就是改一下跟tree[i].value相关的操作,buld()中改叶子节点赋值那里,update()改查找到叶子节点和每次在中间节点的过度,query()改查询过程的要求 思考:出了真的没什么逻辑错误的bug,就重新写一遍程序!!!!!poj3264 的右子树写成左子树,然后debug了5个小时!!!一晚上没了!!!">
+<meta name="keywords" content="线段树,染色问题,离散化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树">
+<meta property="og:url" content="mazicwong.github.io/2017/08/27/线段树/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="blog">
+<meta property="og:description" content="线段树: 高效解决连续区间的动态查询问题总结:区间查询最值和区间求和两种问题,其实就是改一下跟tree[i].value相关的操作,buld()中改叶子节点赋值那里,update()改查找到叶子节点和每次在中间节点的过度,query()改查询过程的要求 思考:出了真的没什么逻辑错误的bug,就重新写一遍程序!!!!!poj3264 的右子树写成左子树,然后debug了5个小时!!!一晚上没了!!!">
+<meta property="og:updated_time" content="2017-08-26T18:40:21.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mazicwong">
-<meta name="twitter:description" content="blog">
+<meta name="twitter:title" content="线段树">
+<meta name="twitter:description" content="线段树: 高效解决连续区间的动态查询问题总结:区间查询最值和区间求和两种问题,其实就是改一下跟tree[i].value相关的操作,buld()中改叶子节点赋值那里,update()改查找到叶子节点和每次在中间节点的过度,query()改查询过程的要求 思考:出了真的没什么逻辑错误的bug,就重新写一遍程序!!!!!poj3264 的右子树写成左子树,然后debug了5个小时!!!一晚上没了!!!">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -66,39 +68,88 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/29/cf426/" class="archive-article-date">
-  <time datetime="2017-07-29T12:26:40.000Z" itemprop="datePublished">7月 29</time>
+        <section id="main"><article id="post-线段树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/27/线段树/" class="article-date">
+  <time datetime="2017-08-26T18:36:27.000Z" itemprop="datePublished">2017-08-27</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/29/cf426/">cf426</a>
+    <h1 class="article-title" itemprop="name">
+      线段树
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="线段树-高效解决连续区间的动态查询问题"><a href="#线段树-高效解决连续区间的动态查询问题" class="headerlink" title="线段树: 高效解决连续区间的动态查询问题"></a>线段树: 高效解决连续区间的动态查询问题</h2><p>总结:<br>区间查询最值和区间求和两种问题,其实就是改一下跟<code>tree[i].value</code>相关的操作,<code>buld()</code>中改叶子节点赋值那里,<code>update()</code>改查找到叶子节点和每次在中间节点的过度,<code>query()</code>改查询过程的要求</p>
+<p>思考:<br>出了真的没什么逻辑错误的bug,就重新写一遍程序!!!!!<br>poj3264 的右子树写成左子树,然后debug了5个小时!!!一晚上没了!!!<br>不过对完全二叉树的认识又深刻了很多,  </p>
+<p>样例<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">a[<span class="number">1.</span>.n]=&#123;<span class="number">1</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>&#125;          <span class="comment">//数据</span></div><div class="line"></div><div class="line">tree[<span class="number">7</span>].left=tree[<span class="number">7</span>].right=<span class="number">6</span>:  <span class="comment">//对应[1..n]的叶子区间</span></div><div class="line">L(<span class="number">7</span>)=<span class="number">14</span>,R(<span class="number">7</span>)=<span class="number">15</span>:               <span class="comment">//对应子节点</span></div></pre></td></tr></table></figure></p>
+<p>树状数组: 动态维护数组前缀和(单点更新，查询数组的前缀和)<br>hdu 1166<br>poj 3468  <a href="http://kenby.iteye.com/blog/962159" target="_blank" rel="external">http://kenby.iteye.com/blog/962159</a></p>
+<p>rmq:<br>poj 3264</p>
+<hr>
+<p>hdu 1754 线段树模板题<br>单点更新(替换),区间查询(最大值)</p>
+<p>题意:<br>给200000个点,两种操作</p>
+<ul>
+<li>更新: 某个点变成另一个值</li>
+<li>查询: 找一个区间内的最大值</li>
+</ul>
+<p>思路:<br>显然数据量很大,2e5个点,枚举不可能,所以用线段树  </p>
+<p>注意:<br>这题的2e5个点是连续的,如果不是连续的,则需要进行离散化</p>
+<hr>
+<p>hdu 1166<br>单点更新(加减),区间查询(求和)</p>
+<p>思路:<br>直接线段树模板题,改下<code>tree[i].value</code>那里的更新值就可以过了</p>
+<hr>
+<p>poj 3468(模板)<br>区间更新(加),区间查询(和)</p>
+<hr>
+<p>hdu 1698<br>区间更新(替换),区间查询(和)</p>
+<p>思路:<br>在poj3468的模板上,把跟value和lazy相关的值改一下就好了,<br>PushDown()更新的<code>+=</code>全都改成<code>=</code><br>update()中更新<code>+=</code>也改成<code>=</code><br>然后就过了= =</p>
+<hr>
+<p>poj 2528 染色问题(用了另一套板子)<br>线段树+离散化</p>
+<p>题意:<br>给很多线段,每个一种颜色,映射到墙上,会相互覆盖,问最终墙上有多少种颜色</p>
+<p>思路:<br>墙的距离很长,先对这些线段离散化,注意这题的离散化时候,相邻点如果间隔大于1的话,要再插入一个点到他们中间,否则会出错<br>具体解释可以看下<a href="http://blog.csdn.net/non_cease/article/details/7383736" target="_blank" rel="external">http://blog.csdn.net/non_cease/article/details/7383736</a><br>直接建树,然后每次查询到根节点</p>
+<hr>
+<p>zoj 1610 染色区域问题</p>
+<p>题意:<br>在一条长度为8000的线段上染色，每次把区间<code>[a,b]</code>染成c颜色,求染完之后，每个颜色在线段上有多少个间断的区间。</p>
+<p>思路:<br>用线段树维护,然后再查询</p>
+<hr>
+<p>poj 3264 建树+查询</p>
+<p>题意:<br>计算给定区间内最大值和最小值的差</p>
+<p>思路:<br>用线段树维护好区间的最大最小值就可以了</p>
+<p>这道题debug了几个小时,,,一直以为自己的模板还有那里出漏洞了,结果最后是建树的时候右子树写成左子树,不过也好,今晚把整个完全二叉树都搞的特别熟练了<br>以后遇到这种就直接重写一遍!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj6tnihbs001y5jscnc016w16" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/25/cfAIM-round4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cfAIMround4</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
