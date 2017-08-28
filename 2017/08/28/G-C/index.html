@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | mazicwong</title>
+  <title>G++&amp;C++ | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mazicwong">
-<meta property="og:url" content="mazicwong.github.io/archives/index.html">
+  <meta name="description" content="最近写了几道字典树,发现Trie用动态内存分配实现的话,交到OJ上用G++会MLE,用C++不会,原因: 群里大佬说G++指针的size是C++的两倍多,会MLE,然后不断的new出来的内存也是不连续的,跑起来会变慢,测了一下时间大概变慢了一半 顺便整理下这几个的注意点吧 手动扩大栈内存一般,用g++提交时间慢,用C++提交会栈溢出 g++: 用读入挂防止TLEc++: #pragma comme">
+<meta name="keywords" content="G++,C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="G++&amp;C++">
+<meta property="og:url" content="mazicwong.github.io/2017/08/28/G-C/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="blog">
+<meta property="og:description" content="最近写了几道字典树,发现Trie用动态内存分配实现的话,交到OJ上用G++会MLE,用C++不会,原因: 群里大佬说G++指针的size是C++的两倍多,会MLE,然后不断的new出来的内存也是不连续的,跑起来会变慢,测了一下时间大概变慢了一半 顺便整理下这几个的注意点吧 手动扩大栈内存一般,用g++提交时间慢,用C++提交会栈溢出 g++: 用读入挂防止TLEc++: #pragma comme">
+<meta property="og:updated_time" content="2017-08-28T08:56:08.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mazicwong">
-<meta name="twitter:description" content="blog">
+<meta name="twitter:title" content="G++&amp;C++">
+<meta name="twitter:description" content="最近写了几道字典树,发现Trie用动态内存分配实现的话,交到OJ上用G++会MLE,用C++不会,原因: 群里大佬说G++指针的size是C++的两倍多,会MLE,然后不断的new出来的内存也是不连续的,跑起来会变慢,测了一下时间大概变慢了一半 顺便整理下这几个的注意点吧 手动扩大栈内存一般,用g++提交时间慢,用C++提交会栈溢出 g++: 用读入挂防止TLEc++: #pragma comme">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -66,215 +68,67 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/28/cf382/" class="archive-article-date">
-  <time datetime="2017-08-28T14:38:27.000Z" itemprop="datePublished">8月 28</time>
+        <section id="main"><article id="post-G-C" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/28/G-C/" class="article-date">
+  <time datetime="2017-08-28T08:10:43.000Z" itemprop="datePublished">2017-08-28</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/28/cf382/">cf382</a>
+    <h1 class="article-title" itemprop="name">
+      G++&amp;C++
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/28/G-C/" class="archive-article-date">
-  <time datetime="2017-08-28T08:10:43.000Z" itemprop="datePublished">8月 28</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/28/G-C/">G++&amp;C++</a>
-    </h1>
-  
+        <p>最近写了几道字典树,发现Trie用动态内存分配实现的话,交到OJ上用G++会MLE,用C++不会,<br>原因: 群里大佬说G++指针的size是C++的两倍多,会MLE,然后不断的new出来的内存也是不连续的,跑起来会变慢,测了一下时间大概变慢了一半</p>
+<p>顺便整理下这几个的注意点吧</p>
+<h2 id="手动扩大栈内存"><a href="#手动扩大栈内存" class="headerlink" title="手动扩大栈内存"></a>手动扩大栈内存</h2><p>一般,用g++提交时间慢,用C++提交会栈溢出</p>
+<p>g++: 用读入挂防止TLE<br>c++: #pragma comment(linker, “/STACK:102400000,102400000”)</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/27/线段树/" class="archive-article-date">
-  <time datetime="2017-08-26T18:36:27.000Z" itemprop="datePublished">8月 27</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/27/线段树/">线段树</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/25/cfAIM-round4/" class="archive-article-date">
-  <time datetime="2017-08-25T05:48:57.000Z" itemprop="datePublished">8月 25</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj6w9u4se00005ssc30bn2uny" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/25/cfAIM-round4/">cfAIMround4</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/23/强连通分量/" class="archive-article-date">
-  <time datetime="2017-08-23T14:13:29.000Z" itemprop="datePublished">8月 23</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/23/强连通分量/">强连通分量</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/28/cf382/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          cf382
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/27/线段树/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">线段树</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/19/cf429/" class="archive-article-date">
-  <time datetime="2017-08-18T17:44:57.000Z" itemprop="datePublished">8月 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/19/cf429/">cf429</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/17/对拍程序/" class="archive-article-date">
-  <time datetime="2017-08-16T17:13:16.000Z" itemprop="datePublished">8月 17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/17/对拍程序/">对拍程序</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/17/各种数学/" class="archive-article-date">
-  <time datetime="2017-08-16T17:08:19.000Z" itemprop="datePublished">8月 17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/17/各种数学/">各种数学</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/17/博弈论/" class="archive-article-date">
-  <time datetime="2017-08-16T17:02:41.000Z" itemprop="datePublished">8月 17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/17/博弈论/">博弈论</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/17/fft/" class="archive-article-date">
-  <time datetime="2017-08-16T17:00:30.000Z" itemprop="datePublished">8月 17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/17/fft/">fft</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">

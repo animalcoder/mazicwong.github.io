@@ -68,6 +68,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cf382" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/28/cf382/" class="article-date">
+  <time datetime="2017-08-28T14:38:27.000Z" itemprop="datePublished">2017-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/28/cf382/">cf382</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>1.直接模拟</p>
+<hr>
+<p>2.贪心<br>题意:<br>给n个数,和n1,n2,要令你找n1个数和n2个数,使得这n1个数的和除以n1,加上n2个数的和除以n2,值最大</p>
+<p>扩展:<br>给n个数,让取出一个集合的数,使得这个集合里的m个数相加除以m最大,其实就是只去最大那个数就好了,再取其他的数都会使最优值变小</p>
+<hr>
+<p>3.<br>打表,dp,找递推<br>题意:<br>n个人打比赛,每次两个人对打,输的淘汰<br>两个人进行比赛的条件:他们已经打过的次数相差小于等于1<br>问最终剩下的那个人,最多是打几场</p>
+<p>思路:<br>猜了个递推公式,<code>f[n]=f[n-1]+f[n-1]</code><br><code>f[1]=2,f[2]=3,f[3]=5</code><br>然后打表完扔数组里加个<code>upper_bound</code>交了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 2.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月28日 星期一 18时54分07秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line">ll n;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 2  1</div><div class="line"> *</div><div class="line"> * 3  2</div><div class="line"> * 4  2</div><div class="line"> *</div><div class="line"> * 5  3</div><div class="line"> * 6  3</div><div class="line"> * 7  3</div><div class="line"> *</div><div class="line"> * 8  4</div><div class="line"> * 9  4</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="comment">//ll a[200];</span></div><div class="line"></div><div class="line">ll ans[<span class="number">100</span>]=&#123;</div><div class="line"><span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>,<span class="number">21</span>,<span class="number">34</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">144</span>,<span class="number">233</span>,<span class="number">377</span>,<span class="number">610</span>,<span class="number">987</span>,<span class="number">1597</span>,<span class="number">2584</span>,<span class="number">4181</span>,<span class="number">6765</span>,<span class="number">10946</span>,<span class="number">17711</span>,<span class="number">28657</span>,<span class="number">46368</span>,<span class="number">75025</span>,<span class="number">121393</span>,<span class="number">196418</span>,<span class="number">317811</span>,<span class="number">514229</span>,<span class="number">832040</span>,<span class="number">1346269</span>,<span class="number">2178309</span>,<span class="number">3524578</span>,<span class="number">5702887</span>,<span class="number">9227465</span>,<span class="number">14930352</span>,<span class="number">24157817</span>,<span class="number">39088169</span>,<span class="number">63245986</span>,<span class="number">102334155</span>,<span class="number">165580141</span>,<span class="number">267914296</span>,<span class="number">433494437</span>,<span class="number">701408733</span>,<span class="number">1134903170</span>,<span class="number">1836311903</span>,<span class="number">2971215073</span>,<span class="number">4807526976</span>,<span class="number">7778742049</span>,<span class="number">12586269025</span>,<span class="number">20365011074</span>,<span class="number">32951280099</span>,<span class="number">53316291173</span>,<span class="number">86267571272</span>,<span class="number">139583862445</span>,<span class="number">225851433717</span>,<span class="number">365435296162</span>,<span class="number">591286729879</span>,<span class="number">956722026041</span>,<span class="number">1548008755920</span>,<span class="number">2504730781961</span>,<span class="number">4052739537881</span>,<span class="number">6557470319842</span>,<span class="number">10610209857723</span>,<span class="number">17167680177565</span>,<span class="number">27777890035288</span>,<span class="number">44945570212853</span>,<span class="number">72723460248141</span>,<span class="number">117669030460994</span>,<span class="number">190392490709135</span>,<span class="number">308061521170129</span>,<span class="number">498454011879264</span>,<span class="number">806515533049393</span>,<span class="number">1304969544928657</span>,<span class="number">2111485077978050</span>,<span class="number">3416454622906707</span>,<span class="number">5527939700884757</span>,<span class="number">8944394323791464</span>,<span class="number">14472334024676221</span>,<span class="number">23416728348467685</span>,<span class="number">37889062373143906</span>,<span class="number">61305790721611591</span>,<span class="number">99194853094755497</span>,<span class="number">160500643816367088</span>,<span class="number">259695496911122585</span>,<span class="number">420196140727489673</span>,<span class="number">679891637638612258</span>,<span class="number">1100087778366101931</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</div><div class="line">    a[<span class="number">1</span>]=<span class="number">2</span>; a[<span class="number">2</span>]=<span class="number">3</span>;a[<span class="number">3</span>]=<span class="number">5</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">4</span>;i&lt;=<span class="number">86</span>;i++)</div><div class="line">    &#123;</div><div class="line">        a[i] = a[i<span class="number">-1</span>]+a[i<span class="number">-2</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">86</span>;i++)</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">','</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">    <span class="keyword">int</span> aa = upper_bound(ans,ans+<span class="number">87</span>,n)-ans;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,aa<span class="number">-1</span>);</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>4.<br>题意:<br>给n元,要交的税是n的最大因子(eg:n=25,交5),现在将n分成若干份,问交的税最小是多少</p>
+<p>思路:<br>只有3种情况,</p>
+<ul>
+<li>如果是质数,不分,直接交1元;</li>
+<li>如果是合数的话,当他为偶数,直接表示为2个质数之和,结果为2,,</li>
+<li>当他为奇数,这时候有可能是2跟3,他先减掉一个偶数2,如果是质数,就直接表示为2,否则表示为3(可以理解为,减掉3然后变成一个偶数)</li>
+</ul>
+<p>最后再套一个大数素数测试的模板,或者手写一个<code>O(sqrt(n))</code>的素数测试</p>
+<p>扩展:<br>哥德巴赫猜想:一个偶数可以表示为2个质数的和.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">    &gt; File Name: 4.cpp</div><div class="line">    &gt; Author: mazicwong</div><div class="line">    &gt; Mail: mazicwong@gmail.com</div><div class="line">    &gt; Created Time: 2017年08月28日 星期一 19时47分50秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">int</span> S=<span class="number">5</span>;<span class="comment">//测试次数，越大精度越高</span></div><div class="line"><span class="function">ll <span class="title">mod_mul</span><span class="params">(ll a, ll b, ll n)</span>  <span class="comment">//快速乘</span></span></div><div class="line">&#123;</div><div class="line">    ll res = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(b)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)    res = (res + a) % n;</div><div class="line">        a = (a + a) % n;</div><div class="line">        b &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function">ll <span class="title">mod_exp</span><span class="params">(ll a, ll b, ll n)</span>  <span class="comment">//快速幂</span></span></div><div class="line">&#123;</div><div class="line">    ll res = <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(b)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)    res = mod_mul(res, a, n);</div><div class="line">        a = mod_mul(a, a, n);</div><div class="line">        b &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">miller_rabin</span><span class="params">(ll n)</span>  <span class="comment">//复杂度很小</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">2</span> || n == <span class="number">3</span> || n == <span class="number">5</span> || n == <span class="number">7</span> || n == <span class="number">11</span>)    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || !(n%<span class="number">2</span>) || !(n%<span class="number">3</span>) || !(n%<span class="number">5</span>) || !(n%<span class="number">7</span>) || !(n%<span class="number">11</span>))    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">    ll x, pre, u;</div><div class="line">    <span class="keyword">int</span> i, j, k = <span class="number">0</span>;</div><div class="line">    u = n - <span class="number">1</span>;    <span class="comment">//要求x^u % n</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span>(!(u&amp;<span class="number">1</span>))      <span class="comment">//如果u为偶数则u右移，用k记录移位数</span></div><div class="line">    &#123;</div><div class="line">        k++;</div><div class="line">        u &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    srand((ll)time(<span class="number">0</span>));</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; S; ++i)      <span class="comment">//进行S次测试</span></div><div class="line">    &#123;</div><div class="line">        x = rand()%(n<span class="number">-2</span>) + <span class="number">2</span>;    <span class="comment">//在[2, n)中取随机数</span></div><div class="line">        <span class="keyword">if</span>((x%n) == <span class="number">0</span>)    <span class="keyword">continue</span>;</div><div class="line"></div><div class="line">        x = mod_exp(x, u, n);    <span class="comment">//先计算(x^u) % n，</span></div><div class="line">        pre = x;</div><div class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; k; ++j)      <span class="comment">//把移位减掉的量补上，并在这地方加上二次探测</span></div><div class="line">        &#123;</div><div class="line">            x = mod_mul(x, x, n);</div><div class="line">            <span class="keyword">if</span>(x == <span class="number">1</span> &amp;&amp; pre != <span class="number">1</span> &amp;&amp; pre != n<span class="number">-1</span>)    <span class="keyword">return</span> <span class="literal">false</span>;    <span class="comment">//二次探测定理，这里如果x = 1则pre 必须等于 1，或则 n-1否则可以判断不是素数</span></div><div class="line">            pre = x;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(x != <span class="number">1</span>)    <span class="keyword">return</span> <span class="literal">false</span>;    <span class="comment">//费马小定理</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="comment">//*/test miller_rabin</span></div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="built_in">cin</span>&gt;&gt;n;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(miller_rabin(n))</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(miller_rabin(n<span class="number">-2</span>))</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"2\n"</span>);</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">printf</span>(<span class="string">"3\n"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj6w9u4st00055sscgmaniipc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-G-C" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/28/G-C/" class="article-date">
+  <time datetime="2017-08-28T08:10:43.000Z" itemprop="datePublished">2017-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/28/G-C/">G++&amp;C++</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近写了几道字典树,发现Trie用动态内存分配实现的话,交到OJ上用G++会MLE,用C++不会,<br>原因: 群里大佬说G++指针的size是C++的两倍多,会MLE,然后不断的new出来的内存也是不连续的,跑起来会变慢,测了一下时间大概变慢了一半</p>
+<p>顺便整理下这几个的注意点吧</p>
+<h2 id="手动扩大栈内存"><a href="#手动扩大栈内存" class="headerlink" title="手动扩大栈内存"></a>手动扩大栈内存</h2><p>一般,用g++提交时间慢,用C++提交会栈溢出</p>
+<p>g++: 用读入挂防止TLE<br>c++: #pragma comment(linker, “/STACK:102400000,102400000”)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj6w9u4se00005ssc30bn2uny" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-线段树" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/27/线段树/" class="article-date">
@@ -129,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj6tnihbs001y5jscnc016w16" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj6w9u4uc002h5ssc8egmvws1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -190,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj6tnihaf000c5jscaz30af6l" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj6w9u4tb000q5sscv97cuexd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -266,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cj6tnihbt00205jscexgy7jj1" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cj6w9u4ub002g5sscjflnye07" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cj6tnihb7001e5jscae24ze2q" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cj6w9u4t3000g5ssc6q56poq8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -374,7 +474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cj6tnihbj001o5jscd7uydzf2" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cj6w9u4tj00105ssckzgv2fto" class="article-share-link">Share</a>
       
       
     </footer>
@@ -480,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/各种数学/" data-id="cj6tnihba001g5jscg0wx51j4" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/17/各种数学/" data-id="cj6w9u4tf000t5ssc55eyp9wp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -517,7 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/博弈论/" data-id="cj6tnihbw00245jsco4m23edy" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/17/博弈论/" data-id="cj6w9u4ve002v5ssc2ni9qr0t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -555,110 +655,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/fft/" data-id="cj6tnihah000f5jscuvrar9g2" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/17/fft/" data-id="cj6w9u4t6000k5sscipqd13uf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFT/">FFT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模板/">模板</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-树形DP" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/树形DP/" class="article-date">
-  <time datetime="2017-08-16T16:48:07.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/树形DP/">树形DP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>hdu1520<br>题意:</p>
-<blockquote>
-<p>给一棵有根数,每个点有权重,相邻点不能同时出现,问怎么取点可以使得权重最大</p>
-</blockquote>
-<p>思路:  </p>
-<blockquote>
-<p>每个结点有两种状态，取和不取，用0表示不选，1表示选中<br>状态: dp[i][1]表示取第i个点，dp[i][0]表示不取第i个点。<br>转移: dp[u][0] += max (dp[v][0], dp[v][1])  不取父节点,子节点可以取或不取<br>      dp[u][1] += dp[v][0]   取父节点,不能取子节点<br>其中v是u的所有子节点<br>建树: 有向树,用连接表  </p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 1520.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月16日 星期三 23时03分31秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line"> * 状态:</div><div class="line"> * dp[i,0]: 不取i点时的最大</div><div class="line"> * dp[i,1]: 取i点时的最大</div><div class="line"> *</div><div class="line"> * 转移:</div><div class="line"> * dp[i,0] += max&#123;dp[j][0],dp[j][1]&#125;</div><div class="line"> * dp[i,1] += dp[j,0]</div><div class="line"> * 其中j为i的所有儿子</div><div class="line"> *</div><div class="line"> * dfs结果,max&#123;dp[root,0],dp[root,1]&#125;</div><div class="line"> * </div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">6000</span>+<span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dp[maxn][<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="keyword">int</span> in[maxn];</div><div class="line"><span class="keyword">bool</span> vis[maxn];</div><div class="line"><span class="keyword">int</span> n;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> v;</div><div class="line">    <span class="keyword">int</span> next;</div><div class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</div><div class="line"></div><div class="line"><span class="keyword">int</span> cnt,head[maxn];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></div><div class="line">&#123;</div><div class="line">    e[cnt].v=v;</div><div class="line">    e[cnt].next=head[u];</div><div class="line">    head[u]=cnt++;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span></div><div class="line">&#123;</div><div class="line">    vis[u]=<span class="literal">true</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=e[i].next)</div><div class="line">    &#123;</div><div class="line">       <span class="comment">// if (!vis[i])</span></div><div class="line">       <span class="comment">// &#123;</span></div><div class="line">            <span class="keyword">int</span> v=e[i].v;</div><div class="line">            dfs(v);</div><div class="line">            dp[u][<span class="number">0</span>] += max(dp[v][<span class="number">0</span>], dp[v][<span class="number">1</span>]);</div><div class="line">            dp[u][<span class="number">1</span>] += dp[v][<span class="number">0</span>];</div><div class="line">       <span class="comment">// &#125;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        <span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(in));</div><div class="line">        cnt=<span class="number">0</span>;</div><div class="line">        <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="keyword">sizeof</span>(head));</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;dp[i][<span class="number">1</span>]);<span class="comment">//边界</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> u,v;</div><div class="line">        <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;v,&amp;u)!=EOF &amp;&amp; v &amp;&amp; u)</div><div class="line">        &#123;</div><div class="line">            addedge(u,v);</div><div class="line">            in[v]++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (in[i]==<span class="number">0</span>)<span class="comment">//root</span></div><div class="line">            &#123;</div><div class="line">                dfs(i);</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,max(dp[i][<span class="number">0</span>],dp[i][<span class="number">1</span>]));</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/树形DP/" data-id="cj6tnihbx00255jsclo6rwftp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树/">树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树形DP/">树形DP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-树的表示法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/16/树的表示法/" class="article-date">
-  <time datetime="2017-08-16T15:18:42.000Z" itemprop="datePublished">2017-08-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/树的表示法/">树的表示法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>图论的题目难在建图</p>
-<p>二叉树(基础)</p>
-<p>并查集(有根树)</p>
-<p>生成树(图论)</p>
-<p>Trie树(字典树)</p>
-<p>哈弗曼树(编码树)</p>
-<p>二叉排序树(BST,平衡树,伸展树,动态树)</p>
-<p>线段树(扩展)</p>
-<p>树的表示:</p>
-<p>1.”fa型”<br>靠<code>in[i]==0</code>找root</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="keyword">int</span> in[maxn];<span class="comment">//入度</span></div><div class="line"><span class="keyword">int</span> out[maxn];</div><div class="line"></div><div class="line">加边: fa[v]=u; in[v]++;</div></pre></td></tr></table></figure>
-<p>2.”邻接表”<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; V[maxn];</div><div class="line"></div><div class="line">加边: V[u].push_back(v); in[v]++;</div><div class="line">遍历: <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V[u].size();i++)</div><div class="line">         V[u][i]=...;</div></pre></td></tr></table></figure></p>
-<p>3.”struct链表”</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> child;</div><div class="line">    <span class="keyword">int</span> fa;</div><div class="line">    <span class="keyword">int</span> brother;</div><div class="line">    <span class="keyword">int</span> present;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">        child=fa=brother=present=<span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;tree[maxn];</div><div class="line"></div><div class="line">加边: tree[i].init();  <span class="built_in">cin</span>&gt;&gt;tree[i].present;</div></pre></td></tr></table></figure>
-<p>4.”有向树,用连接表”</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> cnt=<span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> head[maxn];</div><div class="line"><span class="keyword">int</span> pre[maxn];</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> v,next;</div><div class="line">    edge()&#123;&#125;</div><div class="line">    edge(<span class="keyword">int</span> V,<span class="keyword">int</span> NEXT):v(V),next(NEXT)&#123;&#125;</div><div class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</div><div class="line"></div><div class="line">初始化:</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    cnt=<span class="number">0</span>;</div><div class="line">    <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="keyword">sizeof</span>(head));</div><div class="line">&#125;</div><div class="line"></div><div class="line">加边:</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></div><div class="line">&#123;</div><div class="line">    e[cnt]=e(v,head[u]);</div><div class="line">    head[u]=cnt++;</div><div class="line">&#125;</div><div class="line"></div><div class="line">遍历:</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=e[i].next)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> v=e[i].v;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/16/树的表示法/" data-id="cj6tnihbq001v5jscd3fuoobc" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -682,7 +683,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
     </div>
   </div>
 
@@ -692,7 +693,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
     </div>
   </div>
 
@@ -714,6 +715,14 @@
       <ul>
         
           <li>
+            <a href="/2017/08/28/cf382/">cf382</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/28/G-C/">G++&amp;C++</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/27/线段树/">线段树</a>
           </li>
         
@@ -723,14 +732,6 @@
         
           <li>
             <a href="/2017/08/23/强连通分量/">强连通分量</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/19/cf429/">cf429</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/17/对拍程序/">对拍程序</a>
           </li>
         
       </ul>
