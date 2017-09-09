@@ -68,6 +68,147 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-最小生成树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/09/最小生成树/" class="article-date">
+  <time datetime="2017-09-09T02:53:08.000Z" itemprop="datePublished">2017-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/09/最小生成树/">最小生成树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最小生成树:kruskal or Prim</p>
+<p>算法:<br>kruskal中,建图一般存边,然后可以sort所有边权,依次取入<code>n-1</code>条边,过程中用并查集判定不会构成回路</p>
+<hr>
+<p>kruskal模板:poj1287<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">50</span>+<span class="number">5</span>;<span class="comment">//point</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1500</span>+<span class="number">5</span>;<span class="comment">//edge</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * poj1287: 传入点,边,求最小生成树边权和</div><div class="line"> * 复杂度: E*logV</div><div class="line"> * point: [1..n]</div><div class="line"> * edge: [0..m-1]</div><div class="line"> */</div><div class="line"><span class="keyword">int</span> n,m;<span class="comment">//点,边</span></div><div class="line"></div><div class="line"><span class="comment">//建图(存边)</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x,y;</div><div class="line">    <span class="keyword">int</span> d;</div><div class="line">&#125;E[maxm];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(edge a1,edge a2)</span></span>&#123;<span class="keyword">return</span> a1.d&lt;a2.d;&#125;</div><div class="line"></div><div class="line"><span class="comment">//并查集(判连通块)</span></div><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;<span class="keyword">return</span> x==fa[x]?x:fa[x]=find(fa[x]);&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> nx=find(x),ny=find(y);</div><div class="line">    <span class="keyword">if</span> (nx!=ny) fa[nx]=ny;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//kruskal(传入边数)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">(<span class="keyword">int</span> num)</span></span></div><div class="line">&#123;</div><div class="line">    init();</div><div class="line">    sort(E,E+num,cmp);</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,cnt=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (find(E[i].x)!=find(E[i].y))</div><div class="line">        &#123;</div><div class="line">            ans += E[i].d;</div><div class="line">            unite(E[i].x,E[i].y);</div><div class="line">            cnt++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (n<span class="number">-1</span>==cnt)</div><div class="line">            <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;E[i].x,&amp;E[i].y,&amp;E[i].d);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,kruskal(m));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>poj 1287 裸最小生成树</p>
+<p>题意:<br>给n点,m边,求最小生成树边权和</p>
+<hr>
+<p>hdu 1233 最小生成树边权和</p>
+<p>题意:<br><code>n</code>村庄,<code>n*(n-1)/2</code>路,输出最小公路总长度</p>
+<p>思路:<br>裸题</p>
+<hr>
+<p>hdu1301 &amp; poj1251</p>
+<p>题意:<br>n点,然后给边,按邻接表方式给,求最小生成树边权和</p>
+<hr>
+<p>hdu 1875</p>
+<p>题意:<br>给出所有点坐标,任意两点建路,要求距离在10到1000之间,目的是使n个点连通,问最少需要建多少</p>
+<p>思路:<br>求出所有边距离,判断是否符合,然后套一个kruskal</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7cpweye00176wscfecm9r7r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/09/note/" class="article-date">
+  <time datetime="2017-09-09T02:52:12.825Z" itemprop="datePublished">2017-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最小生成树:kruskal or Prim</p>
+<p>算法:<br>kruskal中,建图一般存边,然后可以sort所有边权,依次取入<code>n-1</code>条边,过程中用并查集判定不会构成回路</p>
+<hr>
+<p>kruskal模板:poj1287<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">50</span>+<span class="number">5</span>;<span class="comment">//point</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1500</span>+<span class="number">5</span>;<span class="comment">//edge</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * poj1287: 传入点,边,求最小生成树边权和</div><div class="line"> * 复杂度: E*logV</div><div class="line"> * point: [1..n]</div><div class="line"> * edge: [0..m-1]</div><div class="line"> */</div><div class="line"><span class="keyword">int</span> n,m;<span class="comment">//点,边</span></div><div class="line"></div><div class="line"><span class="comment">//建图(存边)</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x,y;</div><div class="line">    <span class="keyword">int</span> d;</div><div class="line">&#125;E[maxm];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(edge a1,edge a2)</span></span>&#123;<span class="keyword">return</span> a1.d&lt;a2.d;&#125;</div><div class="line"></div><div class="line"><span class="comment">//并查集(判连通块)</span></div><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;<span class="keyword">return</span> x==fa[x]?x:fa[x]=find(fa[x]);&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> nx=find(x),ny=find(y);</div><div class="line">    <span class="keyword">if</span> (nx!=ny) fa[nx]=ny;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//kruskal(传入边数)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">(<span class="keyword">int</span> num)</span></span></div><div class="line">&#123;</div><div class="line">    init();</div><div class="line">    sort(E,E+num,cmp);</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,cnt=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (find(E[i].x)!=find(E[i].y))</div><div class="line">        &#123;</div><div class="line">            ans += E[i].d;</div><div class="line">            unite(E[i].x,E[i].y);</div><div class="line">            cnt++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (n<span class="number">-1</span>==cnt)</div><div class="line">            <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;E[i].x,&amp;E[i].y,&amp;E[i].d);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,kruskal(m));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>poj 1287 裸最小生成树</p>
+<p>题意:<br>给n点,m边,求最小生成树边权和</p>
+<hr>
+<p>hdu 1233 最小生成树边权和</p>
+<p>题意:<br><code>n</code>村庄,<code>n*(n-1)/2</code>路,输出最小公路总长度</p>
+<p>思路:<br>裸题</p>
+<hr>
+<p>hdu1301 &amp; poj1251</p>
+<p>题意:<br>n点,然后给边,按邻接表方式给,求最小生成树边权和</p>
+<hr>
+<p>hdu 1875</p>
+<p>题意:<br>给出所有点坐标,任意两点建路,要求距离在10到1000之间,目的是使n个点连通,问最少需要建多少</p>
+<p>思路:<br>求出所有边距离,判断是否符合,然后套一个kruskal</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/09/note/" data-id="cj7cpwexx000o6wscv1hqp81s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ruby-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/01/ruby-first/" class="article-date">
+  <time datetime="2017-09-01T03:17:03.000Z" itemprop="datePublished">2017-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/ruby-first/">ruby(first)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.ruby-lang.org/en/downloads/" target="_blank" rel="external">ruby 2.4.1</a> in Linux: </p>
+<p>安装完ruby的源码包,里面已经有了一个iRb shell,ruby的交互式shell</p>
+<p>用<code>$ irb</code>可以运行,</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7cpweyo001j6wsc5ejrl5al" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-cf382" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/28/cf382/" class="article-date">
@@ -114,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj6w9u4st00055sscgmaniipc" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7cpwexk000g6wscfa8z25cg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -156,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj6w9u4se00005ssc30bn2uny" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7cpwex100016wscis2hid2m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
@@ -229,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj6w9u4uc002h5ssc8egmvws1" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7cpweyn001h6wsczp6j9wm3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -290,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj6w9u4tb000q5sscv97cuexd" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7cpwexp000m6wscs6hll2a8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -366,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cj6w9u4ub002g5sscjflnye07" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cj7cpweyh001a6wsceluef5vp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -429,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cj6w9u4t3000g5ssc6q56poq8" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cj7cpwexj000f6wsc1ma3uhpq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -474,192 +615,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cj6w9u4tj00105ssckzgv2fto" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cj7cpweyd00156wscdg04h74r" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-各种数学" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/各种数学/" class="article-date">
-  <time datetime="2017-08-16T17:08:19.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/各种数学/">各种数学</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.cnblogs.com/qscqesze/p/5129856.html" target="_blank" rel="external">参考</a></p>
-<p><a href="http://blog.csdn.net/ACdreamers/article/category/1159392" target="_blank" rel="external">太菜了,开始系统学习下数论知识点 &amp; 整理模板</a></p>
-<p><a href="http://www.cnblogs.com/linyujun/category/784324.html" target="_blank" rel="external">http://www.cnblogs.com/linyujun/category/784324.html</a></p>
-<ul>
-<li><a href="#1">1.数论基础</a><ul>
-<li><a href="#1.1">1.1图片</a></li>
-<li><a href="#1.2">1.2换行</a></li>
-</ul>
-</li>
-</ul>
-<p>[欧几里得]<br>[扩展欧几里得]<br>[中国剩余定理]<br>[高斯消元法]<br>[卢卡斯定理]<br>[容斥原理]<br>[莫比乌斯反演]<br>[快速幂]<br>[素数筛选]<br>[分解质因数]<br>[求因子数]<br>[欧拉函数]</p>
-<hr>
-<h2 id="1">数论基础</h2>
-
-
-<hr>
-<h3 id="1.1">欧几里得:辗转相除法</h3>
-
-
-
-<hr>
-<p></p><h3 id="1.2">拓展欧几里得:</h3><p></p>
-<blockquote>
-<p>ax+by=gcd(a,b)<br>当gcd(a,b)=1,即a,b互质,方程的解是a关于模b的逆元</p>
-</blockquote>
-<hr>
-<p>中国剩余定理(CRT):</p>
-<blockquote>
-<p>“物不知其数问题”  N≡2 (mod 3)≡3 (mod 5)≡2 (mod 7)</p>
-</blockquote>
-<hr>
-<p>高斯消元法:<br>&gt;</p>
-<hr>
-<p>卢卡斯定理:(Lucas)组合数取模</p>
-<blockquote>
-<p>模运算求二项式系数C(n,r)%p,</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function">ll <span class="title">mod_pow</span><span class="params">(ll x,ll n,ll mod)</span></span>&#123;<span class="comment">//快速幂</span></div><div class="line">    ll res=<span class="number">1</span>;  </div><div class="line">    <span class="keyword">while</span>(n&gt;<span class="number">0</span>)&#123;  </div><div class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>) res=(res*x)%mod;</div><div class="line">        x=x*x%mod;</div><div class="line">        n&gt;&gt;=<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line">ll fac[<span class="number">100005</span>];  </div><div class="line"><span class="function">ll <span class="title">Get_Fact</span><span class="params">(ll p)</span></span>&#123;<span class="comment">//初始化</span></div><div class="line">    fac[<span class="number">0</span>]=<span class="number">1</span>;  </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=p;i++)  </div><div class="line">        fac[i]=(fac[i<span class="number">-1</span>]*i)%p;  </div><div class="line">&#125;  </div><div class="line"><span class="function">ll <span class="title">Lucas</span><span class="params">(ll n,ll m,ll p)</span></span>&#123;<span class="comment">//Lucas 定理</span></div><div class="line">    ll res=<span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(n&amp;&amp;m)&#123;</div><div class="line">        ll a=n%p,b=m%p;</div><div class="line">        <span class="keyword">if</span>(a&lt;b) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        res=(res*fac[a]*mod_pow(fac[b]*fac[a-b]%p,p<span class="number">-2</span>,p))%p;</div><div class="line">        n/=p;</div><div class="line">        m/=p;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p><a href="http://www.cppblog.com/vici/archive/2011/09/05/155103.html" target="_blank" rel="external">容斥原理:</a></p>
-<blockquote>
-</blockquote>
-<hr>
-<p><a href="https://www.zhihu.com/question/23764267/answer/26007647" target="_blank" rel="external">莫比乌斯反演:</a><br>&gt;</p>
-<hr>
-<p>快速幂:(反复平方法降复杂度logn)</p>
-<blockquote>
-<p>x^n%mod,重复n次x的乘积,把n拆为多个2的幂形式(即直接判二进制位)<br>判n的每一位过程中,每次都更新x为x^2,对应上面的2的幂次  </p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function">ll <span class="title">mod_pow</span><span class="params">(ll x, ll n,ll mod)</span><span class="comment">//x^n%mod</span></span></div><div class="line">&#123;</div><div class="line">    ll res=<span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(n&gt;<span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (n&amp;<span class="number">1</span>) res = res*x%mod;<span class="comment">//最低位1则要乘以x^(2^i)</span></div><div class="line">        x = x*x%mod;<span class="comment">//</span></div><div class="line">        n&gt;&gt;=<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p>素数筛选:</p>
-<blockquote>
-<p>i*i&lt;n筛素数</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">bool</span> isprime[maxm];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getprime</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxm;i++)</div><div class="line">        isprime[i]=<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="built_in">sqrt</span>(maxm);i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(isprime[i])</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+i;j&lt;maxm;j+=i)</div><div class="line">                isprime[j]=<span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxm;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (isprime[i])</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p>分解质因数:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_key</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">while</span>(n!=i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (n%i==<span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d*"</span>,i);</div><div class="line">                n=n/i;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,n);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p><a href="http://blog.sina.com.cn/s/blog_818d3d9301017436.html" target="_blank" rel="external">求因子数d(n):</a></p>
-<blockquote>
-<p>n的因子数,分解质因数n=P1^x1 <em> P2^x2</em> …… <em> Pm^xm;<br>d(n)=(x1+1)</em>(x2+1)<em>…</em>(xm+1)<br>d(n^k)=(kx1+1)<em>(kx2+1)…(kxm+1)  n=p1^x1</em>p2^x2…pm^xm</p>
-</blockquote>
-<hr>
-<p>欧拉函数:</p>
-<blockquote>
-<p>[1,n]与n公约数为1的个数</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function">ll <span class="title">euler</span><span class="params">(ll x)</span></span></div><div class="line">&#123;</div><div class="line">    ll i,ans=x;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(x*<span class="number">1.0</span>)+<span class="number">1</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (x%i==<span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            ans=ans/i*(i<span class="number">-1</span>);</div><div class="line">            <span class="keyword">while</span> (x%i==<span class="number">0</span>) x/=i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (x&gt;<span class="number">1</span>) ans=ans/x*(x<span class="number">-1</span>);</div><div class="line">    <span class="keyword">return</span> ans;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/各种数学/" data-id="cj6w9u4tf000t5ssc55eyp9wp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-博弈论" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/博弈论/" class="article-date">
-  <time datetime="2017-08-16T17:02:41.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/博弈论/">博弈论</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.51nod.com/blog/blog.html#!blogId=190" target="_blank" rel="external">51nod上博弈论</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/博弈论/" data-id="cj6w9u4ve002v5ssc2ni9qr0t" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fft" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/fft/" class="article-date">
-  <time datetime="2017-08-16T17:00:30.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/fft/">fft</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>51nod上很快的fft模板</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line">//FFT 大整数乘法</div><div class="line">#include&lt;cstdio&gt;</div><div class="line">#include&lt;cmath&gt;</div><div class="line">#include&lt;cstring&gt;</div><div class="line">#include&lt;algorithm&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line"></div><div class="line">const int N = 500005;</div><div class="line">const double pi = acos(-1.0);</div><div class="line"></div><div class="line">char s1[N],s2[N];</div><div class="line">int len,res[N];</div><div class="line"></div><div class="line">struct Complex</div><div class="line">&#123;</div><div class="line">    double r,i;</div><div class="line">    Complex(double r=0,double i=0):r(r),i(i) &#123;&#125;;</div><div class="line">    Complex operator+(const Complex &amp;rhs)</div><div class="line">    &#123;</div><div class="line">        return Complex(r + rhs.r,i + rhs.i);</div><div class="line">    &#125;</div><div class="line">    Complex operator-(const Complex &amp;rhs)</div><div class="line">    &#123;</div><div class="line">        return Complex(r - rhs.r,i - rhs.i);</div><div class="line">    &#125;</div><div class="line">    Complex operator*(const Complex &amp;rhs)</div><div class="line">    &#123;</div><div class="line">        return Complex(r*rhs.r - i*rhs.i,i*rhs.r + r*rhs.i);</div><div class="line">    &#125;</div><div class="line">&#125; va[N],vb[N];</div><div class="line"></div><div class="line">void rader(Complex F[],int len) //len = 2^M,reverse F[i] with  F[j] j为i二进制反转</div><div class="line">&#123;</div><div class="line">    int j = len &gt;&gt; 1;</div><div class="line">    for(int i = 1;i &lt; len - 1;++i)</div><div class="line">    &#123;</div><div class="line">        if(i &lt; j) swap(F[i],F[j]);  // reverse</div><div class="line">        int k = len&gt;&gt;1; </div><div class="line">        while(j&gt;=k)</div><div class="line">        &#123;</div><div class="line">            j -= k;</div><div class="line">            k &gt;&gt;= 1;</div><div class="line">        &#125;</div><div class="line">        if(j &lt; k) j += k;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void FFT(Complex F[],int len,int t)</div><div class="line">&#123;</div><div class="line">    rader(F,len);</div><div class="line">    for(int h=2;h&lt;=len;h&lt;&lt;=1)</div><div class="line">    &#123;</div><div class="line">        Complex wn(cos(-t*2*pi/h),sin(-t*2*pi/h));</div><div class="line">        for(int j=0;j&lt;len;j+=h)</div><div class="line">        &#123;</div><div class="line">            Complex E(1,0); //旋转因子</div><div class="line">            for(int k=j;k&lt;j+h/2;++k)</div><div class="line">            &#123;</div><div class="line">                Complex u = F[k];</div><div class="line">                Complex v = E*F[k+h/2];</div><div class="line">                F[k] = u+v;</div><div class="line">                F[k+h/2] = u-v;</div><div class="line">                E=E*wn;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if(t==-1)   //IDFT</div><div class="line">        for(int i=0;i&lt;len;++i)</div><div class="line">            F[i].r/=len;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void Conv(Complex a[],Complex b[],int len) //求卷积</div><div class="line">&#123;</div><div class="line">    FFT(a,len,1);</div><div class="line">    FFT(b,len,1);</div><div class="line">    for(int i=0;i&lt;len;++i) a[i] = a[i]*b[i]; </div><div class="line">    FFT(a,len,-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void init(char *s1,char *s2)</div><div class="line">&#123;</div><div class="line">    int n1 = strlen(s1),n2 = strlen(s2);</div><div class="line">    len = 1;</div><div class="line">    while(len &lt; 2*n1 || len &lt; 2*n2) len &lt;&lt;= 1;</div><div class="line">    int i;</div><div class="line">    for(i=0;i&lt;n1;++i)</div><div class="line">    &#123;</div><div class="line">        va[i].r = s1[n1-i-1]-'0';</div><div class="line">        va[i].i = 0;</div><div class="line">    &#125;</div><div class="line">    while(i&lt;len)</div><div class="line">    &#123;</div><div class="line">        va[i].r = va[i].i = 0;</div><div class="line">        ++i;</div><div class="line">    &#125;</div><div class="line">    for(i=0;i&lt;n2;++i)</div><div class="line">    &#123;</div><div class="line">        vb[i].r = s2[n2-i-1]-'0';</div><div class="line">        vb[i].i = 0;</div><div class="line">    &#125;</div><div class="line">    while(i&lt;len)</div><div class="line">    &#123;</div><div class="line">        vb[i].r = vb[i].i = 0;</div><div class="line">        ++i;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void gao()</div><div class="line">&#123;</div><div class="line">    Conv(va,vb,len);</div><div class="line">    memset(res,0,sizeof res);</div><div class="line">    for(int i=0;i&lt;len;++i)</div><div class="line">    &#123;</div><div class="line">        res[i]=va[i].r + 0.5;</div><div class="line">    &#125;</div><div class="line">    for(int i=0;i&lt;len;++i)</div><div class="line">    &#123;</div><div class="line">        res[i+1]+=res[i]/10;</div><div class="line">        res[i]%=10;</div><div class="line">    &#125;</div><div class="line">    int high = 0;</div><div class="line">    for(int i=len-1;i&gt;=0;--i)   </div><div class="line">    &#123;</div><div class="line">        if(res[i])  </div><div class="line">        &#123;</div><div class="line">            high = i;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    for(int i=high;i&gt;=0;--i) putchar('0'+res[i]);</div><div class="line">    puts("");</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    while(scanf("%s %s",s1,s2)==2)</div><div class="line">    &#123;</div><div class="line">        init(s1,s2);</div><div class="line">        gao();</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/fft/" data-id="cj6w9u4t6000k5sscipqd13uf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFT/">FFT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模板/">模板</a></li></ul>
-
     </footer>
   </div>
   
@@ -670,7 +628,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -683,7 +641,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
     </div>
   </div>
 
@@ -693,7 +651,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
     </div>
   </div>
 
@@ -702,7 +660,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
   </div>
 
@@ -715,23 +673,23 @@
       <ul>
         
           <li>
+            <a href="/2017/09/09/最小生成树/">最小生成树</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/09/note/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/01/ruby-first/">ruby(first)</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/28/cf382/">cf382</a>
           </li>
         
           <li>
             <a href="/2017/08/28/G-C/">G++&amp;C++</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/27/线段树/">线段树</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/25/cfAIM-round4/">cfAIMround4</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/23/强连通分量/">强连通分量</a>
           </li>
         
       </ul>
