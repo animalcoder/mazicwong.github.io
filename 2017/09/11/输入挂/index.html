@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Mot-clé: 尺取法 | mazicwong</title>
+  <title>输入挂 | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mazicwong">
-<meta property="og:url" content="mazicwong.github.io/tags/尺取法/index.html">
+  <meta name="description" content="12345678910111213141516171819202122232425262728namespace fastIO  &amp;#123;    #define BUF_SIZE 100000      //fread -&amp;gt; read    bool IOerror = 0;      inline char nc() &amp;#123;          static char buf[BU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="输入挂">
+<meta property="og:url" content="mazicwong.github.io/2017/09/11/输入挂/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="blog">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728namespace fastIO  &amp;#123;    #define BUF_SIZE 100000      //fread -&amp;gt; read    bool IOerror = 0;      inline char nc() &amp;#123;          static char buf[BU">
+<meta property="og:updated_time" content="2017-09-10T16:24:08.885Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mazicwong">
-<meta name="twitter:description" content="blog">
+<meta name="twitter:title" content="输入挂">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728namespace fastIO  &amp;#123;    #define BUF_SIZE 100000      //fread -&amp;gt; read    bool IOerror = 0;      inline char nc() &amp;#123;          static char buf[BU">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -66,39 +67,53 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/11/尺取法/" class="archive-article-date">
-  <time datetime="2017-08-10T17:54:47.000Z" itemprop="datePublished">8月 11</time>
+        <section id="main"><article id="post-输入挂" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/11/输入挂/" class="article-date">
+  <time datetime="2017-09-10T16:21:41.000Z" itemprop="datePublished">2017-09-11</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/11/尺取法/">尺取法</a>
+    <h1 class="article-title" itemprop="name">
+      输入挂
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> fastIO  </div><div class="line">&#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100000  </span></div><div class="line">    <span class="comment">//fread -&gt; read</span></div><div class="line">    <span class="keyword">bool</span> IOerror = <span class="number">0</span>;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">nc</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[BUF_SIZE], *p1 = buf + BUF_SIZE, *pend = buf + BUF_SIZE;  </div><div class="line">        <span class="keyword">if</span>(p1 == pend) &#123;  </div><div class="line">            p1 = buf;  </div><div class="line">            pend = buf + fread(buf, <span class="number">1</span>, BUF_SIZE, <span class="built_in">stdin</span>);  </div><div class="line">            <span class="keyword">if</span>(pend == p1) &#123;  </div><div class="line">                IOerror = <span class="number">1</span>;<span class="keyword">return</span> <span class="number">-1</span>;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> *p1++;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">blank</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span> || ch == <span class="string">'\t'</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)<span class="keyword">return</span>;  </div><div class="line">        <span class="keyword">for</span>(x = ch - <span class="string">'0'</span>; (ch = nc()) &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>);  </div><div class="line">    &#125;  </div><div class="line"><span class="meta">#<span class="meta-keyword">undef</span> BUF_SIZE  </span></div><div class="line">&#125;;  </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> fastIO;</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</div><div class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>)f=<span class="number">-1</span>;ch=getchar();&#125;</div><div class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;x=x*<span class="number">10</span>+ch-<span class="string">'0'</span>;ch=getchar();&#125;</div><div class="line">    <span class="keyword">return</span> x*f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7ezm30g001ke5sckobm1aii" class="article-share-link">Partager</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/09/最小生成树/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">最小生成树</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
@@ -67,6 +67,44 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-输入挂" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/11/输入挂/" class="article-date">
+  <time datetime="2017-09-10T16:21:41.000Z" itemprop="datePublished">2017-09-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/输入挂/">输入挂</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> fastIO  </div><div class="line">&#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100000  </span></div><div class="line">    <span class="comment">//fread -&gt; read</span></div><div class="line">    <span class="keyword">bool</span> IOerror = <span class="number">0</span>;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">nc</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[BUF_SIZE], *p1 = buf + BUF_SIZE, *pend = buf + BUF_SIZE;  </div><div class="line">        <span class="keyword">if</span>(p1 == pend) &#123;  </div><div class="line">            p1 = buf;  </div><div class="line">            pend = buf + fread(buf, <span class="number">1</span>, BUF_SIZE, <span class="built_in">stdin</span>);  </div><div class="line">            <span class="keyword">if</span>(pend == p1) &#123;  </div><div class="line">                IOerror = <span class="number">1</span>;<span class="keyword">return</span> <span class="number">-1</span>;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> *p1++;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">blank</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span> || ch == <span class="string">'\t'</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)<span class="keyword">return</span>;  </div><div class="line">        <span class="keyword">for</span>(x = ch - <span class="string">'0'</span>; (ch = nc()) &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>);  </div><div class="line">    &#125;  </div><div class="line"><span class="meta">#<span class="meta-keyword">undef</span> BUF_SIZE  </span></div><div class="line">&#125;;  </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> fastIO;</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</div><div class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>)f=<span class="number">-1</span>;ch=getchar();&#125;</div><div class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;x=x*<span class="number">10</span>+ch-<span class="string">'0'</span>;ch=getchar();&#125;</div><div class="line">    <span class="keyword">return</span> x*f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7ezm30g001ke5sckobm1aii" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-最小生成树" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -112,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7cpweye00176wscfecm9r7r" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7ezm3090019e5sc2oeyb4vc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
@@ -158,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/note/" data-id="cj7cpwexx000o6wscv1hqp81s" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/09/note/" data-id="cj7ezm2zi000le5sc7rv8jj8m" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -197,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7cpweyo001j6wsc5ejrl5al" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7ezm2zv000te5sce4x3vg2b" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
@@ -255,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7cpwexk000g6wscfa8z25cg" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7ezm2z10004e5scycduqkjm" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -297,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7cpwex100016wscis2hid2m" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7ezm2yv0001e5scuk4asako" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
@@ -370,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7cpweyn001h6wsczp6j9wm3" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7ezm30d001ge5sc0nz8gqof" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -431,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7cpwexp000m6wscs6hll2a8" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7ezm2zb000be5scvno04rjb" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -507,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cj7cpweyh001a6wsceluef5vp" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cj7ezm30a001be5scyj2viqhk" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -570,54 +608,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cj7cpwexj000f6wsc1ma3uhpq" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cj7ezm2zu000re5sce6ueu05e" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-对拍程序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/对拍程序/" class="article-date">
-  <time datetime="2017-08-16T17:13:16.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/对拍程序/">对拍程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.cnblogs.com/qscqesze/p/4442527.html" target="_blank" rel="external">windows下参考</a></p>
-<p>linux下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#bash</span></div><div class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span>  </div><div class="line">    ./data_maker&gt;tmp.in <span class="comment">#出数据  </span></div><div class="line">    ./MyProg&lt;tmp.in&gt;tmp.out <span class="comment">#被测程序  </span></div><div class="line">    ./StdProg&lt;tmp.in&gt;tmp2.out <span class="comment">#正确（暴力）程序  </span></div><div class="line">    <span class="keyword">if</span> diff tmp.out tmp2.out; <span class="keyword">then</span> <span class="comment">#比较两个输出文件  </span></div><div class="line">        <span class="built_in">printf</span> <span class="string">"AC\n"</span>  <span class="comment">#结果相同显示AC  </span></div><div class="line">  </div><div class="line">    <span class="keyword">elif</span> diff -B -b tmp.out tmp2.out; <span class="keyword">then</span>  </div><div class="line">        <span class="built_in">printf</span> <span class="string">"PE\n"</span>  </div><div class="line">  </div><div class="line">    <span class="keyword">else</span>  </div><div class="line">        <span class="built_in">printf</span> <span class="string">"WA\n"</span> <span class="comment">#结果不同显示WA，并退出  </span></div><div class="line">        <span class="built_in">exit</span> 0  </div><div class="line">    <span class="keyword">fi</span>  </div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
-<p>举例:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a,b;</div><div class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;a+b&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码2</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a,b;</div><div class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</div><div class="line">    <span class="keyword">while</span>(b--) a++;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//data_maker</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    srand(time(<span class="number">0</span>));</div><div class="line">    <span class="keyword">int</span> a,b;</div><div class="line">    a=rand();</div><div class="line">    b=rand();</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">' '</span>&lt;&lt;b&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cj7cpweyd00156wscdg04h74r" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -639,7 +634,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li></ul>
     </div>
@@ -649,7 +644,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a>
     </div>
@@ -668,9 +663,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/11/输入挂/">输入挂</a>
+          </li>
         
           <li>
             <a href="/2017/09/09/最小生成树/">最小生成树</a>
@@ -688,10 +687,6 @@
             <a href="/2017/08/28/cf382/">cf382</a>
           </li>
         
-          <li>
-            <a href="/2017/08/28/G-C/">G++&amp;C++</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -705,7 +700,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 MazicWong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
