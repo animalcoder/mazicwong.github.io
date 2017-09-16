@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
@@ -67,6 +67,73 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-sqlServer入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/16/sqlServer入门/" class="article-date">
+  <time datetime="2017-09-16T12:20:55.000Z" itemprop="datePublished">2017-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/16/sqlServer入门/">sqlServer入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数据库之SQL-Server"><a href="#数据库之SQL-Server" class="headerlink" title="数据库之SQL Server"></a>数据库之SQL Server</h2><p>According to the follow official document, this is my first attempt to learn the ‘SQL Server’:</p>
+<blockquote>
+<p><a href="https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu" target="_blank" rel="external">https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu</a></p>
+</blockquote>
+<ul>
+<li><a href="#1"> SQL Server</a><ul>
+<li><a href="#1.1">1. installion of sql server</a></li>
+<li><a href="#1.2">2. install the SQL Server command-line tools: sqlcmd AND bcp</a></li>
+<li><a href="#1.3">3. use sqlcmd to connect to sql server AND learn some usual command</a></li>
+<li><a href="#1.4">4. python with sql server in linux</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="1.1"> 1. install the sql server</h3>
+
+<p>有developer(开发人员版)和express(速成版)两种免费的,我选了express版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -   <span class="comment">#获取软件包并安装</span></div><div class="line">sudo add-apt-repository <span class="string">"<span class="variable">$(curl https://packages.microsoft.com/config/ubuntu/16.04/mssql-server.list)</span>"</span></div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install -y mssql-server</div><div class="line">sudo /opt/mssql/bin/mssql-conf setup   <span class="comment">#此处需要输入密码:************(以后都要用到)</span></div><div class="line">systemctl status mssql-server          <span class="comment">#验证是否成功安装</span></div></pre></td></tr></table></figure>
+<h3 id="1.2"> 2. install the SQL Server command-line tools: sqlcmd AND bcp</h3>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -   <span class="comment">#获取软件包并安装</span></div><div class="line">sudo add-apt-repository <span class="string">"<span class="variable">$(curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list)</span>"</span></div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install -y mssql-tools unixodbc-dev</div><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH="$PATH:/opt/mssql-tools/bin"'</span> &gt;&gt; ~/.bash_profile   <span class="comment">#添加PATH并启动</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH="$PATH:/opt/mssql-tools/bin"'</span> &gt;&gt; ~/.bashrc</div><div class="line"><span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h3 id="1.3"> 3. use sqlcmd to locally connect to sql server AND learn some command</h3>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#连接到本地sqlserver</span></div><div class="line">sqlcmd -S localhost -U SA -P <span class="string">'&lt;YourPassword&gt;'</span></div><div class="line"></div><div class="line"><span class="comment">#创建</span></div><div class="line">CREATE DATABASE TestDB</div><div class="line">SELECT Name from sys.Databases</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="comment">#插入</span></div><div class="line">USE TestDB</div><div class="line">CREATE TABLE Inventory (id INT, name NVARCHAR(50), quantity INT)</div><div class="line">INSERT INTO Inventory VALUES (1, <span class="string">'banana'</span>, 150); INSERT INTO Inventory VALUES (2, <span class="string">'orange'</span>, 154);</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="comment">#选择</span></div><div class="line">SELECT * FROM Inventory WHERE quantity &gt; 152;</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="comment">#退出</span></div><div class="line">QUIT</div></pre></td></tr></table></figure>
+<h3 id="1.4"> 4. python with sql server in linux</h3>
+
+<p>now the aql server and sqlcmd can run well in your linux, so we can use a python app to taste it</p>
+<blockquote>
+<p>tutorial:<br><a href="https://www.microsoft.com/en-us/sql-server/developer-get-started/python/ubuntu/" target="_blank" rel="external">https://www.microsoft.com/en-us/sql-server/developer-get-started/python/ubuntu/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cj7nab9gi0000qoscefcs3s6g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-后缀数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -98,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cj7keh8fk000xyxscv57ffg7x" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cj7naa0m6000zn0sckrzq88qm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
@@ -141,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cj7keh8gc001qyxsc1o5rxjbl" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cj7naa0mo001in0scgf06wqvp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
@@ -181,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7keh8g7001lyxscdvqkaz8p" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7naa0mn001gn0sc2b5nz8sf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -235,55 +302,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7keh8gb001oyxsc58hl4ras" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7naa0mg0019n0scllptp53c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-note" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/09/note/" class="article-date">
-  <time datetime="2017-09-09T02:52:12.825Z" itemprop="datePublished">2017-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最小生成树:kruskal or Prim</p>
-<p>算法:<br>kruskal中,建图一般存边,然后可以sort所有边权,依次取入<code>n-1</code>条边,过程中用并查集判定不会构成回路</p>
-<hr>
-<p>kruskal模板:poj1287<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">50</span>+<span class="number">5</span>;<span class="comment">//point</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1500</span>+<span class="number">5</span>;<span class="comment">//edge</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * poj1287: 传入点,边,求最小生成树边权和</div><div class="line"> * 复杂度: E*logV</div><div class="line"> * point: [1..n]</div><div class="line"> * edge: [0..m-1]</div><div class="line"> */</div><div class="line"><span class="keyword">int</span> n,m;<span class="comment">//点,边</span></div><div class="line"></div><div class="line"><span class="comment">//建图(存边)</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x,y;</div><div class="line">    <span class="keyword">int</span> d;</div><div class="line">&#125;E[maxm];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(edge a1,edge a2)</span></span>&#123;<span class="keyword">return</span> a1.d&lt;a2.d;&#125;</div><div class="line"></div><div class="line"><span class="comment">//并查集(判连通块)</span></div><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;<span class="keyword">return</span> x==fa[x]?x:fa[x]=find(fa[x]);&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> nx=find(x),ny=find(y);</div><div class="line">    <span class="keyword">if</span> (nx!=ny) fa[nx]=ny;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//kruskal(传入边数)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">(<span class="keyword">int</span> num)</span></span></div><div class="line">&#123;</div><div class="line">    init();</div><div class="line">    sort(E,E+num,cmp);</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,cnt=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (find(E[i].x)!=find(E[i].y))</div><div class="line">        &#123;</div><div class="line">            ans += E[i].d;</div><div class="line">            unite(E[i].x,E[i].y);</div><div class="line">            cnt++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (n<span class="number">-1</span>==cnt)</div><div class="line">            <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;E[i].x,&amp;E[i].y,&amp;E[i].d);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,kruskal(m));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<hr>
-<p>poj 1287 裸最小生成树</p>
-<p>题意:<br>给n点,m边,求最小生成树边权和</p>
-<hr>
-<p>hdu 1233 最小生成树边权和</p>
-<p>题意:<br><code>n</code>村庄,<code>n*(n-1)/2</code>路,输出最小公路总长度</p>
-<p>思路:<br>裸题</p>
-<hr>
-<p>hdu1301 &amp; poj1251</p>
-<p>题意:<br>n点,然后给边,按邻接表方式给,求最小生成树边权和</p>
-<hr>
-<p>hdu 1875</p>
-<p>题意:<br>给出所有点坐标,任意两点建路,要求距离在10到1000之间,目的是使n个点连通,问最少需要建多少</p>
-<p>思路:<br>求出所有边距离,判断是否符合,然后套一个kruskal</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/note/" data-id="cj7keh8fj000vyxsckm74h8sf" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -320,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7keh8f9000qyxscl742m0ml" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7naa0m0000qn0scmrzpwlcw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
@@ -378,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7keh8ev000ayxsccy8r5wq4" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7naa0lj000fn0sculb2gvpk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -420,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7keh8ea0000yxscud9ro61m" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7naa0la0008n0scl18qrjqm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
@@ -493,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7keh8g5001iyxschu4keas7" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7naa0ml001en0scgqhfqn9y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -554,7 +577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7keh8f7000oyxscuk4kzc9x" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7naa0lp000mn0scuwufzq86" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -582,7 +605,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
     </div>
   </div>
 
@@ -592,14 +615,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ACM技巧/" style="font-size: 10px;">ACM技巧</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+      <a href="/tags/ACM技巧/" style="font-size: 10px;">ACM技巧</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/sqlserver/" style="font-size: 10px;">sqlserver</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
@@ -609,9 +632,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/16/sqlServer入门/">sqlServer入门</a>
+          </li>
         
           <li>
             <a href="/2017/09/14/后缀数组/">后缀数组</a>
@@ -627,10 +654,6 @@
         
           <li>
             <a href="/2017/09/09/最小生成树/">最小生成树</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/09/note/">(no title)</a>
           </li>
         
       </ul>
