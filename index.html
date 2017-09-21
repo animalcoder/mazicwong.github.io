@@ -123,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cj7o43gl40011pmsc3n2jg5rs" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cj7ui5yja000x8esc7zgz5dx6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -237,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cj7o43gl0000xpmscd2k9k6ae" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cj7ui5yj9000v8escgklftpcl" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
@@ -280,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cj7o43glr001mpmsc6dkvvug2" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cj7ui5ykm00378esc2l646mal" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
@@ -314,13 +314,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> fastIO  </div><div class="line">&#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100000  </span></div><div class="line">    <span class="comment">//fread -&gt; read</span></div><div class="line">    <span class="keyword">bool</span> IOerror = <span class="number">0</span>;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">nc</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[BUF_SIZE], *p1 = buf + BUF_SIZE, *pend = buf + BUF_SIZE;  </div><div class="line">        <span class="keyword">if</span>(p1 == pend) &#123;  </div><div class="line">            p1 = buf;  </div><div class="line">            pend = buf + fread(buf, <span class="number">1</span>, BUF_SIZE, <span class="built_in">stdin</span>);  </div><div class="line">            <span class="keyword">if</span>(pend == p1) &#123;  </div><div class="line">                IOerror = <span class="number">1</span>;<span class="keyword">return</span> <span class="number">-1</span>;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> *p1++;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">blank</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span> || ch == <span class="string">'\t'</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)<span class="keyword">return</span>;  </div><div class="line">        <span class="keyword">for</span>(x = ch - <span class="string">'0'</span>; (ch = nc()) &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>);  </div><div class="line">    &#125;  </div><div class="line"><span class="meta">#<span class="meta-keyword">undef</span> BUF_SIZE  </span></div><div class="line">&#125;;  </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> fastIO;  </div><div class="line"></div><div class="line"><span class="comment">//use</span></div><div class="line"><span class="keyword">while</span>(read(n),!fastIO::IOerror)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        read(a[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p>测试: hdu6208 青岛网络赛第三题的AC自动机,3000ms</p>
+<ul>
+<li>AC自动机:</li>
+<li>1.用<code>string+sync</code>            各种TLE</li>
+<li>2.改用<code>char ss[]</code>            刚好卡过去..2800ms</li>
+<li>3.加了个<code>fastIO</code>输入挂…    2400ms就过了</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> fastIO  </div><div class="line">&#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100000  </span></div><div class="line">    <span class="comment">//fread -&gt; read</span></div><div class="line">    <span class="keyword">bool</span> IOerror = <span class="number">0</span>;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">nc</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[BUF_SIZE], *p1 = buf + BUF_SIZE, *pend = buf + BUF_SIZE;  </div><div class="line">        <span class="keyword">if</span>(p1 == pend) &#123;  </div><div class="line">            p1 = buf;  </div><div class="line">            pend = buf + fread(buf, <span class="number">1</span>, BUF_SIZE, <span class="built_in">stdin</span>);  </div><div class="line">            <span class="keyword">if</span>(pend == p1) &#123;  </div><div class="line">                IOerror = <span class="number">1</span>;<span class="keyword">return</span> <span class="number">-1</span>;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> *p1++;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">blank</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span> || ch == <span class="string">'\t'</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span> x[])</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)  </div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;  </div><div class="line">        <span class="keyword">for</span>(x[k++] = ch; (ch = nc())&amp;&amp;(!blank(ch))&amp;&amp;(ch != EOF); x[k++] = ch);  </div><div class="line">        x[k]=<span class="string">'\0'</span>;  </div><div class="line">        <span class="keyword">return</span> k;  </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">readint</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)<span class="keyword">return</span>;  </div><div class="line">        <span class="keyword">for</span>(x = ch - <span class="string">'0'</span>; (ch = nc()) &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>);  </div><div class="line">    &#125;  </div><div class="line"><span class="meta">#<span class="meta-keyword">undef</span> BUF_SIZE  </span></div><div class="line">&#125;;  </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> fastIO;  </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//how to use</span></div><div class="line"><span class="keyword">while</span>(read(n),!fastIO::IOerror)</div><div class="line">&#123;</div><div class="line">    readint(T);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        readint(a[i]);</div><div class="line">    <span class="keyword">char</span> str[maxn];</div><div class="line">    read(str);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>/<strong><strong>**</strong></strong>another<strong><strong><em>*</em></strong></strong>/</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> ch=getchar();</div><div class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(ch==<span class="string">'-'</span>)f=<span class="number">-1</span>;ch=getchar();&#125;</div><div class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;x=x*<span class="number">10</span>+ch-<span class="string">'0'</span>;ch=getchar();&#125;</div><div class="line">    <span class="keyword">return</span> x*f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7o43glo001lpmsctre08adz" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7ui5yjy001l8esc2jazcso4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -374,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7o43glt001ppmsczf90du0p" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7ui5yk1001m8escug79bqkk" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
@@ -415,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7o43gkp000spmsce35giu8r" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7ui5yiz000q8escjedwuxpa" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
@@ -473,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7o43gk70008pmscq010usnb" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7ui5yik000a8escex5t84s9" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -515,7 +523,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7o43gjo0000pmscju1oqf1q" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7ui5yhw00008escejfjx9jd" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
@@ -588,7 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7o43gll001jpmsc8xi3qqr4" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7ui5yju001i8esc8zw9uua3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -649,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7o43gki000lpmscjyrvioe6" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7ui5yit000k8esckhwgq0cf" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
