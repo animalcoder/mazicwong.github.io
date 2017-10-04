@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
@@ -67,6 +67,54 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-记忆化搜索与DP区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/04/记忆化搜索与DP区别/" class="article-date">
+  <time datetime="2017-10-04T03:52:39.000Z" itemprop="datePublished">2017-10-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/04/记忆化搜索与DP区别/">记忆化搜索与DP区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天写DP专题的时候,看到一个题之前是做过的,当时用的记忆化搜索,这样重新用dp写了一遍,顺便总结下这两者的区别</p>
+<h4 id="hdu1078"><a href="#hdu1078" class="headerlink" title="hdu1078"></a>hdu1078</h4><p>题意很简单<br><code>n*n</code>矩阵,老鼠吃奶酪,可以走四个方向,每次最多走k步<br>且要求每次找到的点的奶酪是递增的,问最多能吃到多少奶酪  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">input</div><div class="line">3 1</div><div class="line">1 2 5</div><div class="line">10 11 6</div><div class="line">12 12 7</div><div class="line">-1 -1</div><div class="line"></div><div class="line">output</div><div class="line">37</div></pre></td></tr></table></figure>
+<h4 id="法1"><a href="#法1" class="headerlink" title="法1:"></a>法1:</h4><p>明显,如果直接DP的话,虽然子问题重复,但是不满足无后效性,因为每次移动的方向不是固定的,而且四个方向,所以用记忆化搜索更好,直接搜索所有方向找到最优解</p>
+<h4 id="法2"><a href="#法2" class="headerlink" title="法2:"></a>法2:</h4><p>但是其实也可以DP,先将所有点按权值排列,这样找到一个方向后,可以进行DP</p>
+<h4 id="复杂度说明"><a href="#复杂度说明" class="headerlink" title="复杂度说明:"></a>复杂度说明:</h4><p>时间复杂度差不多,空间复杂度DP更好一点</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h4><ul>
+<li>DP:要有一个推进的方向,二维DP的话一般是从矩阵的左上角推到右下角,一维DP直接按照线性顺序推就可以了,</li>
+<li>这道题虽然是二维面,但是他的推进方向有四个,DP会有很多子问题,所以我们先按照权值排序,找到一个线性的关系,在这个关系上进行DP,就可以直接推进到整体最优解了</li>
+</ul>
+<h4 id="附代码"><a href="#附代码" class="headerlink" title="附代码"></a>附代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//DP写法   109ms,1.7MB</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">int</span> mp[maxn][maxn],dp[maxn][maxn];</div><div class="line"><span class="keyword">int</span> n,k;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> i,j;</div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Node&amp; mm) <span class="keyword">const</span>&#123;</div><div class="line">        <span class="keyword">return</span> val&lt;mm.val;</div><div class="line">    &#125;</div><div class="line">&#125;node[maxn*maxn];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k) &amp;&amp; n!=<span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> tot=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;mp[i][j]);</div><div class="line">                <span class="keyword">if</span> (i==<span class="number">0</span> &amp;&amp; j==<span class="number">0</span>)</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                node[tot].i=i; node[tot].j=j; node[tot++].val=mp[i][j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        sort(node,node+tot);</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">-1</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=mp[<span class="number">0</span>][<span class="number">0</span>];</div><div class="line">        <span class="keyword">int</span> ans = dp[<span class="number">0</span>][<span class="number">0</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> tt=<span class="number">0</span>;tt&lt;tot;tt++) <span class="comment">//找到范围内比他小的点</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> i=node[tt].i, j=node[tt].j;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> rr=max(<span class="number">0</span>,i-k);rr&lt;=min(n<span class="number">-1</span>,i+k);rr++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (mp[rr][j]&gt;=mp[i][j]) <span class="keyword">continue</span>;</div><div class="line">                <span class="keyword">if</span> (dp[rr][j]==<span class="number">-1</span>) <span class="keyword">continue</span>;</div><div class="line">                dp[i][j] = max(dp[i][j], dp[rr][j]+mp[i][j]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> cc=max(<span class="number">0</span>,j-k);cc&lt;=min(n<span class="number">-1</span>,j+k);cc++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (mp[i][cc]&gt;=mp[i][j]) <span class="keyword">continue</span>;</div><div class="line">                <span class="keyword">if</span> (dp[i][cc]==<span class="number">-1</span>) <span class="keyword">continue</span>;</div><div class="line">                dp[i][j] = max(dp[i][j], dp[i][cc]+mp[i][j]);</div><div class="line">            &#125;</div><div class="line">            ans = max(ans,dp[i][j]);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//搜索写法  109ms, 1.9MB</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">int</span> mp[maxn][maxn];</div><div class="line"><span class="keyword">int</span> dp[maxn][maxn];</div><div class="line"><span class="keyword">int</span> to[<span class="number">4</span>][<span class="number">2</span>]=&#123;</div><div class="line">    &#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">int</span> n;<span class="keyword">int</span> k;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span> (!dp[i][j]) <span class="comment">//这里是记忆化搜索</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len=<span class="number">1</span>;len&lt;=k;len++)<span class="comment">//最多走k次</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> tt=<span class="number">0</span>;tt&lt;<span class="number">4</span>;tt++)<span class="comment">//4个方向</span></div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> nx = i+to[tt][<span class="number">0</span>]*len;</div><div class="line">                <span class="keyword">int</span> ny = j+to[tt][<span class="number">1</span>]*len;</div><div class="line">                <span class="keyword">if</span> (nx&gt;=<span class="number">0</span> &amp;&amp; nx&lt;n &amp;&amp; ny&gt;=<span class="number">0</span> &amp;&amp; ny&lt;n &amp;&amp; mp[nx][ny]&gt;mp[i][j])</div><div class="line">                    ans = max(ans,dfs(nx,ny));<span class="comment">//ans:最大的dp[nx][ny]</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        dp[i][j] = ans+mp[i][j];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[i][j];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="comment">// freopen("in","r",stdin);</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k) &amp;&amp; n!=<span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;mp[i][j]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        <span class="keyword">int</span> ans = dfs(<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/10/04/记忆化搜索与DP区别/" data-id="cj8ckta3i001ifcscg18finoa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-sqlServer入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -92,7 +140,7 @@
       
         <h2 id="数据库之SQL-Server"><a href="#数据库之SQL-Server" class="headerlink" title="数据库之SQL Server"></a>数据库之SQL Server</h2><p>According to the follow official document, this is my first attempt to learn the ‘SQL Server’:</p>
 <blockquote>
-<p><a href="https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu" target="_blank" rel="external">https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu</a></p>
+<p><a href="https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu" target="_blank" rel="external">https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu</a><br><a href="https://docs.microsoft.com/zh-cn/sql/linux/sql-server-linux-configure-mssql-conf#collation" target="_blank" rel="external">https://docs.microsoft.com/zh-cn/sql/linux/sql-server-linux-configure-mssql-conf#collation</a></p>
 </blockquote>
 <ul>
 <li><a href="#1"> SQL Server</a><ul>
@@ -119,11 +167,12 @@
 <blockquote>
 <p>tutorial:<br><a href="https://www.microsoft.com/en-us/sql-server/developer-get-started/python/ubuntu/" target="_blank" rel="external">https://www.microsoft.com/en-us/sql-server/developer-get-started/python/ubuntu/</a></p>
 </blockquote>
+<p>PS: 安装完后关机会卡住,可能是mssql还在运行的原因<br><code>sudo systemctl stop mssql-server</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cj7ui5yja000x8esc7zgz5dx6" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cj8ckta2l000pfcsc4vaymttl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -237,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cj7ui5yj9000v8escgklftpcl" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cj8ckta2y000xfcsc6h27944x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
@@ -280,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cj7ui5ykm00378esc2l646mal" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cj8ckta3q001ofcsc54xsrbwm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
@@ -328,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj7ui5yjy001l8esc2jazcso4" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cj8ckta47003gfcsc78q36au8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -382,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj7ui5yk1001m8escug79bqkk" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cj8ckta3c001bfcsc1xita1qe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
@@ -423,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj7ui5yiz000q8escjedwuxpa" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cj8ckta2w000tfcsc2yw82g80" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
@@ -481,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj7ui5yik000a8escex5t84s9" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cj8ckta2g000gfcscecmyizmu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -523,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj7ui5yhw00008escejfjx9jd" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cj8ckta220004fcsc41inhrzt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
@@ -596,71 +645,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj7ui5yju001i8esc8zw9uua3" class="article-share-link">Partager</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cj8ckta3h001gfcscb36fhnxk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-cfAIM-round4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/25/cfAIM-round4/" class="article-date">
-  <time datetime="2017-08-25T05:48:57.000Z" itemprop="datePublished">2017-08-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/25/cfAIM-round4/">cfAIMround4</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="cf-AIM-round4"><a href="#cf-AIM-round4" class="headerlink" title="cf AIM round4"></a><a href="http://codeforces.com/contest/844" target="_blank" rel="external">cf AIM round4</a></h1><p><a href="http://codeforces.com/contest/844/problem/A" target="_blank" rel="external">A:</a></p>
-<p>简单题,直接map找26个字母出现次数</p>
-<hr>
-<p><a href="http://codeforces.com/contest/844/problem/B" target="_blank" rel="external">B:</a></p>
-<p>题意:<br>给一个由0/1组成的<code>n*m</code>矩形,现在要问,存在多少种集合,使得满足下面两个条件:</p>
-<ul>
-<li>集合内元素都相同</li>
-<li>该集合内的元素均在同一行或者同一列</li>
-</ul>
-<p>eg:<br>input:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2 3  </div><div class="line">1 0 1  </div><div class="line">0 1 0</div></pre></td></tr></table></figure></p>
-<p>output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">8</div></pre></td></tr></table></figure></p>
-<p>思路:<br>直接找到每一行每一列的0/1个数,然后<code>2^cnt-1</code>就是该行cnt个相同元素所能组成的集合数(-1是去掉非空)<br>然后注意行列可能会计算重复就行了</p>
-<hr>
-<p><a href="http://codeforces.com/contest/844/problem/C" target="_blank" rel="external">C:</a></p>
-<p>题意:<br>置换群(离散书P209)<br>给一个串,把他们分成一些集合,使得对每个集合分别排序后,整个串也是有序的,要让集合的数量最多,且每个数只能取一次</p>
-<p>思路:<br>明显是置换群了<br>开两个数组,一个存原来的串,一个存排序后的串,然后在他们之间找到所有循环节并输出</p>
-<p>注意:<br>存下标那里我用的是<code>pair&lt;b[i],i&gt;</code>,力豪用的离散化也过了</p>
-<p>eg:<br>input:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">6</div><div class="line">3 2 1 6 5 4</div></pre></td></tr></table></figure></p>
-<p>output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">4</div><div class="line">2 1 3</div><div class="line">1 2</div><div class="line">2 4 6</div><div class="line">1 5</div></pre></td></tr></table></figure></p>
-<p>顺便贴一下离散化的模板:<br>作用:缩小数据范围</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a[maxn];<span class="comment">//离散化后的数组a</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">lisan</span><span class="params">(<span class="keyword">int</span> *arr)</span><span class="comment">//传入数组arr[0..n-1],返回a[0..n-1]</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) a[i]=arr[i];</div><div class="line"></div><div class="line">    sort(a,a+n);</div><div class="line">    <span class="keyword">int</span> size = unique(a,a+n)-a; <span class="comment">//size是离散化后元素个数</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">        a[i] = lower_bound(a,a+size,arr[i])-a+<span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>代码:<br>感觉这次的代码写的很美啊…</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 3.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月25日 星期五 01时10分06秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</div><div class="line"><span class="keyword">bool</span> vis[maxn];</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; PII;</div><div class="line">PII a[maxn];</div><div class="line"><span class="keyword">int</span> raw[maxn];</div><div class="line"></div><div class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; Q[maxn];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in3"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> n;<span class="built_in">cin</span>&gt;&gt;n;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;raw[i]);</div><div class="line">        a[i].first=raw[i];</div><div class="line">        a[i].second=i;</div><div class="line">    &#125;</div><div class="line">    sort(a,a+n);</div><div class="line"></div><div class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line"></div><div class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (vis[i]) <span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">int</span> cur = i;</div><div class="line"></div><div class="line">        <span class="keyword">do</span></div><div class="line">        &#123;</div><div class="line">            Q[cnt].push(a[cur].second);</div><div class="line">            cur = a[cur].second;</div><div class="line">            vis[cur]=<span class="number">1</span>;</div><div class="line">        &#125;<span class="keyword">while</span>(a[i].first != a[cur].first);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (i!=cur) Q[cnt].push(a[cur].second);</div><div class="line">       </div><div class="line">        cnt++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; cnt &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; Q[i].size();</div><div class="line">        <span class="comment">//printf("%d",Q.size());</span></div><div class="line">        <span class="keyword">while</span>(!Q[i].empty())</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">" %d"</span>,Q[i].top()+<span class="number">1</span>);</div><div class="line">            Q[i].pop();</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">""</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cj7ui5yit000k8esckhwgq0cf" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
 
     </footer>
   </div>
@@ -683,7 +671,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
     </div>
@@ -693,7 +681,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/ACM技巧/" style="font-size: 10px;">ACM技巧</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/sqlserver/" style="font-size: 10px;">sqlserver</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
     </div>
@@ -704,7 +692,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
   </div>
 
@@ -712,9 +700,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/10/04/记忆化搜索与DP区别/">记忆化搜索与DP区别</a>
+          </li>
         
           <li>
             <a href="/2017/09/16/sqlServer入门/">sqlServer入门</a>
@@ -732,10 +724,6 @@
             <a href="/2017/09/11/输入挂/">输入挂</a>
           </li>
         
-          <li>
-            <a href="/2017/09/09/最小生成树/">最小生成树</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -749,7 +737,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 MazicWong<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
