@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
@@ -67,6 +67,62 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-tryJdbc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/18/tryJdbc/" class="article-date">
+  <time datetime="2017-11-18T09:18:10.000Z" itemprop="datePublished">2017-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/18/tryJdbc/">tryJdbc</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="In-ubtuntu"><a href="#In-ubtuntu" class="headerlink" title="In ubtuntu"></a>In ubtuntu</h3><p>本来想在服务器上面试试的，不过那边好像出了点问题，直接装本机上了<br>java环境之前就有了，主要是装下mysql，不过照着书上做的时候出了点问题  </p>
+<ul>
+<li><p>安装<br><code>sudo apt-get install mysql-client mysql-service libmysql-java</code>  </p>
+</li>
+<li><p>问题<br>运行过程一直出现”No Suitable Driver Found For Jdbc“，</p>
+</li>
+<li><p>解决:<br><strong>添加</strong></p>
+<ol>
+<li>驱动加入路径中,bashrc<br><code>CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar</code>  </li>
+<li>把jar包放到对应jre的外部jar包中！<br><code>sudo cp /usr/share/java/mysql-connector-java-5.1.38.jar  /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext</code>  </li>
+</ol>
+</li>
+<li><p>参考:  </p>
+<blockquote>
+<p><a href="http://www.blogjava.net/w2gavin/articles/217864.html" target="_blank" rel="external">http://www.blogjava.net/w2gavin/articles/217864.html</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="MYSQL代码"><a href="#MYSQL代码" class="headerlink" title="MYSQL代码"></a>MYSQL代码</h3><p>先建立一个空db:webmazic;<br>user-pass:auss—-auss<br>然后插入数据;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">sudo mysql -u root -p</div><div class="line">&gt;create databse webmazic;</div><div class="line">&gt;grant all privileges on webmazic.* to auss@localhost identified by &quot;auss&quot;;</div><div class="line">sudo mysql -u auss -h 127.0.0.1 -p</div><div class="line">&gt;password: auss</div><div class="line"></div><div class="line">//建表</div><div class="line">&gt;use webmazic;</div><div class="line">&gt;CREATE TABLE `websites` (</div><div class="line">    `id` int(11) NOT NULL AUTO_INCREMENT,</div><div class="line">    `name` char(20) NOT NULL DEFAULT &apos;&apos; COMMENT &apos;站点名称&apos;,</div><div class="line">    `url` varchar(255) NOT NULL DEFAULT &apos;&apos;,</div><div class="line">    `alexa` int(11) NOT NULL DEFAULT &apos;0&apos; COMMENT &apos;Alexa 排名&apos;,</div><div class="line">    `country` char(10) NOT NULL DEFAULT &apos;&apos; COMMENT &apos;国家&apos;,</div><div class="line">    PRIMARY KEY (`id`)</div><div class="line">) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;</div><div class="line">&gt;INSERT INTO `websites` </div><div class="line">VALUES </div><div class="line">(&apos;1&apos;, &apos;Google&apos;, &apos;https://www.google.cm/&apos;, &apos;1&apos;, &apos;USA&apos;), </div><div class="line">(&apos;2&apos;, &apos;淘宝&apos;, &apos;https://www.taobao.com/&apos;, &apos;13&apos;, &apos;CN&apos;), </div><div class="line">(&apos;3&apos;, &apos;菜鸟教程&apos;, &apos;http://www.runoob.com&apos;, &apos;5892&apos;, &apos;&apos;), </div><div class="line">(&apos;4&apos;, &apos;微博&apos;, &apos;http://weibo.com/&apos;, &apos;20&apos;, &apos;CN&apos;), </div><div class="line">(&apos;5&apos;, &apos;Facebook&apos;, &apos;https://www.facebook.com/&apos;, &apos;3&apos;, &apos;USA&apos;);</div></pre></td></tr></table></figure></p>
+<h3 id="JAVA测试代码"><a href="#JAVA测试代码" class="headerlink" title="JAVA测试代码"></a>JAVA测试代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">package laia;</div><div class="line">import java.sql.*;</div><div class="line"></div><div class="line">/*</div><div class="line"> * 1.下载JDBC-MySQL驱动</div><div class="line"> * 2.加载驱动</div><div class="line"> * 3.连接数据库</div><div class="line"> * 4.编码问题</div><div class="line"> */</div><div class="line"></div><div class="line">/*</div><div class="line"> * In mysql;</div><div class="line"> * sudo mysql -u root -p</div><div class="line"> * &gt;create databse webmazic;</div><div class="line"> * &gt;grant all privileges on webmazic.* to auss@localhost identified by &quot;auss&quot;;</div><div class="line"> * sudo mysql -u auss -h 127.0.0.1 -p</div><div class="line"> * &gt;password: auss</div><div class="line"> */</div><div class="line"></div><div class="line">public class JDBCtry &#123;	</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		</div><div class="line">		//2.加载驱动</div><div class="line">		try&#123; </div><div class="line">			Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div><div class="line">		&#125;</div><div class="line">		catch (Exception e) &#123;&#125;</div><div class="line">		</div><div class="line">		//3.连接数据库</div><div class="line">		Connection con = null;</div><div class="line">		String db_url=&quot;jdbc:mysql://localhost:3306/webmazic?useSSL=true&quot;;</div><div class="line">		String user=&quot;auss&quot;;</div><div class="line">		String password=&quot;auss&quot;;</div><div class="line">		try &#123;</div><div class="line">			con = DriverManager.getConnection(db_url,user,password);</div><div class="line">		&#125;</div><div class="line">		catch(SQLException e) &#123;</div><div class="line">			System.out.println(e);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		//4.查询</div><div class="line">		try &#123;</div><div class="line">			Statement sql=con.createStatement();</div><div class="line">			ResultSet rs = sql.executeQuery(&quot;SELECT * FROM websites&quot;);</div><div class="line">			while(rs.next()) &#123;</div><div class="line">				int id = rs.getInt(&quot;id&quot;);</div><div class="line">				String name = rs.getString(&quot;name&quot;);</div><div class="line">				String url = rs.getString(&quot;url&quot;);</div><div class="line">				System.out.print(&quot;ID: &quot;+id);</div><div class="line">				System.out.print(&quot;,站点名: &quot;+name);</div><div class="line">				System.out.println(&quot;,站点URL: &quot;+url);</div><div class="line">			&#125;</div><div class="line">			rs.close();</div><div class="line">			sql.close();</div><div class="line">			con.close();</div><div class="line">		&#125;</div><div class="line">		catch(SQLException e) &#123;&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/11/18/tryJdbc/" data-id="cja56cbjq000sjbsc9q7o57qu" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-近期计划" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -113,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/11/15/近期计划/" data-id="cja15jcf9001ox8scj87z6yf4" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/11/15/近期计划/" data-id="cja56cbki001sjbscqipcz63g" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -162,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/10/04/记忆化搜索与DP区别/" data-id="cja15jcfa001qx8scoq6m2j13" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/10/04/记忆化搜索与DP区别/" data-id="cja56cbkh001qjbscxbadfwor" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -232,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cja15jceb000qx8scrcyzvpxo" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cja56cbjp000qjbsc0k2rhcxy" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -346,7 +402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cja15jcei000yx8sc5lgpu8tw" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cja56cbjy0012jbsc30c69zm0" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
@@ -389,7 +445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cja15jcfs003ax8scyfkpwi7h" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cja56cbkl001wjbsckmk9dsbi" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
@@ -446,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cja15jcf8001mx8scbx6mncl4" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cja56cbkk001vjbscfmxb704t" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -500,7 +556,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cja15jcfq0039x8scryc8az97" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cja56cbl1003gjbscd9m8mbxx" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
@@ -541,7 +597,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cja15jcej0010x8sc9jovficd" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cja56cbjm000ojbsc66nljq2e" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
@@ -599,52 +655,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cja15jcdl0005x8sci7syjk83" class="article-share-link">Share</a>
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cja56cbiz0008jbsc80i7tg77" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-G-C" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/28/G-C/" class="article-date">
-  <time datetime="2017-08-28T08:10:43.000Z" itemprop="datePublished">2017-08-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/28/G-C/">G++&amp;C++</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近写了几道字典树,发现Trie用动态内存分配实现的话,交到OJ上用G++会MLE,用C++不会,<br>原因: 群里大佬说G++指针的size是C++的两倍多,会MLE,然后不断的new出来的内存也是不连续的,跑起来会变慢,测了一下时间大概变慢了一半</p>
-<p>顺便整理下这几个的注意点吧</p>
-<h2 id="手动扩大栈内存"><a href="#手动扩大栈内存" class="headerlink" title="手动扩大栈内存"></a>手动扩大栈内存</h2><p>一般,用g++提交时间慢,用C++提交会栈溢出</p>
-<p>g++: 用读入挂防止TLE<br>c++: #pragma comment(linker, “/STACK:102400000,102400000”)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cja15jcda0001x8scbgwvirvz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
 
     </footer>
   </div>
@@ -667,7 +681,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
     </div>
@@ -686,7 +700,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
@@ -696,9 +710,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/18/tryJdbc/">tryJdbc</a>
+          </li>
         
           <li>
             <a href="/2017/11/15/近期计划/">近期计划</a>
@@ -714,10 +732,6 @@
         
           <li>
             <a href="/2017/09/14/后缀数组/">后缀数组</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/11/随机数/">随机数</a>
           </li>
         
       </ul>
