@@ -68,6 +68,105 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ruby-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/01/ruby-first/" class="article-date">
+  <time datetime="2017-09-01T03:17:03.000Z" itemprop="datePublished">2017-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/ruby-first/">ruby(first)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.ruby-lang.org/en/downloads/" target="_blank" rel="external">ruby 2.4.1</a> in Linux: </p>
+<p>安装完ruby的源码包,里面已经有了一个iRb shell,ruby的交互式shell</p>
+<p>用<code>$ irb</code>可以运行,</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/09/01/ruby-first/" data-id="cjcj5cnn2000o2vscxocl36fq" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">ruby</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-cf382" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/28/cf382/" class="article-date">
+  <time datetime="2017-08-28T14:38:27.000Z" itemprop="datePublished">2017-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/28/cf382/">cf382</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>1.直接模拟</p>
+<hr>
+<p>2.贪心<br>题意:<br>给n个数,和n1,n2,要令你找n1个数和n2个数,使得这n1个数的和除以n1,加上n2个数的和除以n2,值最大</p>
+<p>扩展:<br>给n个数,让取出一个集合的数,使得这个集合里的m个数相加除以m最大,其实就是只去最大那个数就好了,再取其他的数都会使最优值变小</p>
+<hr>
+<p>3.<br>打表,dp,找递推<br>题意:<br>n个人打比赛,每次两个人对打,输的淘汰<br>两个人进行比赛的条件:他们已经打过的次数相差小于等于1<br>问最终剩下的那个人,最多是打几场</p>
+<p>思路:<br>猜了个递推公式,<code>f[n]=f[n-1]+f[n-1]</code><br><code>f[1]=2,f[2]=3,f[3]=5</code><br>然后打表完扔数组里加个<code>upper_bound</code>交了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 2.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月28日 星期一 18时54分07秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line">ll n;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 2  1</div><div class="line"> *</div><div class="line"> * 3  2</div><div class="line"> * 4  2</div><div class="line"> *</div><div class="line"> * 5  3</div><div class="line"> * 6  3</div><div class="line"> * 7  3</div><div class="line"> *</div><div class="line"> * 8  4</div><div class="line"> * 9  4</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="comment">//ll a[200];</span></div><div class="line"></div><div class="line">ll ans[<span class="number">100</span>]=&#123;</div><div class="line"><span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>,<span class="number">21</span>,<span class="number">34</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">144</span>,<span class="number">233</span>,<span class="number">377</span>,<span class="number">610</span>,<span class="number">987</span>,<span class="number">1597</span>,<span class="number">2584</span>,<span class="number">4181</span>,<span class="number">6765</span>,<span class="number">10946</span>,<span class="number">17711</span>,<span class="number">28657</span>,<span class="number">46368</span>,<span class="number">75025</span>,<span class="number">121393</span>,<span class="number">196418</span>,<span class="number">317811</span>,<span class="number">514229</span>,<span class="number">832040</span>,<span class="number">1346269</span>,<span class="number">2178309</span>,<span class="number">3524578</span>,<span class="number">5702887</span>,<span class="number">9227465</span>,<span class="number">14930352</span>,<span class="number">24157817</span>,<span class="number">39088169</span>,<span class="number">63245986</span>,<span class="number">102334155</span>,<span class="number">165580141</span>,<span class="number">267914296</span>,<span class="number">433494437</span>,<span class="number">701408733</span>,<span class="number">1134903170</span>,<span class="number">1836311903</span>,<span class="number">2971215073</span>,<span class="number">4807526976</span>,<span class="number">7778742049</span>,<span class="number">12586269025</span>,<span class="number">20365011074</span>,<span class="number">32951280099</span>,<span class="number">53316291173</span>,<span class="number">86267571272</span>,<span class="number">139583862445</span>,<span class="number">225851433717</span>,<span class="number">365435296162</span>,<span class="number">591286729879</span>,<span class="number">956722026041</span>,<span class="number">1548008755920</span>,<span class="number">2504730781961</span>,<span class="number">4052739537881</span>,<span class="number">6557470319842</span>,<span class="number">10610209857723</span>,<span class="number">17167680177565</span>,<span class="number">27777890035288</span>,<span class="number">44945570212853</span>,<span class="number">72723460248141</span>,<span class="number">117669030460994</span>,<span class="number">190392490709135</span>,<span class="number">308061521170129</span>,<span class="number">498454011879264</span>,<span class="number">806515533049393</span>,<span class="number">1304969544928657</span>,<span class="number">2111485077978050</span>,<span class="number">3416454622906707</span>,<span class="number">5527939700884757</span>,<span class="number">8944394323791464</span>,<span class="number">14472334024676221</span>,<span class="number">23416728348467685</span>,<span class="number">37889062373143906</span>,<span class="number">61305790721611591</span>,<span class="number">99194853094755497</span>,<span class="number">160500643816367088</span>,<span class="number">259695496911122585</span>,<span class="number">420196140727489673</span>,<span class="number">679891637638612258</span>,<span class="number">1100087778366101931</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</div><div class="line">    a[<span class="number">1</span>]=<span class="number">2</span>; a[<span class="number">2</span>]=<span class="number">3</span>;a[<span class="number">3</span>]=<span class="number">5</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">4</span>;i&lt;=<span class="number">86</span>;i++)</div><div class="line">    &#123;</div><div class="line">        a[i] = a[i<span class="number">-1</span>]+a[i<span class="number">-2</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">86</span>;i++)</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">','</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">    <span class="keyword">int</span> aa = upper_bound(ans,ans+<span class="number">87</span>,n)-ans;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,aa<span class="number">-1</span>);</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>4.<br>题意:<br>给n元,要交的税是n的最大因子(eg:n=25,交5),现在将n分成若干份,问交的税最小是多少</p>
+<p>思路:<br>只有3种情况,</p>
+<ul>
+<li>如果是质数,不分,直接交1元;</li>
+<li>如果是合数的话,当他为偶数,直接表示为2个质数之和,结果为2,,</li>
+<li>当他为奇数,这时候有可能是2跟3,他先减掉一个偶数2,如果是质数,就直接表示为2,否则表示为3(可以理解为,减掉3然后变成一个偶数)</li>
+</ul>
+<p>最后再套一个大数素数测试的模板,或者手写一个<code>O(sqrt(n))</code>的素数测试</p>
+<p>扩展:<br>哥德巴赫猜想:一个偶数可以表示为2个质数的和.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">    &gt; File Name: 4.cpp</div><div class="line">    &gt; Author: mazicwong</div><div class="line">    &gt; Mail: mazicwong@gmail.com</div><div class="line">    &gt; Created Time: 2017年08月28日 星期一 19时47分50秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">int</span> S=<span class="number">5</span>;<span class="comment">//测试次数，越大精度越高</span></div><div class="line"><span class="function">ll <span class="title">mod_mul</span><span class="params">(ll a, ll b, ll n)</span>  <span class="comment">//快速乘</span></span></div><div class="line">&#123;</div><div class="line">    ll res = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(b)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)    res = (res + a) % n;</div><div class="line">        a = (a + a) % n;</div><div class="line">        b &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function">ll <span class="title">mod_exp</span><span class="params">(ll a, ll b, ll n)</span>  <span class="comment">//快速幂</span></span></div><div class="line">&#123;</div><div class="line">    ll res = <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(b)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)    res = mod_mul(res, a, n);</div><div class="line">        a = mod_mul(a, a, n);</div><div class="line">        b &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">miller_rabin</span><span class="params">(ll n)</span>  <span class="comment">//复杂度很小</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">2</span> || n == <span class="number">3</span> || n == <span class="number">5</span> || n == <span class="number">7</span> || n == <span class="number">11</span>)    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || !(n%<span class="number">2</span>) || !(n%<span class="number">3</span>) || !(n%<span class="number">5</span>) || !(n%<span class="number">7</span>) || !(n%<span class="number">11</span>))    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">    ll x, pre, u;</div><div class="line">    <span class="keyword">int</span> i, j, k = <span class="number">0</span>;</div><div class="line">    u = n - <span class="number">1</span>;    <span class="comment">//要求x^u % n</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span>(!(u&amp;<span class="number">1</span>))      <span class="comment">//如果u为偶数则u右移，用k记录移位数</span></div><div class="line">    &#123;</div><div class="line">        k++;</div><div class="line">        u &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    srand((ll)time(<span class="number">0</span>));</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; S; ++i)      <span class="comment">//进行S次测试</span></div><div class="line">    &#123;</div><div class="line">        x = rand()%(n<span class="number">-2</span>) + <span class="number">2</span>;    <span class="comment">//在[2, n)中取随机数</span></div><div class="line">        <span class="keyword">if</span>((x%n) == <span class="number">0</span>)    <span class="keyword">continue</span>;</div><div class="line"></div><div class="line">        x = mod_exp(x, u, n);    <span class="comment">//先计算(x^u) % n，</span></div><div class="line">        pre = x;</div><div class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; k; ++j)      <span class="comment">//把移位减掉的量补上，并在这地方加上二次探测</span></div><div class="line">        &#123;</div><div class="line">            x = mod_mul(x, x, n);</div><div class="line">            <span class="keyword">if</span>(x == <span class="number">1</span> &amp;&amp; pre != <span class="number">1</span> &amp;&amp; pre != n<span class="number">-1</span>)    <span class="keyword">return</span> <span class="literal">false</span>;    <span class="comment">//二次探测定理，这里如果x = 1则pre 必须等于 1，或则 n-1否则可以判断不是素数</span></div><div class="line">            pre = x;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(x != <span class="number">1</span>)    <span class="keyword">return</span> <span class="literal">false</span>;    <span class="comment">//费马小定理</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="comment">//*/test miller_rabin</span></div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="built_in">cin</span>&gt;&gt;n;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(miller_rabin(n))</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(miller_rabin(n<span class="number">-2</span>))</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"2\n"</span>);</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">printf</span>(<span class="string">"3\n"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2017/08/28/cf382/" data-id="cjcj5cnms000a2vsc605w5g0z" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-G-C" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/28/G-C/" class="article-date">
@@ -98,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cja56cbit0003jbscqhc3vxlj" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/28/G-C/" data-id="cjcj5cnm800002vsckiig95qk" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/G/">G++</a></li></ul>
@@ -171,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cja56cbkb001jjbscahw87suq" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/27/线段树/" data-id="cjcj5cnop002u2vsci0ukkxfm" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/离散化/">离散化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线段树/">线段树</a></li></ul>
@@ -232,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cja56cbj8000ejbsc2b5gmeot" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/25/cfAIM-round4/" data-id="cjcj5cnmv000f2vscfss4xvau" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -308,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cja56cbk6001bjbscnvqnt92y" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/23/强连通分量/" data-id="cjcj5cnog002l2vscjqddndy4" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -371,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cja56cbjs000vjbsch6mfcphe" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/19/cf429/" data-id="cjcj5cnne000t2vscqee2x9zv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">codeforces</a></li></ul>
@@ -416,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cja56cbk20018jbsc63z6cnvd" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/17/对拍程序/" data-id="cjcj5cnoc002h2vscanhx4toq" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -522,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/各种数学/" data-id="cja56cbjv0010jbsc5scfhy3x" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/17/各种数学/" data-id="cjcj5cnnn00132vsc8qb7qd6p" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -559,96 +658,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/博弈论/" data-id="cja56cbk4001ajbscnw7lj3d7" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/08/17/博弈论/" data-id="cjcj5cnp5003j2vscbp7otaqi" class="article-share-link">Delen</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fft" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/fft/" class="article-date">
-  <time datetime="2017-08-16T17:00:30.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/fft/">fft</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>51nod上很快的fft模板</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line">//FFT 大整数乘法</div><div class="line">#include&lt;cstdio&gt;</div><div class="line">#include&lt;cmath&gt;</div><div class="line">#include&lt;cstring&gt;</div><div class="line">#include&lt;algorithm&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line"></div><div class="line">const int N = 500005;</div><div class="line">const double pi = acos(-1.0);</div><div class="line"></div><div class="line">char s1[N],s2[N];</div><div class="line">int len,res[N];</div><div class="line"></div><div class="line">struct Complex</div><div class="line">&#123;</div><div class="line">    double r,i;</div><div class="line">    Complex(double r=0,double i=0):r(r),i(i) &#123;&#125;;</div><div class="line">    Complex operator+(const Complex &amp;rhs)</div><div class="line">    &#123;</div><div class="line">        return Complex(r + rhs.r,i + rhs.i);</div><div class="line">    &#125;</div><div class="line">    Complex operator-(const Complex &amp;rhs)</div><div class="line">    &#123;</div><div class="line">        return Complex(r - rhs.r,i - rhs.i);</div><div class="line">    &#125;</div><div class="line">    Complex operator*(const Complex &amp;rhs)</div><div class="line">    &#123;</div><div class="line">        return Complex(r*rhs.r - i*rhs.i,i*rhs.r + r*rhs.i);</div><div class="line">    &#125;</div><div class="line">&#125; va[N],vb[N];</div><div class="line"></div><div class="line">void rader(Complex F[],int len) //len = 2^M,reverse F[i] with  F[j] j为i二进制反转</div><div class="line">&#123;</div><div class="line">    int j = len &gt;&gt; 1;</div><div class="line">    for(int i = 1;i &lt; len - 1;++i)</div><div class="line">    &#123;</div><div class="line">        if(i &lt; j) swap(F[i],F[j]);  // reverse</div><div class="line">        int k = len&gt;&gt;1; </div><div class="line">        while(j&gt;=k)</div><div class="line">        &#123;</div><div class="line">            j -= k;</div><div class="line">            k &gt;&gt;= 1;</div><div class="line">        &#125;</div><div class="line">        if(j &lt; k) j += k;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void FFT(Complex F[],int len,int t)</div><div class="line">&#123;</div><div class="line">    rader(F,len);</div><div class="line">    for(int h=2;h&lt;=len;h&lt;&lt;=1)</div><div class="line">    &#123;</div><div class="line">        Complex wn(cos(-t*2*pi/h),sin(-t*2*pi/h));</div><div class="line">        for(int j=0;j&lt;len;j+=h)</div><div class="line">        &#123;</div><div class="line">            Complex E(1,0); //旋转因子</div><div class="line">            for(int k=j;k&lt;j+h/2;++k)</div><div class="line">            &#123;</div><div class="line">                Complex u = F[k];</div><div class="line">                Complex v = E*F[k+h/2];</div><div class="line">                F[k] = u+v;</div><div class="line">                F[k+h/2] = u-v;</div><div class="line">                E=E*wn;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if(t==-1)   //IDFT</div><div class="line">        for(int i=0;i&lt;len;++i)</div><div class="line">            F[i].r/=len;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void Conv(Complex a[],Complex b[],int len) //求卷积</div><div class="line">&#123;</div><div class="line">    FFT(a,len,1);</div><div class="line">    FFT(b,len,1);</div><div class="line">    for(int i=0;i&lt;len;++i) a[i] = a[i]*b[i]; </div><div class="line">    FFT(a,len,-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void init(char *s1,char *s2)</div><div class="line">&#123;</div><div class="line">    int n1 = strlen(s1),n2 = strlen(s2);</div><div class="line">    len = 1;</div><div class="line">    while(len &lt; 2*n1 || len &lt; 2*n2) len &lt;&lt;= 1;</div><div class="line">    int i;</div><div class="line">    for(i=0;i&lt;n1;++i)</div><div class="line">    &#123;</div><div class="line">        va[i].r = s1[n1-i-1]-'0';</div><div class="line">        va[i].i = 0;</div><div class="line">    &#125;</div><div class="line">    while(i&lt;len)</div><div class="line">    &#123;</div><div class="line">        va[i].r = va[i].i = 0;</div><div class="line">        ++i;</div><div class="line">    &#125;</div><div class="line">    for(i=0;i&lt;n2;++i)</div><div class="line">    &#123;</div><div class="line">        vb[i].r = s2[n2-i-1]-'0';</div><div class="line">        vb[i].i = 0;</div><div class="line">    &#125;</div><div class="line">    while(i&lt;len)</div><div class="line">    &#123;</div><div class="line">        vb[i].r = vb[i].i = 0;</div><div class="line">        ++i;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void gao()</div><div class="line">&#123;</div><div class="line">    Conv(va,vb,len);</div><div class="line">    memset(res,0,sizeof res);</div><div class="line">    for(int i=0;i&lt;len;++i)</div><div class="line">    &#123;</div><div class="line">        res[i]=va[i].r + 0.5;</div><div class="line">    &#125;</div><div class="line">    for(int i=0;i&lt;len;++i)</div><div class="line">    &#123;</div><div class="line">        res[i+1]+=res[i]/10;</div><div class="line">        res[i]%=10;</div><div class="line">    &#125;</div><div class="line">    int high = 0;</div><div class="line">    for(int i=len-1;i&gt;=0;--i)   </div><div class="line">    &#123;</div><div class="line">        if(res[i])  </div><div class="line">        &#123;</div><div class="line">            high = i;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    for(int i=high;i&gt;=0;--i) putchar('0'+res[i]);</div><div class="line">    puts("");</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    while(scanf("%s %s",s1,s2)==2)</div><div class="line">    &#123;</div><div class="line">        init(s1,s2);</div><div class="line">        gao();</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/fft/" data-id="cja56cbj9000gjbscbnjepedg" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFT/">FFT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模板/">模板</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-树形DP" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/树形DP/" class="article-date">
-  <time datetime="2017-08-16T16:48:07.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/树形DP/">树形DP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>hdu1520<br>题意:</p>
-<blockquote>
-<p>给一棵有根数,每个点有权重,相邻点不能同时出现,问怎么取点可以使得权重最大</p>
-</blockquote>
-<p>思路:  </p>
-<blockquote>
-<p>每个结点有两种状态，取和不取，用0表示不选，1表示选中<br>状态: dp[i][1]表示取第i个点，dp[i][0]表示不取第i个点。<br>转移: dp[u][0] += max (dp[v][0], dp[v][1])  不取父节点,子节点可以取或不取<br>      dp[u][1] += dp[v][0]   取父节点,不能取子节点<br>其中v是u的所有子节点<br>建树: 有向树,用连接表  </p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*************************************************************************</span></div><div class="line">	&gt; File Name: 1520.cpp</div><div class="line">	&gt; Author: mazicwong</div><div class="line">	&gt; Mail: mazicwong@gmail.com</div><div class="line">	&gt; Created Time: 2017年08月16日 星期三 23时03分31秒</div><div class="line"> ************************************************************************/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line"> * 状态:</div><div class="line"> * dp[i,0]: 不取i点时的最大</div><div class="line"> * dp[i,1]: 取i点时的最大</div><div class="line"> *</div><div class="line"> * 转移:</div><div class="line"> * dp[i,0] += max&#123;dp[j][0],dp[j][1]&#125;</div><div class="line"> * dp[i,1] += dp[j,0]</div><div class="line"> * 其中j为i的所有儿子</div><div class="line"> *</div><div class="line"> * dfs结果,max&#123;dp[root,0],dp[root,1]&#125;</div><div class="line"> * </div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">6000</span>+<span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dp[maxn][<span class="number">2</span>];</div><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="keyword">int</span> in[maxn];</div><div class="line"><span class="keyword">bool</span> vis[maxn];</div><div class="line"><span class="keyword">int</span> n;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> v;</div><div class="line">    <span class="keyword">int</span> next;</div><div class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</div><div class="line"></div><div class="line"><span class="keyword">int</span> cnt,head[maxn];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></div><div class="line">&#123;</div><div class="line">    e[cnt].v=v;</div><div class="line">    e[cnt].next=head[u];</div><div class="line">    head[u]=cnt++;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span></div><div class="line">&#123;</div><div class="line">    vis[u]=<span class="literal">true</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i!=<span class="number">-1</span>;i=e[i].next)</div><div class="line">    &#123;</div><div class="line">       <span class="comment">// if (!vis[i])</span></div><div class="line">       <span class="comment">// &#123;</span></div><div class="line">            <span class="keyword">int</span> v=e[i].v;</div><div class="line">            dfs(v);</div><div class="line">            dp[u][<span class="number">0</span>] += max(dp[v][<span class="number">0</span>], dp[v][<span class="number">1</span>]);</div><div class="line">            dp[u][<span class="number">1</span>] += dp[v][<span class="number">0</span>];</div><div class="line">       <span class="comment">// &#125;</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</div><div class="line">        <span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(in));</div><div class="line">        cnt=<span class="number">0</span>;</div><div class="line">        <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="keyword">sizeof</span>(head));</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;dp[i][<span class="number">1</span>]);<span class="comment">//边界</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> u,v;</div><div class="line">        <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;v,&amp;u)!=EOF &amp;&amp; v &amp;&amp; u)</div><div class="line">        &#123;</div><div class="line">            addedge(u,v);</div><div class="line">            in[v]++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (in[i]==<span class="number">0</span>)<span class="comment">//root</span></div><div class="line">            &#123;</div><div class="line">                dfs(i);</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,max(dp[i][<span class="number">0</span>],dp[i][<span class="number">1</span>]));</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/08/17/树形DP/" data-id="cja56cbk9001gjbscsv5u1rpk" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树/">树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树形DP/">树形DP</a></li></ul>
-
     </footer>
   </div>
   
@@ -659,7 +671,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -691,7 +703,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
   </div>
 
@@ -704,6 +716,14 @@
       <ul>
         
           <li>
+            <a href="/2018/01/17/大三上学期期末考/">大三上学期期末考</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/23/paper/">paper</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/18/tryJdbc/">tryJdbc</a>
           </li>
         
@@ -713,14 +733,6 @@
         
           <li>
             <a href="/2017/10/04/记忆化搜索与DP区别/">记忆化搜索与DP区别</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/16/sqlServer入门/">sqlServer入门</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/14/后缀数组/">后缀数组</a>
           </li>
         
       </ul>
@@ -735,7 +747,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 MazicWong<br>
+      &copy; 2018 MazicWong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
