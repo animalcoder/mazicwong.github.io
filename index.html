@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
@@ -67,6 +67,121 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-netease爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/19/netease爬虫/" class="article-date">
+  <time datetime="2018-01-19T12:25:00.000Z" itemprop="datePublished">2018-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/19/netease爬虫/">netease爬虫</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><p>采用Scrapy<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">keke/</div><div class="line">    main.py</div><div class="line">    docs/</div><div class="line">        netease/</div><div class="line">    crawl/</div><div class="line">        pipelines.py</div><div class="line">        middlewares.py</div><div class="line">        settings.py</div><div class="line">        items.py</div><div class="line">        maziclib/</div><div class="line">            news_fun.py</div><div class="line">        spiders/</div><div class="line">            newsspider.py</div></pre></td></tr></table></figure></p>
+<h3 id="正文爬取"><a href="#正文爬取" class="headerlink" title="正文爬取"></a>正文爬取</h3><ol>
+<li>先在主函数中,从网易主页找出所有的URL,这些就是当天最热门的新闻,正则如下:<br><code>url_pattern = r&#39;(http://news\.163\.com)/(\d{2})/(\d{4})/(\d+)/(\w+)\.html&#39;</code></li>
+<li>然后对每个获取到的URL,直接获取他的<code>source</code>,<code>date</code>,<code>newsId</code>,<code>cmtId</code>,<code>productKey</code>,<code>title</code>,<code>passage</code></li>
+<li>有了productKey后,通过下面的构造方法,获得一个网易的API,在该API中可以获得一个boardId,这个boardId是用来构造评论地址的<br><code>comments_api = &#39;http://comment.news.163.com/api/v1/products/&#39; + productKey + &#39;/threads/&#39; + newsId</code></li>
+<li>通过下面规则获取评论地址,<code>comments</code><br><code>comments = (&#39;http://comment.news.163.com/&#39;+boardId+&#39;/&#39;+newsId+&#39;.html&#39;)</code></li>
+<li>将上述获取到的数据放入<code>item[]</code>中,然后<code>yield item</code></li>
+</ol>
+<h3 id="评论爬取"><a href="#评论爬取" class="headerlink" title="评论爬取"></a>评论爬取</h3><p>这里无法直接从新闻页面获取评论地址,要通过一些方法<br>地址格式: <code>comments = (&#39;http://comment.news.163.com/&#39;+boardId+&#39;/&#39;+newsId+&#39;.html&#39;)</code></p>
+<ul>
+<li>先从主页获取productKey和newsId</li>
+<li>然后构造出一个api地址,从该地址获取boardId</li>
+<li>通过boardId和newsId构造出评论地址</li>
+<li>到评论地址获取评论内容</li>
+</ul>
+<h3 id="坑点"><a href="#坑点" class="headerlink" title="坑点"></a>坑点</h3><ul>
+<li><p>函数没有用熟练,<code>re.match(re.compile(pattern),str)</code>是匹配<code>pat</code>串是否从函数开头开始的,要从中间找应该用<code>findall</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">re.findall(re.compile(pattern), urlopen(url).read().decode(encode=&apos;utf-8&apos;))</div></pre></td></tr></table></figure>
+</li>
+<li><p>调试时,用了bs4抓了一下所有的<code>tag = script</code>下来一个一个对比找问题..  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">soup = BeautifulSoup(urlopen(url).read(),lxml)</div><div class="line">contents = soup.find_all(&apos;script&apos;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="http://lemon2013.top/2017/07/13/news-spider/" target="_blank" rel="external">http://lemon2013.top/2017/07/13/news-spider/</a></li>
+<li><a href="http://blog.reetsee.com/archives/237" target="_blank" rel="external">http://blog.reetsee.com/archives/237</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2018/01/19/netease爬虫/" data-id="cjcn4yz7p000lousco4gr34hs" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易新闻/">网易新闻</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sina" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/17/sina/" class="article-date">
+  <time datetime="2018-01-17T14:23:53.000Z" itemprop="datePublished">2018-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/17/sina/">sina</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><code>scrapy startproject jnuxshc</code>之后，要用到的就是进sina里面修改了<br><code>scrapy crawl mazic.py</code>,spiders中爬虫代码,这里用<code>main.py</code>来执行了<br>最终接口,调用<code>python3 main.py</code>会得到一个<code>jnu.csv</code>的文件</p>
+<h4 id="需要修改的文件"><a href="#需要修改的文件" class="headerlink" title="需要修改的文件:"></a>需要修改的文件:</h4><ul>
+<li>items.py: 修改为需要获得的数据</li>
+<li>pipelines.py: 暂时不管</li>
+<li>settings.py: 数据存储的地方和格式,修改<code>robots</code>,<code>user_agent</code></li>
+<li>middlewares.py: 暂时不管</li>
+<li>spiders/<em>*</em>.py: 真正爬虫代码,可以用xpath,selector等处理,记得放入item中</li>
+</ul>
+<h4 id="Some-Problem"><a href="#Some-Problem" class="headerlink" title="Some Problem:"></a>Some Problem:</h4><ol>
+<li>一开始运行完空白,看到debug中返回403,然后到settings.py里修改<code>user_agent</code>就好了</li>
+<li>然后运行完还是爬不到,在settings把robots.txt修改为False就好了</li>
+<li>第三个错误就是xpath写错的原因了,以后注意就行</li>
+<li>由于输出到csv的列是无序的,所以在spiders/中加了<code>csv_item_exporter.py</code>,在<code>settings.py</code>中添加了<code>FEED_EXPORTERS</code>和<code>FIELDS_TO_EXPORT</code></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2018/01/17/sina/" data-id="cjcn4yz7w000sousccgpdjdzn" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-大三上学期期末考" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -95,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2018/01/17/大三上学期期末考/" data-id="cjcj5cnoa002f2vsci0j677si" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2018/01/17/大三上学期期末考/" data-id="cjcn4yz8i001fouscy6d80iqn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -134,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/11/23/paper/" data-id="cjcj5cnng000x2vscwgasfwpp" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/11/23/paper/" data-id="cjcn4yz7r000oousc68d46zu0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -199,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/11/18/tryJdbc/" data-id="cjcj5cnnb000q2vsc39xyx5er" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/11/18/tryJdbc/" data-id="cjcn4yz7z000xouscjxw3gjtw" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -254,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/11/15/近期计划/" data-id="cjcj5cnos002z2vsc5hth6rnt" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/11/15/近期计划/" data-id="cjcn4yz9l003oousctp7w0qh4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -303,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/10/04/记忆化搜索与DP区别/" data-id="cjcj5cnor002x2vscxgelswv9" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/10/04/记忆化搜索与DP区别/" data-id="cjcn4yz8s001pousc11f0owok" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -373,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cjcj5cnnc000s2vsc6dokgi81" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/09/16/sqlServer入门/" data-id="cjcn4yz7y000vousc4j8pvluz" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -487,7 +602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cjcj5cnnl00112vscjxd23iyi" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/09/14/后缀数组/" data-id="cjcn4yz8b0016ouscx78h5is6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li></ul>
@@ -530,121 +645,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cjcj5cnow00342vsc83hl233f" class="article-share-link">Delen</a>
+      <a data-url="mazicwong.github.io/2017/09/11/随机数/" data-id="cjcn4yz9i003louscyhhdqdry" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-输入挂" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/11/输入挂/" class="article-date">
-  <time datetime="2017-09-10T16:21:41.000Z" itemprop="datePublished">2017-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/输入挂/">输入挂</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>测试: hdu6208 青岛网络赛第三题的AC自动机,3000ms</p>
-<ul>
-<li>AC自动机:</li>
-<li>1.用<code>string+sync</code>            各种TLE</li>
-<li>2.改用<code>char ss[]</code>            刚好卡过去..2800ms</li>
-<li>3.加了个<code>fastIO</code>输入挂…    2400ms就过了</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> fastIO  </div><div class="line">&#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100000  </span></div><div class="line">    <span class="comment">//fread -&gt; read</span></div><div class="line">    <span class="keyword">bool</span> IOerror = <span class="number">0</span>;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">nc</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[BUF_SIZE], *p1 = buf + BUF_SIZE, *pend = buf + BUF_SIZE;  </div><div class="line">        <span class="keyword">if</span>(p1 == pend) &#123;  </div><div class="line">            p1 = buf;  </div><div class="line">            pend = buf + fread(buf, <span class="number">1</span>, BUF_SIZE, <span class="built_in">stdin</span>);  </div><div class="line">            <span class="keyword">if</span>(pend == p1) &#123;  </div><div class="line">                IOerror = <span class="number">1</span>;<span class="keyword">return</span> <span class="number">-1</span>;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> *p1++;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">blank</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span> || ch == <span class="string">'\t'</span>;  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span> x[])</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)  </div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;  </div><div class="line">        <span class="keyword">for</span>(x[k++] = ch; (ch = nc())&amp;&amp;(!blank(ch))&amp;&amp;(ch != EOF); x[k++] = ch);  </div><div class="line">        x[k]=<span class="string">'\0'</span>;  </div><div class="line">        <span class="keyword">return</span> k;  </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">readint</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;  </div><div class="line">        <span class="keyword">char</span> ch;  </div><div class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </div><div class="line">        <span class="keyword">if</span>(IOerror)<span class="keyword">return</span>;  </div><div class="line">        <span class="keyword">for</span>(x = ch - <span class="string">'0'</span>; (ch = nc()) &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>);  </div><div class="line">    &#125;  </div><div class="line"><span class="meta">#<span class="meta-keyword">undef</span> BUF_SIZE  </span></div><div class="line">&#125;;  </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> fastIO;  </div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//how to use</span></div><div class="line"><span class="keyword">while</span>(read(n),!fastIO::IOerror)</div><div class="line">&#123;</div><div class="line">    readint(T);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">        readint(a[i]);</div><div class="line">    <span class="keyword">char</span> str[maxn];</div><div class="line">    read(str);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>/<strong><strong>**</strong></strong>another<strong><strong><em>*</em></strong></strong>/</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//适用于正负整数</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></div><div class="line"><span class="title">inline</span> <span class="title">bool</span> <span class="title">scan_d</span>(<span class="title">T</span> &amp;<span class="title">ret</span>) &#123;</div><div class="line">    <span class="keyword">char</span> c; <span class="keyword">int</span> sgn;</div><div class="line">    <span class="keyword">if</span>(c=getchar(),c==EOF) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//EOF</span></div><div class="line">    <span class="keyword">while</span>(c!=<span class="string">'-'</span>&amp;&amp;(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)) c=getchar();</div><div class="line">    sgn=(c==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>;</div><div class="line">    ret=(c==<span class="string">'-'</span>)?<span class="number">0</span>:(c-<span class="string">'0'</span>);</div><div class="line">    <span class="keyword">while</span>(c=getchar(),c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>) ret=ret*<span class="number">10</span>+(c-<span class="string">'0'</span>);</div><div class="line">    ret*=sgn;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(x&gt;<span class="number">9</span>) out(x/<span class="number">10</span>);</div><div class="line">    <span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">'0'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>/<strong><strong>**</strong></strong>another<strong><strong><em>*</em></strong></strong>/<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::ios::sync_with_stdio(<span class="literal">false</span>);</div><div class="line"><span class="built_in">cin</span>.tie(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
-<p>/<strong><strong>**</strong></strong>test<strong><strong><em>*</em></strong></strong>/<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">double</span> start = clock();</div><div class="line">    <span class="comment">// do sth;</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%.3lf\n"</span>,<span class="keyword">double</span>(clock()-start)/CLOCKS_PRE_SEC);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>//一开始测用  <code>for (int i=0;i&lt;maxn;i++) cin&gt;&gt;i;</code> 然后输入挂一直用不了…<br>int maxn = 1e7+5;</p>
-<p>//1.406s<br>while(maxn–) cin&gt;&gt;i;</p>
-<p>//0.552<br>while(maxn–) scanf(“%d”,&amp;i);</p>
-<p>//0.521<br>std::ios::sync_with_stdio(false);<br>while(maxn–) cin&gt;&gt;i;</p>
-<p>//0.427<br>std::ios::sync_with_stdio(false); cin.tie(0);<br>while(maxn–) cin&gt;&gt;i;</p>
-<p>//0.229 (kuangbin)<br>while(maxn–) scan_d()i;</p>
-<p>//0.165 (神奇FastIO挂)<br>while(maxn–) readint(i)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/11/输入挂/" data-id="cjcj5cnou00312vsc66jmxd1m" class="article-share-link">Delen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-最小生成树" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/09/最小生成树/" class="article-date">
-  <time datetime="2017-09-09T02:53:08.000Z" itemprop="datePublished">2017-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/09/最小生成树/">最小生成树</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最小生成树:kruskal or Prim</p>
-<p>算法:<br>kruskal中,建图一般存边,然后可以sort所有边权,依次取入<code>n-1</code>条边,过程中用并查集判定不会构成回路</p>
-<hr>
-<p>kruskal模板:poj1287<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">50</span>+<span class="number">5</span>;<span class="comment">//point</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1500</span>+<span class="number">5</span>;<span class="comment">//edge</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * poj1287: 传入点,边,求最小生成树边权和</div><div class="line"> * 复杂度: E*logV</div><div class="line"> * point: [1..n]</div><div class="line"> * edge: [0..m-1]</div><div class="line"> */</div><div class="line"><span class="keyword">int</span> n,m;<span class="comment">//点,边</span></div><div class="line"></div><div class="line"><span class="comment">//建图(存边)</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x,y;</div><div class="line">    <span class="keyword">int</span> d;</div><div class="line">&#125;E[maxm];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(edge a1,edge a2)</span></span>&#123;<span class="keyword">return</span> a1.d&lt;a2.d;&#125;</div><div class="line"></div><div class="line"><span class="comment">//并查集(判连通块)</span></div><div class="line"><span class="keyword">int</span> fa[maxn];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;<span class="keyword">return</span> x==fa[x]?x:fa[x]=find(fa[x]);&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> nx=find(x),ny=find(y);</div><div class="line">    <span class="keyword">if</span> (nx!=ny) fa[nx]=ny;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//kruskal(传入边数)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">(<span class="keyword">int</span> num)</span></span></div><div class="line">&#123;</div><div class="line">    init();</div><div class="line">    sort(E,E+num,cmp);</div><div class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,cnt=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (find(E[i].x)!=find(E[i].y))</div><div class="line">        &#123;</div><div class="line">            ans += E[i].d;</div><div class="line">            unite(E[i].x,E[i].y);</div><div class="line">            cnt++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (n<span class="number">-1</span>==cnt)</div><div class="line">            <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in","r",stdin);</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;E[i].x,&amp;E[i].y,&amp;E[i].d);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,kruskal(m));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<hr>
-<p>poj 1287 裸最小生成树</p>
-<p>题意:<br>给n点,m边,求最小生成树边权和</p>
-<hr>
-<p>hdu 1233 最小生成树边权和</p>
-<p>题意:<br><code>n</code>村庄,<code>n*(n-1)/2</code>路,输出最小公路总长度</p>
-<p>思路:<br>裸题</p>
-<hr>
-<p>hdu1301 &amp; poj1251</p>
-<p>题意:<br>n点,然后给边,按邻接表方式给,求最小生成树边权和</p>
-<hr>
-<p>hdu 1875</p>
-<p>题意:<br>给出所有点坐标,任意两点建路,要求距离在10到1000之间,目的是使n个点连通,问最少需要建多少</p>
-<p>思路:<br>求出所有边距离,判断是否符合,然后套一个kruskal</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mazicwong.github.io/2017/09/09/最小生成树/" data-id="cjcj5cnp6003l2vsci1dlzqgp" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kruskal/">kruskal</a></li></ul>
 
     </footer>
   </div>
@@ -667,9 +671,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易新闻/">网易新闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
     </div>
   </div>
 
@@ -677,16 +681,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ACM技巧/" style="font-size: 10px;">ACM技巧</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/sqlserver/" style="font-size: 10px;">sqlserver</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+      <a href="/tags/ACM技巧/" style="font-size: 10px;">ACM技巧</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/sqlserver/" style="font-size: 10px;">sqlserver</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/网易新闻/" style="font-size: 10px;">网易新闻</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
     </div>
@@ -696,9 +700,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/19/netease爬虫/">netease爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/17/sina/">sina</a>
+          </li>
         
           <li>
             <a href="/2018/01/17/大三上学期期末考/">大三上学期期末考</a>
@@ -710,14 +722,6 @@
         
           <li>
             <a href="/2017/11/18/tryJdbc/">tryJdbc</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/15/近期计划/">近期计划</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/04/记忆化搜索与DP区别/">记忆化搜索与DP区别</a>
           </li>
         
       </ul>
@@ -733,7 +737,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 MazicWong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

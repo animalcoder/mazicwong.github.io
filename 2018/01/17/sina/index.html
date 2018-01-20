@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Mot-clé: 搜索 | mazicwong</title>
+  <title>sina | mazicwong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mazicwong">
-<meta property="og:url" content="mazicwong.github.io/tags/搜索/index.html">
+  <meta name="description" content="使用scrapy startproject jnuxshc之后，要用到的就是进sina里面修改了scrapy crawl mazic.py,spiders中爬虫代码,这里用main.py来执行了最终接口,调用python3 main.py会得到一个jnu.csv的文件 需要修改的文件: items.py: 修改为需要获得的数据 pipelines.py: 暂时不管 settings.py: 数据存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sina">
+<meta property="og:url" content="mazicwong.github.io/2018/01/17/sina/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="blog">
+<meta property="og:description" content="使用scrapy startproject jnuxshc之后，要用到的就是进sina里面修改了scrapy crawl mazic.py,spiders中爬虫代码,这里用main.py来执行了最终接口,调用python3 main.py会得到一个jnu.csv的文件 需要修改的文件: items.py: 修改为需要获得的数据 pipelines.py: 暂时不管 settings.py: 数据存">
+<meta property="og:updated_time" content="2018-01-19T12:23:49.523Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mazicwong">
-<meta name="twitter:description" content="blog">
+<meta name="twitter:title" content="sina">
+<meta name="twitter:description" content="使用scrapy startproject jnuxshc之后，要用到的就是进sina里面修改了scrapy crawl mazic.py,spiders中爬虫代码,这里用main.py来执行了最终接口,调用python3 main.py会得到一个jnu.csv的文件 需要修改的文件: items.py: 修改为需要获得的数据 pipelines.py: 暂时不管 settings.py: 数据存">
   
     <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
   
@@ -66,39 +67,74 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/12/hdu-6113-dfs边界-连通块/" class="archive-article-date">
-  <time datetime="2017-08-12T13:46:14.000Z" itemprop="datePublished">8月 12</time>
+        <section id="main"><article id="post-sina" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/17/sina/" class="article-date">
+  <time datetime="2018-01-17T14:23:53.000Z" itemprop="datePublished">2018-01-17</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/12/hdu-6113-dfs边界-连通块/">hdu 6113 dfs边界+连通块</a>
+    <h1 class="article-title" itemprop="name">
+      sina
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><code>scrapy startproject jnuxshc</code>之后，要用到的就是进sina里面修改了<br><code>scrapy crawl mazic.py</code>,spiders中爬虫代码,这里用<code>main.py</code>来执行了<br>最终接口,调用<code>python3 main.py</code>会得到一个<code>jnu.csv</code>的文件</p>
+<h4 id="需要修改的文件"><a href="#需要修改的文件" class="headerlink" title="需要修改的文件:"></a>需要修改的文件:</h4><ul>
+<li>items.py: 修改为需要获得的数据</li>
+<li>pipelines.py: 暂时不管</li>
+<li>settings.py: 数据存储的地方和格式,修改<code>robots</code>,<code>user_agent</code></li>
+<li>middlewares.py: 暂时不管</li>
+<li>spiders/<em>*</em>.py: 真正爬虫代码,可以用xpath,selector等处理,记得放入item中</li>
+</ul>
+<h4 id="Some-Problem"><a href="#Some-Problem" class="headerlink" title="Some Problem:"></a>Some Problem:</h4><ol>
+<li>一开始运行完空白,看到debug中返回403,然后到settings.py里修改<code>user_agent</code>就好了</li>
+<li>然后运行完还是爬不到,在settings把robots.txt修改为False就好了</li>
+<li>第三个错误就是xpath写错的原因了,以后注意就行</li>
+<li>由于输出到csv的列是无序的,所以在spiders/中加了<code>csv_item_exporter.py</code>,在<code>settings.py</code>中添加了<code>FEED_EXPORTERS</code>和<code>FIELDS_TO_EXPORT</code></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2018/01/17/sina/" data-id="cjcn4yz7w000sousccgpdjdzn" class="article-share-link">Partager</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/19/netease爬虫/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          netease爬虫
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/17/大三上学期期末考/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">大三上学期期末考</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
