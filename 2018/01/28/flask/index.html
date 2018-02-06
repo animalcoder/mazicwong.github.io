@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>flask | mazicwong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="看完了网易云上面flask的教程,做一下笔记,下面打算用来做点东西 教程:  [网易云课堂(http://study.163.com/course/courseMain.htm?courseId=1004091002) 官方文档  url_for: URL反转   - 1.重定向    `return redirect(url_for(&amp;apos;login&amp;apos;))` - 2.模板中用到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flask">
+<meta property="og:url" content="mazicwong.github.io/2018/01/28/flask/index.html">
+<meta property="og:site_name" content="mazicwong">
+<meta property="og:description" content="看完了网易云上面flask的教程,做一下笔记,下面打算用来做点东西 教程:  [网易云课堂(http://study.163.com/course/courseMain.htm?courseId=1004091002) 官方文档  url_for: URL反转   - 1.重定向    `return redirect(url_for(&amp;apos;login&amp;apos;))` - 2.模板中用到">
+<meta property="og:updated_time" content="2018-01-31T17:23:45.542Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flask">
+<meta name="twitter:description" content="看完了网易云上面flask的教程,做一下笔记,下面打算用来做点东西 教程:  [网易云课堂(http://study.163.com/course/courseMain.htm?courseId=1004091002) 官方文档  url_for: URL反转   - 1.重定向    `return redirect(url_for(&amp;apos;login&amp;apos;))` - 2.模板中用到">
+  
+    <link rel="alternate" href="/atom.xml" title="mazicwong" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mazicwong</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录日常</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mazicwong.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-flask" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/28/flask/" class="article-date">
+  <time datetime="2018-01-28T06:02:54.000Z" itemprop="datePublished">2018-01-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      flask
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>看完了网易云上面flask的教程,做一下笔记,下面打算用来做点东西</p>
+<p>教程:</p>
+<ul>
+<li>[网易云课堂(<a href="http://study.163.com/course/courseMain.htm?courseId=1004091002" target="_blank" rel="external">http://study.163.com/course/courseMain.htm?courseId=1004091002</a>)</li>
+<li><a href="http://flask.pocoo.org/docs/0.12/" target="_blank" rel="external">官方文档</a></li>
+</ul>
+<p><code>url_for</code>: URL反转  </p>
+<pre><code>- 1.重定向
+   `return redirect(url_for(&apos;login&apos;))`
+- 2.模板中用到
+</code></pre><h3 id="url传参"><a href="#url传参" class="headerlink" title="url传参:"></a>url传参:</h3><ol>
+<li></li>
+</ol>
+<h3 id="jinjia2"><a href="#jinjia2" class="headerlink" title="jinjia2"></a>jinjia2</h3><p>if<br>   for<br>   block</p>
+<p>/static/ 里写css,js,img,三种静态静态文件<br>/template/ 里写模板文件<br>/main.py 写执行代码</p>
+<h3 id="关于数据库"><a href="#关于数据库" class="headerlink" title="关于数据库"></a>关于数据库</h3><p>采用Mysql,安装<code>sqlalchemy</code>用来处理数据库的操作,</p>
+<h3 id="浏览器请求"><a href="#浏览器请求" class="headerlink" title="浏览器请求"></a>浏览器请求</h3><p><code>cookie &amp; session 同时存在客户端和服务端</code><br>cookie(客户端):</p>
+<ul>
+<li>浏览器中的用户信息<br>session(服务器):</li>
+<li>client side session(flask)</li>
+<li>server side session<br>加密方式:</li>
+<li>信息存储在client,然后cookie中存储<code>session_id</code></li>
+<li>信息加密后存储在cookie中存储</li>
+</ul>
+<p><strong>flask中session原理</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">用户信息先放在session中,然后对session加密,将session传送到cookie中存储,好处就是不用占用服务器资源并且安全</div></pre></td></tr></table></figure></p>
+<p><code>session</code></p>
+<ul>
+<li>添加: <code>session[username]</code></li>
+<li>删除: <code>session.pop(&#39;username&#39;)</code></li>
+<li>获取: <code>session.get(&#39;username&#39;)</code></li>
+</ul>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>安装这个废了很大劲<br>mysql中运行权限不够<br><strong>注意连接数据库的时候用root用户权限不够,改为自己创建的普通用户就可以了</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql运行路径:  usr/sbin/mysqld</div><div class="line">mysql数据库文件存放路径: var/lib/mysql</div><div class="line">mysqk安装路:    usr/lib/mysql</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mazicwong.github.io/2018/01/28/flask/" data-id="cjdbxjv3n00239gsc6liq8e30" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/29/mysql重装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mysql重装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/19/netease爬虫/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">netease爬虫</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM技巧/">ACM技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G/">G++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCA/">LCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RMQ/">RMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cbrt/">cbrt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs/">dfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kruskal/">kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kuangbin/">kuangbin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plan/">plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/search/">search</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">segment_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shortestPath/">shortestPath</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlserver/">sqlserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区间/">区间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/尺取法/">尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用技巧/">常用技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/染色问题/">染色问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/百度之星/">百度之星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散化/">离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易新闻/">网易新闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邻接表/">邻接表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ACM技巧/" style="font-size: 10px;">ACM技巧</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/G/" style="font-size: 10px;">G++</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RMQ/" style="font-size: 10px;">RMQ</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cbrt/" style="font-size: 10px;">cbrt</a> <a href="/tags/codeforces/" style="font-size: 20px;">codeforces</a> <a href="/tags/dfs/" style="font-size: 10px;">dfs</a> <a href="/tags/dp/" style="font-size: 15px;">dp</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/homework/" style="font-size: 10px;">homework</a> <a href="/tags/kruskal/" style="font-size: 10px;">kruskal</a> <a href="/tags/kuangbin/" style="font-size: 15px;">kuangbin</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/search/" style="font-size: 10px;">search</a> <a href="/tags/segment-tree/" style="font-size: 10px;">segment_tree</a> <a href="/tags/shortestPath/" style="font-size: 10px;">shortestPath</a> <a href="/tags/sqlserver/" style="font-size: 10px;">sqlserver</a> <a href="/tags/区间/" style="font-size: 10px;">区间</a> <a href="/tags/后缀数组/" style="font-size: 10px;">后缀数组</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/尺取法/" style="font-size: 10px;">尺取法</a> <a href="/tags/常用技巧/" style="font-size: 10px;">常用技巧</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/染色问题/" style="font-size: 10px;">染色问题</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/树形DP/" style="font-size: 10px;">树形DP</a> <a href="/tags/模板/" style="font-size: 10px;">模板</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/百度之星/" style="font-size: 10px;">百度之星</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/网易新闻/" style="font-size: 10px;">网易新闻</a> <a href="/tags/邻接表/" style="font-size: 10px;">邻接表</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/07/Jnu寒假第五场/">Jnu寒假第五场</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/29/mysql重装/">mysql重装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/28/flask/">flask</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/netease爬虫/">netease爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/17/sina/">sina</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 MazicWong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
