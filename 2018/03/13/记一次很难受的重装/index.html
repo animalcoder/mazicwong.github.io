@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="K2LN0adjK0" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="操作系统," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="起因Linux执行了apt-get autoremove然后打开系统图形界面都没有了，发现少了很多基本库格式化系统后又重新安装了一个deepin跟一个ubuntu,发现还是ubuntu好用   安装系统问题安装Linux过程，一般分配swap,\,\home,还有留有至少35MB用来装引导，在系统里可以自己设置为EFI格式，也可以留作空闲分区就行，启动盘会自己安装;之前有一个没有留出来空间，最后是">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次很难受的重装">
+<meta property="og:url" content="mazicwong.github.io/2018/03/13/记一次很难受的重装/index.html">
+<meta property="og:site_name" content="mazicwong">
+<meta property="og:description" content="起因Linux执行了apt-get autoremove然后打开系统图形界面都没有了，发现少了很多基本库格式化系统后又重新安装了一个deepin跟一个ubuntu,发现还是ubuntu好用   安装系统问题安装Linux过程，一般分配swap,\,\home,还有留有至少35MB用来装引导，在系统里可以自己设置为EFI格式，也可以留作空闲分区就行，启动盘会自己安装;之前有一个没有留出来空间，最后是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-03-13T17:53:23.314Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次很难受的重装">
+<meta name="twitter:description" content="起因Linux执行了apt-get autoremove然后打开系统图形界面都没有了，发现少了很多基本库格式化系统后又重新安装了一个deepin跟一个ubuntu,发现还是ubuntu好用   安装系统问题安装Linux过程，一般分配swap,\,\home,还有留有至少35MB用来装引导，在系统里可以自己设置为EFI格式，也可以留作空闲分区就行，启动盘会自己安装;之前有一个没有留出来空间，最后是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="mazicwong.github.io/2018/03/13/记一次很难受的重装/"/>
+
+
+
+
+
+  <title>记一次很难受的重装 | mazicwong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mazicwong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录日常</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2018/03/13/记一次很难受的重装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">记一次很难受的重装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T21:51:37+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  909
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>Linux执行了<code>apt-get autoremove</code><br>然后打开系统图形界面都没有了，发现少了很多基本库<br>格式化系统后又重新安装了一个<code>deepin</code>跟一个<code>ubuntu</code>,发现还是ubuntu好用  </p>
+<h3 id="安装系统问题"><a href="#安装系统问题" class="headerlink" title="安装系统问题"></a>安装系统问题</h3><p>安装Linux过程，一般分配<code>swap</code>,<code>\</code>,<code>\home</code>,还有留有至少35MB用来装引导，在系统里可以自己设置为EFI格式，也可以留作空闲分区就行，启动盘会自己安装;之前有一个没有留出来空间，最后是到Windows下用EasyBCDs来生成了一个引导，而且还经常出现grub2的问题。</p>
+<h3 id="重新配置hexo-page"><a href="#重新配置hexo-page" class="headerlink" title="重新配置hexo_page"></a>重新配置hexo_page</h3><p>这是个很有趣的问题,因为github上保存的是渲染后的静态页面，所以不能直接从github上获取原来的博客，我在重装之前将原来博客的整个文件夹备份了，包括里面的文章；<br>然后主要是做了下面几个操作:</p>
+<ul>
+<li>安装nodejs,npm,hexo这些基本的东西</li>
+<li><code>hexo init blog</code></li>
+<li>将原来的所有文章放到<code>source/</code>里面</li>
+<li>将原来文件夹中的<code>/.deploy.git/</code>放到新文件夹里</li>
+<li>将新文件夹下的<code>package.json</code>和<code>_config.yml</code>替换为原来文件夹下的东西<br>这样就可以跟之前一样<code>hexo d</code>到github了</li>
+</ul>
+<h3 id="文件迁移的编码问题"><a href="#文件迁移的编码问题" class="headerlink" title="文件迁移的编码问题"></a>文件迁移的编码问题</h3><p><code>Linux-&gt;Udisk-&gt;Windows7-&gt;Udisk-&gt;Linux</code><br>会发生编码错误的问题，原来是用UTF-8(Unicode)，新系统也是UTF-8，然后打开文件里面的编码是没问题的，但是所有的文件名只要有中文都乱码了，在genoDALAO的帮助下，发现了一个很奇葩的编码问题，就是所有编码的16进制都变了，然后各种恢复</p>
+<h3 id="下面是以后重装系统需要配置的东西"><a href="#下面是以后重装系统需要配置的东西" class="headerlink" title="下面是以后重装系统需要配置的东西"></a>下面是以后重装系统需要配置的东西</h3><h3 id="本来想把这些写成一个shell-但是又要防止出现了新版本的各种问题"><a href="#本来想把这些写成一个shell-但是又要防止出现了新版本的各种问题" class="headerlink" title="本来想把这些写成一个shell,但是又要防止出现了新版本的各种问题"></a>本来想把这些写成一个shell,但是又要防止出现了新版本的各种问题</h3><ul>
+<li><p>安装git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git  </span><br><span class="line">$ git config --global user.name mazicwong  </span><br><span class="line">$ git config --global user.email mazicwong@gmail.com  </span><br><span class="line">$ mkdir mygit  </span><br><span class="line">$ cd mygit   </span><br><span class="line">//$ git init  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ ssh-keygen -t rsa -C mazicwong@gmail.com  //配置本地ssh key  </span><br><span class="line">$ cd ~/.ssh  </span><br><span class="line">$ vi id_rsa.pub  </span><br><span class="line">$ ssh -T git@github.com  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//$ git clone git@github.mazicwong/acmArchive.git  </span><br><span class="line">$ git clone git@github.com:mazicwong/acmArchive.git  </span><br><span class="line">$ touch README  </span><br><span class="line">$ git add README  </span><br><span class="line">$ git commit -m &apos;a new file&apos; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ mkdir mm  </span><br><span class="line">$ cd mm  </span><br><span class="line">$ git init  </span><br><span class="line">$ touch readME  </span><br><span class="line">$ git add readME  </span><br><span class="line">$ git commit -m &apos;this is a new message&apos;  </span><br><span class="line">$ git remote add origin https://github.com/mazicwong/test_linux.git  //本地仓库与github仓库关联  </span><br><span class="line">//$ git push origiin master //这里会失败，要先同步下远程  </span><br><span class="line">$ git pull origin master  //&apos;fetch&apos; &amp; &apos;merge&apos; the remote change</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装google-chrome</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb  </span><br><span class="line">$ sudo dpkg -i google-chrome*  </span><br><span class="line">$ sudo apt-get -f install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装hexo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">方法一</span><br><span class="line">$ sudo apt-get install nodejs     // nodejs --version  </span><br><span class="line">$ sudo ln -s /usr/bin/nodejs /usr/bin/node  </span><br><span class="line">$ sudo apt-get install npm  </span><br><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org //绑定淘宝镜像，以后npm改成用cnpm  </span><br><span class="line">$ sudo cnpm install hexo-cli -g  </span><br><span class="line">hexo init blog  </span><br><span class="line">cd blog  </span><br><span class="line">sudo c1npm install  </span><br><span class="line">sudo hexo server   //本地服务器  </span><br><span class="line"></span><br><span class="line">方法二</span><br><span class="line">到官网下载nodejs包，https://nodejs.org/en/</span><br><span class="line">$ sudo ln -s /opt/node-v8.10.0-linux-x64/bin/node  /usr/local/bin/node  </span><br><span class="line">$ sudo ln -s /opt/node-v8.10.0-linux-x64/bin/npm  /usr/local/bin/npm  </span><br><span class="line">$ npm install hexo-cli -g  </span><br><span class="line">$ sudo ln -s /opt/node-v8.10.0-linux-x64/bin/hexo  /usr/local/bin/hexo  </span><br><span class="line">$ sudo ln -s /opt/node-v8.10.0-linux-x64/bin/npx  /usr/local/bin/npx  </span><br><span class="line">npm install hexo-deployer-git --save  </span><br><span class="line"></span><br><span class="line">===接下来是next主题的</span><br><span class="line">npm i --save hexo-wordcount</span><br><span class="line"></span><br><span class="line">推送步骤</span><br><span class="line">hexo new &quot;name&quot;   //新建文章  </span><br><span class="line">hexo new page &quot;name&quot;  //新建页面  </span><br><span class="line">sudo hexo generate   //将.md解析成html  </span><br><span class="line">sudo hexo deploy</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"><i class="fa fa-tag"></i> 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/28/OnlineJudge/" rel="next" title="OnlineJudge">
+                <i class="fa fa-chevron-left"></i> OnlineJudge
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="MazicWong" />
+            
+              <p class="site-author-name" itemprop="name">MazicWong</p>
+              <p class="site-description motion-element" itemprop="description">blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mazicwong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mazicwong.github.io" target="_blank" title="blog">
+                      
+                        <i class="fa fa-fw fa-globe"></i>blog</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装系统问题"><span class="nav-number">2.</span> <span class="nav-text">安装系统问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新配置hexo-page"><span class="nav-number">3.</span> <span class="nav-text">重新配置hexo_page</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件迁移的编码问题"><span class="nav-number">4.</span> <span class="nav-text">文件迁移的编码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是以后重装系统需要配置的东西"><span class="nav-number">5.</span> <span class="nav-text">下面是以后重装系统需要配置的东西</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本来想把这些写成一个shell-但是又要防止出现了新版本的各种问题"><span class="nav-number">6.</span> <span class="nav-text">本来想把这些写成一个shell,但是又要防止出现了新版本的各种问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MazicWong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

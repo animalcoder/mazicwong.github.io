@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="K2LN0adjK0" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="kuangbin,shortestPath," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="kuangbin专题4:最短路分类: poj 2387 dijkstra 裸题(bfs) poj 2253 dijkstra 最短路径上的最大边dist[] poj 1797 dijkstra 路径上边的最小值最打 poj 3268 dijkstra 两次单源最短路 poj 1502 dijkstra 源点到其他所有点的最短路中的最大   poj 1860 spfa 找是否存在正环(跟负环区别就是">
+<meta name="keywords" content="kuangbin,shortestPath">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day2-最短路">
+<meta property="og:url" content="mazicwong.github.io/2017/07/23/Day2-最短路/index.html">
+<meta property="og:site_name" content="mazicwong">
+<meta property="og:description" content="kuangbin专题4:最短路分类: poj 2387 dijkstra 裸题(bfs) poj 2253 dijkstra 最短路径上的最大边dist[] poj 1797 dijkstra 路径上边的最小值最打 poj 3268 dijkstra 两次单源最短路 poj 1502 dijkstra 源点到其他所有点的最短路中的最大   poj 1860 spfa 找是否存在正环(跟负环区别就是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-03-13T10:59:58.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Day2-最短路">
+<meta name="twitter:description" content="kuangbin专题4:最短路分类: poj 2387 dijkstra 裸题(bfs) poj 2253 dijkstra 最短路径上的最大边dist[] poj 1797 dijkstra 路径上边的最小值最打 poj 3268 dijkstra 两次单源最短路 poj 1502 dijkstra 源点到其他所有点的最短路中的最大   poj 1860 spfa 找是否存在正环(跟负环区别就是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="mazicwong.github.io/2017/07/23/Day2-最短路/"/>
+
+
+
+
+
+  <title>Day2-最短路 | mazicwong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mazicwong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录日常</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/07/23/Day2-最短路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Day2-最短路</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-23T11:26:38+08:00">
+                2017-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,734
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="kuangbin专题4-最短路"><a href="#kuangbin专题4-最短路" class="headerlink" title="kuangbin专题4:最短路"></a><a href="https://vjudge.net/contest/66569" target="_blank" rel="noopener">kuangbin专题4:最短路</a></h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类:"></a>分类:</h2><ul>
+<li>poj 2387 dijkstra 裸题(bfs)</li>
+<li>poj 2253 dijkstra 最短路径上的最大边<code>dist[]</code></li>
+<li>poj 1797 dijkstra 路径上边的最小值最打</li>
+<li>poj 3268 dijkstra 两次单源最短路</li>
+<li>poj 1502 dijkstra 源点到其他所有点的最短路中的最大</li>
+</ul>
+<ul>
+<li>poj 1860 spfa 找是否存在正环(跟负环区别就是松弛那里变成放大策略)</li>
+<li>poj 3259 spfa 判负环(单向图,邻接表)</li>
+<li>poj 2240 spfa 找是否存在正环</li>
+<li>poj 1511 spfa 两次单源最短路</li>
+</ul>
+<ul>
+<li>poj 3660 floyd 求传递闭包(多少个点跟其他所有点均有优先级)</li>
+<li>hdu 1704 floyd 求传递闭包(多少个匹配不存在优先级&amp;TLE后优化)</li>
+<li>poj 2240 floyd 找正环(求所有最短路,找是否有<code>dist[i][i]&gt;1</code> )<h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2><em>可以努力读懂别人的经典模板，不要去试图读懂别人的代码，那样会越来越乱<br>每道题有独特的地方，如果不懂可以按照博客思路然后自己用板子实现，特别是最短路问题</em><h2 id="debug遇过的问题"><a href="#debug遇过的问题" class="headerlink" title="debug遇过的问题"></a>debug遇过的问题</h2></li>
+</ul>
+<ol>
+<li>看下标1开始还是0开始</li>
+<li>写最短路忘了调用函数</li>
+<li>vec.que.mp没清空</li>
+<li>函数定义为double distance()会莫名其妙产生bug</li>
+<li>poj 1511,一个数据量很大的最短路,开了个全局的dist[1e6][1e6],然后g++一直过不了..还是经验太少了,以后得注意内存太大记得放栈空间(但是也有可能core dumped = =!)</li>
+</ol>
+<hr>
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><h5 id="各个单源最短路径算法的区别在于：对每条边松弛操作的次数，以及松弛的次序"><a href="#各个单源最短路径算法的区别在于：对每条边松弛操作的次数，以及松弛的次序" class="headerlink" title="各个单源最短路径算法的区别在于：对每条边松弛操作的次数，以及松弛的次序"></a>各个单源最短路径算法的区别在于：对每条边松弛操作的次数，以及松弛的次序</h5><h5 id="松弛操作：就是更新两点间的最短路径。"><a href="#松弛操作：就是更新两点间的最短路径。" class="headerlink" title="松弛操作：就是更新两点间的最短路径。"></a>松弛操作：就是更新两点间的最短路径。</h5><ul>
+<li><p><strong>dijkstra 单源最短路径 O(n^2)</strong></p>
+<blockquote>
+<p>从源点起设为集合S，每次从外面取最短长度的点进行两个操作(松弛+加入S)，直到S包含所有点，则dist[]记录了从源点到其他顶点的最短距离</p>
+</blockquote>
+</li>
+<li><p><strong>spfa 队列优化的Bellman</strong></p>
+<blockquote>
+<p>初始化将所有边设为INF，然后将源点入队，每次取队首进行两个操作(松弛+入队)，直到队列空<br><a href="http://www.360doc.com/content/13/1208/22/14357424_335569176.shtml" target="_blank" rel="noopener">参考博客</a></p>
+<blockquote>
+<p><strong>判断有无负环:</strong> 某个点入队超n次，则存在负环<br><strong>和bfs区别:</strong> bfs只能入队一次,spfa可以多次入队<br><strong>注意加边的时候是单向的还是双向的</strong> eg poj1259  </p>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>floyd 求所有点对最短距离(代码比dijkstra简单)(传递闭包)</strong></p>
+<blockquote>
+<p>对k循环,然后两重循环所有点对,用dp讨论所有点对经过k点和不经过k点的情况</p>
+</blockquote>
+</li>
+</ul>
+<p>1.最短路</p>
+<p>1.1 dijkstra 单元最短路(邻接矩阵)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 单源最短路径,Dijkstra算法,邻接矩阵形式,复杂度为O(n^2)</span></span><br><span class="line"><span class="comment"> * 求出源beg到所有点的最短路径,传入图的顶点数,和邻接矩阵cost[][]</span></span><br><span class="line"><span class="comment"> * 返回各点的最短路径dist[], 路径pre[].pre[i]记录beg到i路径上的父结点,pre[beg]=-1</span></span><br><span class="line"><span class="comment"> * 可更改路径权类型,但是权值必须为非负</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1010</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">0x3f3f3f3f</span>;<span class="comment">//防止后面溢出,这个不能太大</span></span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"><span class="keyword">int</span> pre[maxn];<span class="comment">//存储路径</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> cost[][maxn],<span class="keyword">int</span> dist[],<span class="keyword">int</span> n,<span class="keyword">int</span> beg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dist[i]=INF;</span><br><span class="line">        vis[i]=<span class="literal">false</span>;</span><br><span class="line">        pre[i]=<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dist[beg]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> k=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> minn=INF;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)<span class="comment">//找最小距离</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[i] &amp;&amp; dist[i]&lt;minn)</span><br><span class="line">            &#123;</span><br><span class="line">                minn=dist[i];</span><br><span class="line">                k=i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">-1</span>)<span class="keyword">break</span>;</span><br><span class="line">        vis[k]=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)<span class="comment">//松弛</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[i] &amp;&amp; dist[k]+cost[k][i]&lt;dist[i])</span><br><span class="line">            &#123;</span><br><span class="line">                dist[i] = dist[k]+cost[k][i];</span><br><span class="line">                pre[i] = k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.2 dijkstra+堆优化(邻接表)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">使用优先队列优化,复杂度O(E logE)</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 使用优先队列优化Dijkstra算法</span></span><br><span class="line"><span class="comment"> * 复杂度O(ElogE)</span></span><br><span class="line"><span class="comment"> * 注意对vector&lt;Edge&gt;E[maxn] 进行初始化后加边</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1000010</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">qnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    qnode(<span class="keyword">int</span> _v=<span class="number">0</span>,<span class="keyword">int</span> _c=<span class="number">0</span>):v(_v),c(_c)&#123;&#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> qnode &amp;r)<span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> c&gt;r.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v,cost;</span><br><span class="line">    Edge(<span class="keyword">int</span> _v=<span class="number">0</span>,<span class="keyword">int</span> _cost=<span class="number">0</span>):v(_v),cost(_cost)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; E[maxn];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"><span class="keyword">int</span> dist[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> beg)</span><span class="comment">//点的编号从1开始</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="literal">false</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)dist[i]=INF;</span><br><span class="line">    priority_queue&lt;qnode&gt; que;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())que.pop();</span><br><span class="line">    dist[beg]=<span class="number">0</span>;</span><br><span class="line">    que.push(qnode(beg,<span class="number">0</span>));</span><br><span class="line">    qnode tmp;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        tmp=que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> u=tmp.v;</span><br><span class="line">        <span class="keyword">if</span>(vis[u])<span class="keyword">continue</span>;</span><br><span class="line">        vis[u]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E[u].size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=E[tmp.v][i].v;</span><br><span class="line">            <span class="keyword">int</span> cost=E[u][i].cost;</span><br><span class="line">            <span class="keyword">if</span>(!vis[v]&amp;&amp;dist[v]&gt;dist[u]+cost)</span><br><span class="line">            &#123;</span><br><span class="line">                dist[v]=dist[u]+cost;</span><br><span class="line">                que.push(qnode(v,dist[v]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    E[u].push_back(Edge(v,w));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.4 单源最短路 spfa(邻接表存图,队列实现)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 单源最短路SPFA</span></span><br><span class="line"><span class="comment"> * 时间复杂度 0(kE)</span></span><br><span class="line"><span class="comment"> * 这个是队列实现,有时候改成栈实现会更加快,很容易修改</span></span><br><span class="line"><span class="comment"> * 这个复杂度是不定的</span></span><br><span class="line"><span class="comment"> * 只有v和cost的边是为了配合vector,采用数组实现邻接表存图</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1010</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    Edge(<span class="keyword">int</span> _v=<span class="number">0</span>,<span class="keyword">int</span> _cost=<span class="number">0</span>):v(_v),cost(_cost)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; E[maxn];<span class="comment">//数组实现邻接表存储</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    E[u].push_back(Edge(v,w));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];<span class="comment">//在队列标志</span></span><br><span class="line"><span class="keyword">int</span> dist[maxn];<span class="comment">//源点到每个点的最短距离</span></span><br><span class="line"><span class="keyword">int</span> cnt[maxn];<span class="comment">//每个点的入队列次数</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> start,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,next;<span class="comment">//1 对int队列处理的暂存值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        vis[i]=<span class="literal">false</span>;</span><br><span class="line">        dist[i]=INF;</span><br><span class="line">        cnt[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vis[start]=<span class="literal">true</span>;<span class="comment">//3 更新3个</span></span><br><span class="line">    dist[start]=<span class="number">0</span>;</span><br><span class="line">    cnt[start]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;<span class="comment">//4</span></span><br><span class="line">    <span class="keyword">while</span>(!que.empty())que.pop();</span><br><span class="line">    que.push(start);<span class="comment">//5 入队(经典五步)</span></span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        a=que.front();<span class="comment">//取队首,a是取出来那个点，习惯用a跟next了../用u跟v也可以</span></span><br><span class="line">        que.pop();</span><br><span class="line">        vis[a]=<span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E[a].size();i++) <span class="comment">//对该点的所有边"松弛+入队"</span></span><br><span class="line">        &#123;</span><br><span class="line">            next=E[a][i].v;</span><br><span class="line">            <span class="keyword">if</span>(dist[next]&gt;dist[a]+E[a][i].cost)</span><br><span class="line">            &#123;</span><br><span class="line">                dist[next]=dist[a]+E[a][i].cost; <span class="comment">//下一个点不够松，则松弛下一个点</span></span><br><span class="line">                <span class="keyword">if</span>(!vis[next]) <span class="comment">//下一个点未入队，则入队下一个点</span></span><br><span class="line">                &#123;</span><br><span class="line">                    vis[next]=<span class="literal">true</span>;</span><br><span class="line">                    que.push(next);</span><br><span class="line">                    <span class="keyword">if</span>(++cnt[next]&gt;n)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    <span class="comment">//判断负环:某个点入队超n次，则存在负环，cnt[i]为入队列次数</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//记得清空栈</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++) E[i].clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.5 任意两点间最短路 floyd<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * 传递闭包的时候有个优化</span></span><br><span class="line"><span class="comment"> * 先判断win[i][k]存在,否则就不进行循环</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">                <span class="comment">/* 最短路</span></span><br><span class="line"><span class="comment">                 * dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">/* 传递闭包</span></span><br><span class="line"><span class="comment">                 * if (win[i][k]&amp;&amp;win[k][j]) //直接按定义</span></span><br><span class="line"><span class="comment">                 *     win[i][j] = 1;</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="poj-2387-dijkstra裸题-bfs"><a href="#poj-2387-dijkstra裸题-bfs" class="headerlink" title="poj 2387 dijkstra裸题(bfs)"></a>poj 2387 dijkstra裸题(bfs)</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>从n点走到1点,给出边和权重,求最短路</p>
+</blockquote>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p><code>vector&lt;node&gt; G[maxn]</code> 存图(十字链表)<br><code>node{int to; int cost;};</code><br><code>priority_queue&lt;P, vector&lt;P&gt;,greater&lt;P&gt; &gt; que;</code> 存点</p>
+</blockquote>
+<hr>
+<h2 id="poj-2253-dijkstra-完全图-所以存图直接用struct然后遍历所有点就行了"><a href="#poj-2253-dijkstra-完全图-所以存图直接用struct然后遍历所有点就行了" class="headerlink" title="poj 2253 dijkstra(完全图,所以存图直接用struct然后遍历所有点就行了)"></a>poj 2253 dijkstra(完全图,所以存图直接用struct然后遍历所有点就行了)</h2><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>从源点到终点存在多条路径，每一条路径中有一个最大的两点间距离，求这些最大距离中的最小值</p>
+</blockquote>
+<h3 id="思路-dijkstra-floyd-spfa都可以，只是将松弛条件-更新条件-改变一下"><a href="#思路-dijkstra-floyd-spfa都可以，只是将松弛条件-更新条件-改变一下" class="headerlink" title="思路:dijkstra,floyd,spfa都可以，只是将松弛条件(更新条件)改变一下"></a>思路:dijkstra,floyd,spfa都可以，只是将松弛条件(更新条件)改变一下</h3><blockquote>
+<p>这里用dijkstra,则dist数组不能存i到源点的最短距离了，要定义为：i到源点最短路径上的最大边<br>则在</p>
+</blockquote>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h3><blockquote>
+<p>发现函数名定义为<code>double distance()</code>会莫名其妙产生bug..(required from here),改一下名字就好了</p>
+</blockquote>
+<hr>
+<h2 id="poj-1797-dijkstra变形"><a href="#poj-1797-dijkstra变形" class="headerlink" title="poj 1797 dijkstra变形"></a>poj 1797 dijkstra变形</h2><h3 id="题意-2"><a href="#题意-2" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>源点到终点的流量是路径上边的最小值，要另这个最小值最大<br>找到一个最短路，求该路径上最小边的权</p>
+</blockquote>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>dist[i]是从源点到i点中的最小边权.<br>不断从未访问的点中选出dist[i]最大的点cnt，然后更新其他dist[i]的值<br><code>dist[i] = min(dist[cnt], cost[cnt][i]);</code></p>
+</blockquote>
+<h3 id="注意-这道题用cin过不了…尴尬"><a href="#注意-这道题用cin过不了…尴尬" class="headerlink" title="注意:这道题用cin过不了…尴尬"></a>注意:这道题用cin过不了…尴尬</h3><blockquote>
+<p>也可以用下面这个<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">&gt;ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h2 id="poj-3268-dijkstra-有向图-两次单源最短路"><a href="#poj-3268-dijkstra-有向图-两次单源最短路" class="headerlink" title="poj 3268 dijkstra(有向图,两次单源最短路)"></a>poj 3268 dijkstra(有向图,两次单源最短路)</h2><h3 id="题意-3"><a href="#题意-3" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>很多只牛在不同的点，要去到同一个点然后返回，每个都是最短路，问这些最短路中的最大是多少</p>
+</blockquote>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>返回的话，把终点看成源点，求一遍dist[]就得到了，<br>因为是有向图，去的话有点难，把所有方向反过来，然后继续对终点求一次单源最短路就可以了<br><code>dist[i] = min(dist[cnt], cost[cnt][i]);</code></p>
+</blockquote>
+<hr>
+<h2 id="poj-1502-dijkstra找最短路"><a href="#poj-1502-dijkstra找最短路" class="headerlink" title="poj 1502 dijkstra找最短路"></a>poj 1502 dijkstra找最短路</h2><h3 id="题意-4"><a href="#题意-4" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>n个点,双向图,给一个下三角矩阵,表明边权,</p>
+</blockquote>
+<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>dijkstra求源点到其他所有点最短路,因为是并行处理,所以找出其中的最大</p>
+</blockquote>
+<hr>
+<h2 id="poj-1860-spfa"><a href="#poj-1860-spfa" class="headerlink" title="poj 1860 spfa"></a>poj 1860 spfa</h2><h3 id="题意-5"><a href="#题意-5" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>货币交换,给出各种汇率,题目有点长.不过不难</p>
+</blockquote>
+<h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>只需要寻找一下是否有正环存在就可以了,若某类钱币入队大于n次就存在正环</p>
+</blockquote>
+<hr>
+<h2 id="poj-3259-spfa判负环-单向图-邻接表"><a href="#poj-3259-spfa判负环-单向图-邻接表" class="headerlink" title="poj 3259 spfa判负环,单向图,邻接表"></a>poj 3259 spfa判负环,单向图,邻接表</h2><p>题意:</p>
+<blockquote>
+<p>n个点,m条正边,w条负边,问有没有负环</p>
+</blockquote>
+<p>思路:</p>
+<blockquote>
+<p>显然判负环用SPFA就行啦,cnt[i]&gt;n时存在负环</p>
+</blockquote>
+<p>注意:</p>
+<blockquote>
+<p>虽然简单,还有有几个点要注意,一个是读题,这题是正边双向,负边单向,一开始没注意到<br>还有一个是多次输入记得清空栈和队列</p>
+</blockquote>
+<hr>
+<h2 id="poj-3660-floyd求传递闭包"><a href="#poj-3660-floyd求传递闭包" class="headerlink" title="poj 3660 floyd求传递闭包"></a>poj 3660 floyd求传递闭包</h2><h3 id="题意-6"><a href="#题意-6" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>给出n个点,m对相对关系,求有多少个点的排名是确定的</p>
+</blockquote>
+<h3 id="思路-5"><a href="#思路-5" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>floyd求传递闭包,要某个点排名确定,即该点和其他所有点的先序关系均确定</p>
+</blockquote>
+<hr>
+<h2 id="hdu-1704-floyd求传递闭包"><a href="#hdu-1704-floyd求传递闭包" class="headerlink" title="hdu 1704 floyd求传递闭包"></a>hdu 1704 floyd求传递闭包</h2><h3 id="题意-7"><a href="#题意-7" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>给n点,m优先级,问多少个匹配不存在优先级</p>
+</blockquote>
+<h3 id="思路-6"><a href="#思路-6" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>floyd求传递闭包得出所有点对间的优先级,然后判下多少个匹配不存在优先级就可以了</p>
+</blockquote>
+<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意:"></a>注意:</h3><blockquote>
+<p>一开始直接搞TLE了,然后做了个小优化</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd__</span><span class="params">()</span><span class="comment">//优化前</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (win[i][k] &amp;&amp; win[k][j])</span><br><span class="line">                    win[i][j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span> <span class="comment">//优化后</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">                <span class="keyword">if</span> (win[i][k])</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">                        <span class="keyword">if</span> (win[k][j])</span><br><span class="line">                            win[i][j] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="poj-2240-spfa-amp-floyd-求正环"><a href="#poj-2240-spfa-amp-floyd-求正环" class="headerlink" title="poj 2240 spfa&amp;floyd 求正环"></a>poj 2240 spfa&amp;floyd 求正环</h2><h3 id="题意-8"><a href="#题意-8" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>给n种货币,m个货币转换率,问能否发财!(存在正环哈哈)  </p>
+</blockquote>
+<h3 id="思路-判正环"><a href="#思路-判正环" class="headerlink" title="思路:判正环"></a>思路:判正环</h3><blockquote>
+<p>用map解决点是string的问题<br>spfa: 对所有点进行一次spfa()..正环的话,改变一下松弛策略,变成放大策略就行<br><code>dist[next] = max(dist[next], dist[a]*E[a][i].cost)</code><br>floyd: 求出所有最短路,然后判断有没有大于1的dist[i][i]</p>
+</blockquote>
+<h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意:"></a>注意:</h3><blockquote>
+<p>这题找错找了很久,以后记得1.看下标 2.忘了调用函数 3.vec,que,mp没清空- -!</p>
+</blockquote>
+<ul>
+<li><p>spfa</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">	&gt; File Name: poj2240.cpp</span></span><br><span class="line"><span class="comment">	&gt; Author: mazicwong</span></span><br><span class="line"><span class="comment">	&gt; Mail: mazicwong@gmail.com</span></span><br><span class="line"><span class="comment">	&gt; Created Time: 2017年07月22日 星期六 16时33分42秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">30</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    <span class="keyword">double</span> cost;</span><br><span class="line">    Edge(<span class="keyword">int</span> _v=<span class="number">0</span>,<span class="keyword">double</span> _cost=<span class="number">0</span>):v(_v),cost(_cost)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">double</span> dist[maxn];</span><br><span class="line"><span class="built_in">string</span> str;</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; E[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">double</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    E[u].push_back(Edge(v,w));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"><span class="keyword">int</span> cnt[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> start,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,next;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        vis[i]=<span class="literal">false</span>;</span><br><span class="line">        dist[i]=<span class="number">0</span>;</span><br><span class="line">        cnt[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    vis[start]=<span class="literal">true</span>;</span><br><span class="line">    dist[start]=<span class="number">1</span>;</span><br><span class="line">    cnt[start]=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">    que.push(start);</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        a = que.front();</span><br><span class="line">        que.pop();</span><br><span class="line">        vis[a]=<span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E[a].size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            next=E[a][i].v;</span><br><span class="line">            <span class="keyword">if</span> (dist[next] &lt; dist[a]*E[a][i].cost)<span class="comment">//松弛</span></span><br><span class="line">            &#123;</span><br><span class="line">                dist[next] = dist[a]*E[a][i].cost;</span><br><span class="line">                <span class="keyword">if</span>(!vis[next])<span class="comment">//入队</span></span><br><span class="line">                &#123;</span><br><span class="line">                    vis[next]=<span class="literal">true</span>;</span><br><span class="line">                    que.push(next);</span><br><span class="line">                    <span class="keyword">if</span>(++cnt[next] &gt; n)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="keyword">int</span> cas=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++)</span><br><span class="line">            E[i].clear();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">            mp[str]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">        <span class="built_in">string</span> str1,str2;</span><br><span class="line">        <span class="keyword">double</span> aa;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; str1 &gt;&gt; aa &gt;&gt; str2;</span><br><span class="line">            <span class="keyword">int</span> a = mp[str1];</span><br><span class="line">            <span class="keyword">int</span> b = mp[str2];</span><br><span class="line">            addedge(a,b,aa);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(spfa(i,n))</span><br><span class="line">            &#123;</span><br><span class="line">                flag=<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Case %d: Yes\n"</span>,cas++);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Case %d: No\n"</span>,cas++);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>floyd</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">	&gt; File Name: poj2240.cpp</span></span><br><span class="line"><span class="comment">	&gt; Author: mazicwong</span></span><br><span class="line"><span class="comment">	&gt; Mail: mazicwong@gmail.com</span></span><br><span class="line"><span class="comment">	&gt; Created Time: 2017年07月22日 星期六 19时46分45秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">30</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">double</span> dist[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> cnt[maxn];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;mp;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dist[i][j]=max(dist[i][j], dist[i][k]*dist[k][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="keyword">int</span> cas=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</span><br><span class="line">    &#123;</span><br><span class="line">        mp.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">            mp[str]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i==j) dist[i][j]=<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> dist[i][j]=<span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">        <span class="built_in">string</span> str1,str2;</span><br><span class="line">        <span class="keyword">double</span> tmp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; str1 &gt;&gt; tmp &gt;&gt; str2;</span><br><span class="line">            <span class="keyword">int</span> a = mp[str1];</span><br><span class="line">            <span class="keyword">int</span> b = mp[str2];</span><br><span class="line">            dist[a][b]=tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">        floyd();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dist[i][i]&gt;<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Case %d: Yes\n"</span>,cas++);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Case %d: No\n"</span>,cas++);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="poj-1511-spfa求原图和逆图的最短路"><a href="#poj-1511-spfa求原图和逆图的最短路" class="headerlink" title="poj 1511 spfa求原图和逆图的最短路"></a>poj 1511 spfa求原图和逆图的最短路</h2><h3 id="题意-9"><a href="#题意-9" class="headerlink" title="题意:"></a>题意:</h3><blockquote>
+<p>读了好久的题..就是一个强连通图,给n个点,和m条单向边,求源点1到其他每个点来回的最短路之和</p>
+</blockquote>
+<h3 id="思路-7"><a href="#思路-7" class="headerlink" title="思路:"></a>思路:</h3><blockquote>
+<p>spfa求原图和逆图的最短路</p>
+</blockquote>
+<h3 id="巨坑点"><a href="#巨坑点" class="headerlink" title="巨坑点:"></a>巨坑点:</h3><blockquote>
+<p>数据量很大,开了个dist[1e6][1e6],g++报错了<br>改过来后..Segmentation fault(core dumped)</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kuangbin/" rel="tag"><i class="fa fa-tag"></i> kuangbin</a>
+          
+            <a href="/tags/shortestPath/" rel="tag"><i class="fa fa-tag"></i> shortestPath</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/22/调试/" rel="next" title="调试">
+                <i class="fa fa-chevron-left"></i> 调试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/25/cf425/" rel="prev" title="cf425">
+                cf425 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="MazicWong" />
+            
+              <p class="site-author-name" itemprop="name">MazicWong</p>
+              <p class="site-description motion-element" itemprop="description">blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mazicwong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mazicwong.github.io" target="_blank" title="blog">
+                      
+                        <i class="fa fa-fw fa-globe"></i>blog</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kuangbin专题4-最短路"><span class="nav-number">1.</span> <span class="nav-text">kuangbin专题4:最短路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级"><span class="nav-number">1.2.</span> <span class="nav-text">升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug遇过的问题"><span class="nav-number">1.3.</span> <span class="nav-text">debug遇过的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模板"><span class="nav-number">2.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#各个单源最短路径算法的区别在于：对每条边松弛操作的次数，以及松弛的次序"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">各个单源最短路径算法的区别在于：对每条边松弛操作的次数，以及松弛的次序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#松弛操作：就是更新两点间的最短路径。"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">松弛操作：就是更新两点间的最短路径。</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">3.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-2387-dijkstra裸题-bfs"><span class="nav-number">3.1.</span> <span class="nav-text">poj 2387 dijkstra裸题(bfs)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意"><span class="nav-number">3.1.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">3.1.2.</span> <span class="nav-text">思路:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-2253-dijkstra-完全图-所以存图直接用struct然后遍历所有点就行了"><span class="nav-number">3.2.</span> <span class="nav-text">poj 2253 dijkstra(完全图,所以存图直接用struct然后遍历所有点就行了)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-dijkstra-floyd-spfa都可以，只是将松弛条件-更新条件-改变一下"><span class="nav-number">3.2.2.</span> <span class="nav-text">思路:dijkstra,floyd,spfa都可以，只是将松弛条件(更新条件)改变一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">3.2.3.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-1797-dijkstra变形"><span class="nav-number">3.3.</span> <span class="nav-text">poj 1797 dijkstra变形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">思路:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-这道题用cin过不了…尴尬"><span class="nav-number">3.3.3.</span> <span class="nav-text">注意:这道题用cin过不了…尴尬</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-3268-dijkstra-有向图-两次单源最短路"><span class="nav-number">3.4.</span> <span class="nav-text">poj 3268 dijkstra(有向图,两次单源最短路)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-3"><span class="nav-number">3.4.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-2"><span class="nav-number">3.4.2.</span> <span class="nav-text">思路:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-1502-dijkstra找最短路"><span class="nav-number">3.5.</span> <span class="nav-text">poj 1502 dijkstra找最短路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-4"><span class="nav-number">3.5.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-3"><span class="nav-number">3.5.2.</span> <span class="nav-text">思路:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-1860-spfa"><span class="nav-number">3.6.</span> <span class="nav-text">poj 1860 spfa</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-5"><span class="nav-number">3.6.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-4"><span class="nav-number">3.6.2.</span> <span class="nav-text">思路:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-3259-spfa判负环-单向图-邻接表"><span class="nav-number">3.7.</span> <span class="nav-text">poj 3259 spfa判负环,单向图,邻接表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-3660-floyd求传递闭包"><span class="nav-number">3.8.</span> <span class="nav-text">poj 3660 floyd求传递闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-6"><span class="nav-number">3.8.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-5"><span class="nav-number">3.8.2.</span> <span class="nav-text">思路:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hdu-1704-floyd求传递闭包"><span class="nav-number">3.9.</span> <span class="nav-text">hdu 1704 floyd求传递闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-7"><span class="nav-number">3.9.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-6"><span class="nav-number">3.9.2.</span> <span class="nav-text">思路:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">3.9.3.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-2240-spfa-amp-floyd-求正环"><span class="nav-number">3.10.</span> <span class="nav-text">poj 2240 spfa&amp;floyd 求正环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-8"><span class="nav-number">3.10.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-判正环"><span class="nav-number">3.10.2.</span> <span class="nav-text">思路:判正环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-2"><span class="nav-number">3.10.3.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poj-1511-spfa求原图和逆图的最短路"><span class="nav-number">3.11.</span> <span class="nav-text">poj 1511 spfa求原图和逆图的最短路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题意-9"><span class="nav-number">3.11.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-7"><span class="nav-number">3.11.2.</span> <span class="nav-text">思路:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#巨坑点"><span class="nav-number">3.11.3.</span> <span class="nav-text">巨坑点:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MazicWong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

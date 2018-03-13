@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="K2LN0adjK0" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="百度之星,dfs,搜索," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="hdu6113 度度熊的01世界  (dfs判边界+连通块) Problem Description123456度度熊是一个喜欢计算机的孩子，在计算机的世界中，所有事物实际上都只由0和1组成。现在给你一个n*m的图像，你需要分辨他究竟是0，还是1，或者两者均不是。图像0的定义：存在1字符且1字符只能是由一个连通块组成，存在且仅存在一个由0字符组成的连通块完全被1所包围。图像1的定义：存在1字符且1">
+<meta name="keywords" content="百度之星,dfs,搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hdu 6113 dfs边界+连通块">
+<meta property="og:url" content="mazicwong.github.io/2017/08/12/hdu/index.html">
+<meta property="og:site_name" content="mazicwong">
+<meta property="og:description" content="hdu6113 度度熊的01世界  (dfs判边界+连通块) Problem Description123456度度熊是一个喜欢计算机的孩子，在计算机的世界中，所有事物实际上都只由0和1组成。现在给你一个n*m的图像，你需要分辨他究竟是0，还是1，或者两者均不是。图像0的定义：存在1字符且1字符只能是由一个连通块组成，存在且仅存在一个由0字符组成的连通块完全被1所包围。图像1的定义：存在1字符且1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-03-13T10:59:58.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hdu 6113 dfs边界+连通块">
+<meta name="twitter:description" content="hdu6113 度度熊的01世界  (dfs判边界+连通块) Problem Description123456度度熊是一个喜欢计算机的孩子，在计算机的世界中，所有事物实际上都只由0和1组成。现在给你一个n*m的图像，你需要分辨他究竟是0，还是1，或者两者均不是。图像0的定义：存在1字符且1字符只能是由一个连通块组成，存在且仅存在一个由0字符组成的连通块完全被1所包围。图像1的定义：存在1字符且1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="mazicwong.github.io/2017/08/12/hdu/"/>
+
+
+
+
+
+  <title>hdu 6113 dfs边界+连通块 | mazicwong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mazicwong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录日常</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/08/12/hdu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hdu 6113 dfs边界+连通块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-12T21:46:14+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,096
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6113" target="_blank" rel="noopener">hdu6113 度度熊的01世界  (dfs判边界+连通块)</a></p>
+<p>Problem Description<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">度度熊是一个喜欢计算机的孩子，在计算机的世界中，所有事物实际上都只由0和1组成。</span><br><span class="line">现在给你一个n*m的图像，你需要分辨他究竟是0，还是1，或者两者均不是。</span><br><span class="line">图像0的定义：存在1字符且1字符只能是由一个连通块组成，存在且仅存在一个由0字符组成的连通块完全被1所包围。</span><br><span class="line">图像1的定义：存在1字符且1字符只能是由一个连通块组成，不存在任何0字符组成的连通块被1所完全包围。</span><br><span class="line">连通的含义是，只要连续两个方块有公共边，就看做是连通。</span><br><span class="line">完全包围的意思是，该连通块不与边界相接触。</span><br></pre></td></tr></table></figure></p>
+<p>Input<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">本题包含若干组测试数据。  </span><br><span class="line">每组测试数据包含:</span><br><span class="line">第一行两个整数n,m表示图像的长与宽。  </span><br><span class="line">接下来n行m列将会是只有01组成的字符画。  </span><br><span class="line">满足1&lt;=n,m&lt;=100</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果这个图是1的话，输出1；如果是0的话，输出0，都不是输出-1。</span><br></pre></td></tr></table></figure></p>
+<p>Sample Input<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">32 32</span><br><span class="line">00000000000000000000000000000000</span><br><span class="line">00000000000111111110000000000000</span><br><span class="line">00000000001111111111100000000000</span><br><span class="line">00000000001111111111110000000000</span><br><span class="line">00000000011111111111111000000000</span><br><span class="line">00000000011111100011111000000000</span><br><span class="line">00000000111110000001111000000000</span><br><span class="line">00000000111110000001111100000000</span><br><span class="line">00000000111110000000111110000000</span><br><span class="line">00000001111110000000111110000000</span><br><span class="line">00000001111110000000011111000000</span><br><span class="line">00000001111110000000001111000000</span><br><span class="line">00000001111110000000001111100000</span><br><span class="line">00000001111100000000001111000000</span><br><span class="line">00000001111000000000001111000000</span><br><span class="line">00000001111000000000001111000000</span><br><span class="line">00000001111000000000000111000000</span><br><span class="line">00000000111100000000000111000000</span><br><span class="line">00000000111100000000000111000000</span><br><span class="line">00000000111100000000000111000000</span><br><span class="line">00000001111000000000011110000000</span><br><span class="line">00000001111000000000011110000000</span><br><span class="line">00000000111000000000011110000000</span><br><span class="line">00000000111110000011111110000000</span><br><span class="line">00000000111110001111111100000000</span><br><span class="line">00000000111111111111111000000000</span><br><span class="line">00000000011111111111111000000000</span><br><span class="line">00000000111111111111100000000000</span><br><span class="line">00000000011111111111000000000000</span><br><span class="line">00000000001111111000000000000000</span><br><span class="line">00000000001111100000000000000000</span><br><span class="line">00000000000000000000000000000000</span><br><span class="line">32 32</span><br><span class="line">00000000000000000000000000000000</span><br><span class="line">00000000000000001111110000000000</span><br><span class="line">00000000000000001111111000000000</span><br><span class="line">00000000000000011111111000000000</span><br><span class="line">00000000000000111111111000000000</span><br><span class="line">00000000000000011111111000000000</span><br><span class="line">00000000000000011111111000000000</span><br><span class="line">00000000000000111111110000000000</span><br><span class="line">00000000000000111111100000000000</span><br><span class="line">00000000000001111111100000000000</span><br><span class="line">00000000000001111111110000000000</span><br><span class="line">00000000000001111111110000000000</span><br><span class="line">00000000000001111111100000000000</span><br><span class="line">00000000000011111110000000000000</span><br><span class="line">00000000011111111110000000000000</span><br><span class="line">00000001111111111111000000000000</span><br><span class="line">00000011111111111111000000000000</span><br><span class="line">00000011111111111111000000000000</span><br><span class="line">00000011111111111110000000000000</span><br><span class="line">00000000001111111111000000000000</span><br><span class="line">00000000000000111111000000000000</span><br><span class="line">00000000000001111111000000000000</span><br><span class="line">00000000000111111110000000000000</span><br><span class="line">00000000000011111111000000000000</span><br><span class="line">00000000000011111111000000000000</span><br><span class="line">00000000000011111111100000000000</span><br><span class="line">00000000000011111111100000000000</span><br><span class="line">00000000000000111111110000000000</span><br><span class="line">00000000000000001111111111000000</span><br><span class="line">00000000000000001111111111000000</span><br><span class="line">00000000000000000111111111000000</span><br><span class="line">00000000000000000000000000000000</span><br><span class="line">3 3</span><br><span class="line">101</span><br><span class="line">101</span><br><span class="line">011</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Sample Output</span><br></pre></td></tr></table></figure></p>
+<p>0<br>1<br>-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Source</span><br></pre></td></tr></table></figure></p>
+<p>2017”百度之星”程序设计大赛 - 初赛（A）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">***</span><br><span class="line">**题意**:  </span><br><span class="line">判断01组成的图形是1，还是0，或者都不是。  </span><br><span class="line">0: 一个1组成的连通块,1内有一个0组成的连通块,(0不能在边界)  </span><br><span class="line">1: 一个1组成的连通块,1中不能有0  </span><br><span class="line">-1: 1的连通块数为0或者&gt;=2,或者1的内部有0  </span><br><span class="line"></span><br><span class="line">**思路**:  </span><br><span class="line">题目说1内的0不会到边界,所以先判1内的0不在边界,先把边界的所有0搜一遍,剩下1和1里面的0,统计1和0堆数,确定答案</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">/*************************************************************************</span><br><span class="line">	&gt; File Name: 6.cpp</span><br><span class="line">	&gt; Author: mazicwong</span><br><span class="line">	&gt; Mail: mazicwong@gmail.com</span><br><span class="line">	&gt; Created Time: 2017年08月12日 星期六 15时36分46秒</span><br><span class="line"> ************************************************************************/</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int n,m;</span><br><span class="line">const int maxn = 100+5;</span><br><span class="line">/*</span><br><span class="line"> * 0: 一个1组成的连通块,1内有一个0组成的连通块,(0不能在边界)</span><br><span class="line"> * 1: 一个1组成的连通块,1中不能有0</span><br><span class="line"> * -1: 1的连通块数为0或者&gt;=2,或者1的内部有0</span><br><span class="line"> * 判1内的0不在边界,先把边界的所有0搜一遍,剩下1和1里面的0,统计1和0堆数,确定答案</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">char mp[maxn][maxn];</span><br><span class="line">bool vis[maxn][maxn];</span><br><span class="line">int to[4][2]=&#123;</span><br><span class="line">    &#123;0,1&#125;,&#123;1,0&#125;,&#123;0,-1&#125;,&#123;-1,0&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void dfs(int i,int j,char s)</span><br><span class="line">&#123;</span><br><span class="line">    int nx,ny;</span><br><span class="line">    vis[i][j]=1;</span><br><span class="line">    for (int k=0;k&lt;4;k++)</span><br><span class="line">    &#123;</span><br><span class="line">        nx = i+to[k][0];</span><br><span class="line">        ny = j+to[k][1];</span><br><span class="line">        if (nx&gt;=0 &amp;&amp; nx&lt;n &amp;&amp; ny&gt;=0 &amp;&amp; ny&lt;m &amp;&amp; mp[nx][ny]==s &amp;&amp; !vis[nx][ny])</span><br><span class="line">            dfs(nx,ny,s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    freopen(&quot;in6&quot;,&quot;r&quot;,stdin);</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        memset(vis,0,sizeof(vis));</span><br><span class="line">        for (int i=0;i&lt;n;i++)</span><br><span class="line">            scanf(&quot;%s&quot;,mp[i]);</span><br><span class="line">        </span><br><span class="line">        //处理4个边界的0</span><br><span class="line">        for (int i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (mp[0][i]==&apos;0&apos;)</span><br><span class="line">                dfs(0,i,&apos;0&apos;);</span><br><span class="line">            if (mp[n-1][i]==&apos;0&apos;)</span><br><span class="line">                dfs(n-1,i,&apos;0&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (mp[i][0]==&apos;0&apos;)</span><br><span class="line">                dfs(i,0,&apos;0&apos;);</span><br><span class="line">            if (mp[i][m-1]==&apos;0&apos;)</span><br><span class="line">                dfs(i,m-1,&apos;0&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        //搜连通块</span><br><span class="line">        int cnt0=0,cnt1=0;</span><br><span class="line">        for (int i=0;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j=0;j&lt;m;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if (!vis[i][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    if(mp[i][j]==&apos;0&apos;)</span><br><span class="line">                        cnt0++;</span><br><span class="line">                    else cnt1++;</span><br><span class="line">                    dfs(i,j,mp[i][j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (cnt1==1 &amp;&amp; cnt0==0) puts(&quot;1&quot;);</span><br><span class="line">        else if (cnt1==1 &amp;&amp; cnt0==1) puts(&quot;0&quot;);</span><br><span class="line">        else puts(&quot;-1&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/百度之星/" rel="tag"><i class="fa fa-tag"></i> 百度之星</a>
+          
+            <a href="/tags/dfs/" rel="tag"><i class="fa fa-tag"></i> dfs</a>
+          
+            <a href="/tags/搜索/" rel="tag"><i class="fa fa-tag"></i> 搜索</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/12/KMP/" rel="next" title="KMP">
+                <i class="fa fa-chevron-left"></i> KMP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/14/一个有趣的问题/" rel="prev" title="一个有趣的问题">
+                一个有趣的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="MazicWong" />
+            
+              <p class="site-author-name" itemprop="name">MazicWong</p>
+              <p class="site-description motion-element" itemprop="description">blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mazicwong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mazicwong.github.io" target="_blank" title="blog">
+                      
+                        <i class="fa fa-fw fa-globe"></i>blog</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MazicWong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

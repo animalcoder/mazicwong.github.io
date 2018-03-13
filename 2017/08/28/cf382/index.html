@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="K2LN0adjK0" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="codeforces," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.直接模拟  2.贪心题意:给n个数,和n1,n2,要令你找n1个数和n2个数,使得这n1个数的和除以n1,加上n2个数的和除以n2,值最大 扩展:给n个数,让取出一个集合的数,使得这个集合里的m个数相加除以m最大,其实就是只去最大那个数就好了,再取其他的数都会使最优值变小  3.打表,dp,找递推题意:n个人打比赛,每次两个人对打,输的淘汰两个人进行比赛的条件:他们已经打过的次数相差小于等于">
+<meta name="keywords" content="codeforces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cf382">
+<meta property="og:url" content="mazicwong.github.io/2017/08/28/cf382/index.html">
+<meta property="og:site_name" content="mazicwong">
+<meta property="og:description" content="1.直接模拟  2.贪心题意:给n个数,和n1,n2,要令你找n1个数和n2个数,使得这n1个数的和除以n1,加上n2个数的和除以n2,值最大 扩展:给n个数,让取出一个集合的数,使得这个集合里的m个数相加除以m最大,其实就是只去最大那个数就好了,再取其他的数都会使最优值变小  3.打表,dp,找递推题意:n个人打比赛,每次两个人对打,输的淘汰两个人进行比赛的条件:他们已经打过的次数相差小于等于">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-03-13T10:59:58.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cf382">
+<meta name="twitter:description" content="1.直接模拟  2.贪心题意:给n个数,和n1,n2,要令你找n1个数和n2个数,使得这n1个数的和除以n1,加上n2个数的和除以n2,值最大 扩展:给n个数,让取出一个集合的数,使得这个集合里的m个数相加除以m最大,其实就是只去最大那个数就好了,再取其他的数都会使最优值变小  3.打表,dp,找递推题意:n个人打比赛,每次两个人对打,输的淘汰两个人进行比赛的条件:他们已经打过的次数相差小于等于">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="mazicwong.github.io/2017/08/28/cf382/"/>
+
+
+
+
+
+  <title>cf382 | mazicwong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mazicwong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录日常</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/08/28/cf382/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cf382</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-28T22:38:27+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,170
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>1.直接模拟</p>
+<hr>
+<p>2.贪心<br>题意:<br>给n个数,和n1,n2,要令你找n1个数和n2个数,使得这n1个数的和除以n1,加上n2个数的和除以n2,值最大</p>
+<p>扩展:<br>给n个数,让取出一个集合的数,使得这个集合里的m个数相加除以m最大,其实就是只去最大那个数就好了,再取其他的数都会使最优值变小</p>
+<hr>
+<p>3.<br>打表,dp,找递推<br>题意:<br>n个人打比赛,每次两个人对打,输的淘汰<br>两个人进行比赛的条件:他们已经打过的次数相差小于等于1<br>问最终剩下的那个人,最多是打几场</p>
+<p>思路:<br>猜了个递推公式,<code>f[n]=f[n-1]+f[n-1]</code><br><code>f[1]=2,f[2]=3,f[3]=5</code><br>然后打表完扔数组里加个<code>upper_bound</code>交了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">	&gt; File Name: 2.cpp</span></span><br><span class="line"><span class="comment">	&gt; Author: mazicwong</span></span><br><span class="line"><span class="comment">	&gt; Mail: mazicwong@gmail.com</span></span><br><span class="line"><span class="comment">	&gt; Created Time: 2017年08月28日 星期一 18时54分07秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll n;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 2  1</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 3  2</span></span><br><span class="line"><span class="comment"> * 4  2</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 5  3</span></span><br><span class="line"><span class="comment"> * 6  3</span></span><br><span class="line"><span class="comment"> * 7  3</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 8  4</span></span><br><span class="line"><span class="comment"> * 9  4</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//ll a[200];</span></span><br><span class="line"></span><br><span class="line">ll ans[<span class="number">100</span>]=&#123;</span><br><span class="line"><span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>,<span class="number">21</span>,<span class="number">34</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">144</span>,<span class="number">233</span>,<span class="number">377</span>,<span class="number">610</span>,<span class="number">987</span>,<span class="number">1597</span>,<span class="number">2584</span>,<span class="number">4181</span>,<span class="number">6765</span>,<span class="number">10946</span>,<span class="number">17711</span>,<span class="number">28657</span>,<span class="number">46368</span>,<span class="number">75025</span>,<span class="number">121393</span>,<span class="number">196418</span>,<span class="number">317811</span>,<span class="number">514229</span>,<span class="number">832040</span>,<span class="number">1346269</span>,<span class="number">2178309</span>,<span class="number">3524578</span>,<span class="number">5702887</span>,<span class="number">9227465</span>,<span class="number">14930352</span>,<span class="number">24157817</span>,<span class="number">39088169</span>,<span class="number">63245986</span>,<span class="number">102334155</span>,<span class="number">165580141</span>,<span class="number">267914296</span>,<span class="number">433494437</span>,<span class="number">701408733</span>,<span class="number">1134903170</span>,<span class="number">1836311903</span>,<span class="number">2971215073</span>,<span class="number">4807526976</span>,<span class="number">7778742049</span>,<span class="number">12586269025</span>,<span class="number">20365011074</span>,<span class="number">32951280099</span>,<span class="number">53316291173</span>,<span class="number">86267571272</span>,<span class="number">139583862445</span>,<span class="number">225851433717</span>,<span class="number">365435296162</span>,<span class="number">591286729879</span>,<span class="number">956722026041</span>,<span class="number">1548008755920</span>,<span class="number">2504730781961</span>,<span class="number">4052739537881</span>,<span class="number">6557470319842</span>,<span class="number">10610209857723</span>,<span class="number">17167680177565</span>,<span class="number">27777890035288</span>,<span class="number">44945570212853</span>,<span class="number">72723460248141</span>,<span class="number">117669030460994</span>,<span class="number">190392490709135</span>,<span class="number">308061521170129</span>,<span class="number">498454011879264</span>,<span class="number">806515533049393</span>,<span class="number">1304969544928657</span>,<span class="number">2111485077978050</span>,<span class="number">3416454622906707</span>,<span class="number">5527939700884757</span>,<span class="number">8944394323791464</span>,<span class="number">14472334024676221</span>,<span class="number">23416728348467685</span>,<span class="number">37889062373143906</span>,<span class="number">61305790721611591</span>,<span class="number">99194853094755497</span>,<span class="number">160500643816367088</span>,<span class="number">259695496911122585</span>,<span class="number">420196140727489673</span>,<span class="number">679891637638612258</span>,<span class="number">1100087778366101931</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    a[<span class="number">1</span>]=<span class="number">2</span>; a[<span class="number">2</span>]=<span class="number">3</span>;a[<span class="number">3</span>]=<span class="number">5</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">4</span>;i&lt;=<span class="number">86</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i] = a[i<span class="number">-1</span>]+a[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">86</span>;i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">','</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen("in","r",stdin);</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">int</span> aa = upper_bound(ans,ans+<span class="number">87</span>,n)-ans;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,aa<span class="number">-1</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>4.<br>题意:<br>给n元,要交的税是n的最大因子(eg:n=25,交5),现在将n分成若干份,问交的税最小是多少</p>
+<p>思路:<br>只有3种情况,</p>
+<ul>
+<li>如果是质数,不分,直接交1元;</li>
+<li>如果是合数的话,当他为偶数,直接表示为2个质数之和,结果为2,,</li>
+<li>当他为奇数,这时候有可能是2跟3,他先减掉一个偶数2,如果是质数,就直接表示为2,否则表示为3(可以理解为,减掉3然后变成一个偶数)</li>
+</ul>
+<p>最后再套一个大数素数测试的模板,或者手写一个<code>O(sqrt(n))</code>的素数测试</p>
+<p>扩展:<br>哥德巴赫猜想:一个偶数可以表示为2个质数的和.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">    &gt; File Name: 4.cpp</span></span><br><span class="line"><span class="comment">    &gt; Author: mazicwong</span></span><br><span class="line"><span class="comment">    &gt; Mail: mazicwong@gmail.com</span></span><br><span class="line"><span class="comment">    &gt; Created Time: 2017年08月28日 星期一 19时47分50秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> S=<span class="number">5</span>;<span class="comment">//测试次数，越大精度越高</span></span><br><span class="line"><span class="function">ll <span class="title">mod_mul</span><span class="params">(ll a, ll b, ll n)</span>  <span class="comment">//快速乘</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)    res = (res + a) % n;</span><br><span class="line">        a = (a + a) % n;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">mod_exp</span><span class="params">(ll a, ll b, ll n)</span>  <span class="comment">//快速幂</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)    res = mod_mul(res, a, n);</span><br><span class="line">        a = mod_mul(a, a, n);</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">miller_rabin</span><span class="params">(ll n)</span>  <span class="comment">//复杂度很小</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">2</span> || n == <span class="number">3</span> || n == <span class="number">5</span> || n == <span class="number">7</span> || n == <span class="number">11</span>)    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || !(n%<span class="number">2</span>) || !(n%<span class="number">3</span>) || !(n%<span class="number">5</span>) || !(n%<span class="number">7</span>) || !(n%<span class="number">11</span>))    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    ll x, pre, u;</span><br><span class="line">    <span class="keyword">int</span> i, j, k = <span class="number">0</span>;</span><br><span class="line">    u = n - <span class="number">1</span>;    <span class="comment">//要求x^u % n</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!(u&amp;<span class="number">1</span>))      <span class="comment">//如果u为偶数则u右移，用k记录移位数</span></span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">        u &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    srand((ll)time(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; S; ++i)      <span class="comment">//进行S次测试</span></span><br><span class="line">    &#123;</span><br><span class="line">        x = rand()%(n<span class="number">-2</span>) + <span class="number">2</span>;    <span class="comment">//在[2, n)中取随机数</span></span><br><span class="line">        <span class="keyword">if</span>((x%n) == <span class="number">0</span>)    <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        x = mod_exp(x, u, n);    <span class="comment">//先计算(x^u) % n，</span></span><br><span class="line">        pre = x;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; k; ++j)      <span class="comment">//把移位减掉的量补上，并在这地方加上二次探测</span></span><br><span class="line">        &#123;</span><br><span class="line">            x = mod_mul(x, x, n);</span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">1</span> &amp;&amp; pre != <span class="number">1</span> &amp;&amp; pre != n<span class="number">-1</span>)    <span class="keyword">return</span> <span class="literal">false</span>;    <span class="comment">//二次探测定理，这里如果x = 1则pre 必须等于 1，或则 n-1否则可以判断不是素数</span></span><br><span class="line">            pre = x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(x != <span class="number">1</span>)    <span class="keyword">return</span> <span class="literal">false</span>;    <span class="comment">//费马小定理</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen("in","r",stdin);</span></span><br><span class="line">    <span class="comment">//*/test miller_rabin</span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(miller_rabin(n))</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(miller_rabin(n<span class="number">-2</span>))</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"2\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"3\n"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/codeforces/" rel="tag"><i class="fa fa-tag"></i> codeforces</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/28/G++&C++/" rel="next" title="G++&C++">
+                <i class="fa fa-chevron-left"></i> G++&C++
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/01/ruby(first)/" rel="prev" title="ruby(first)">
+                ruby(first) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.jpg"
+                alt="MazicWong" />
+            
+              <p class="site-author-name" itemprop="name">MazicWong</p>
+              <p class="site-description motion-element" itemprop="description">blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mazicwong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://mazicwong.github.io" target="_blank" title="blog">
+                      
+                        <i class="fa fa-fw fa-globe"></i>blog</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MazicWong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
