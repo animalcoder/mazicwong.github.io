@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="windows下参考 linux下: 12345678910111213141516#bashwhile true; do      ./data_maker&amp;gt;tmp.in #出数据      ./MyProg&amp;lt;tmp.in&amp;gt;tmp.out #被测程序      ./StdProg&amp;lt;tmp.in&amp;gt;tmp2.out #正确（暴力）程序      if diff tmp.">
+<meta name="description" content="windows下参考 Windows下脚本12345678910111213141516#include&amp;lt;iostream&amp;gt;#include&amp;lt;windows.h&amp;gt;using namespace std;int main()&amp;#123;    int t=100;    while(t--)    &amp;#123;        system(&quot;data &amp;gt; a+b.in&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对拍程序">
 <meta property="og:url" content="mazicwong.github.io/2017/08/17/对拍程序/index.html">
 <meta property="og:site_name" content="mazicwong">
-<meta property="og:description" content="windows下参考 linux下: 12345678910111213141516#bashwhile true; do      ./data_maker&amp;gt;tmp.in #出数据      ./MyProg&amp;lt;tmp.in&amp;gt;tmp.out #被测程序      ./StdProg&amp;lt;tmp.in&amp;gt;tmp2.out #正确（暴力）程序      if diff tmp.">
+<meta property="og:description" content="windows下参考 Windows下脚本12345678910111213141516#include&amp;lt;iostream&amp;gt;#include&amp;lt;windows.h&amp;gt;using namespace std;int main()&amp;#123;    int t=100;    while(t--)    &amp;#123;        system(&quot;data &amp;gt; a+b.in&quot;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:updated_time" content="2018-03-13T10:59:58.285Z">
+<meta property="og:updated_time" content="2018-03-17T08:39:14.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对拍程序">
-<meta name="twitter:description" content="windows下参考 linux下: 12345678910111213141516#bashwhile true; do      ./data_maker&amp;gt;tmp.in #出数据      ./MyProg&amp;lt;tmp.in&amp;gt;tmp.out #被测程序      ./StdProg&amp;lt;tmp.in&amp;gt;tmp2.out #正确（暴力）程序      if diff tmp.">
+<meta name="twitter:description" content="windows下参考 Windows下脚本12345678910111213141516#include&amp;lt;iostream&amp;gt;#include&amp;lt;windows.h&amp;gt;using namespace std;int main()&amp;#123;    int t=100;    while(t--)    &amp;#123;        system(&quot;data &amp;gt; a+b.in&quot;">
 
 
 
@@ -320,7 +320,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  218
+                  291
                 </span>
               
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -358,10 +358,9 @@
 
       
         <p><a href="http://www.cnblogs.com/qscqesze/p/4442527.html" target="_blank" rel="noopener">windows下参考</a></p>
-<p>linux下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bash</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span>  </span><br><span class="line">    ./data_maker&gt;tmp.in <span class="comment">#出数据  </span></span><br><span class="line">    ./MyProg&lt;tmp.in&gt;tmp.out <span class="comment">#被测程序  </span></span><br><span class="line">    ./StdProg&lt;tmp.in&gt;tmp2.out <span class="comment">#正确（暴力）程序  </span></span><br><span class="line">    <span class="keyword">if</span> diff tmp.out tmp2.out; <span class="keyword">then</span> <span class="comment">#比较两个输出文件  </span></span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"AC\n"</span>  <span class="comment">#结果相同显示AC  </span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">elif</span> diff -B -b tmp.out tmp2.out; <span class="keyword">then</span>  </span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"PE\n"</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"WA\n"</span> <span class="comment">#结果不同显示WA，并退出  </span></span><br><span class="line">        <span class="built_in">exit</span> 0  </span><br><span class="line">    <span class="keyword">fi</span>  </span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<p>举例:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a+b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Windows下脚本"><a href="#Windows下脚本" class="headerlink" title="Windows下脚本"></a>Windows下脚本</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        system(<span class="string">"data &gt; a+b.in"</span>);</span><br><span class="line">        system(<span class="string">"zj &lt; a+b.in &gt; 1.out"</span>);</span><br><span class="line">        system(<span class="string">"duipai &lt; a+b.in &gt; 2.out"</span>);</span><br><span class="line">        <span class="keyword">if</span>(system(<span class="string">"fc 1.out 2.out"</span>)) &#123;<span class="built_in">printf</span>(<span class="string">"WA\n"</span>);<span class="keyword">break</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="linux下脚本"><a href="#linux下脚本" class="headerlink" title="linux下脚本"></a>linux下脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bash</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span>  </span><br><span class="line">    ./data_maker&gt;tmp.in <span class="comment">#出数据  </span></span><br><span class="line">    ./MyProg&lt;tmp.in&gt;tmp.out <span class="comment">#被测程序  </span></span><br><span class="line">    ./StdProg&lt;tmp.in&gt;tmp2.out <span class="comment">#正确（暴力）程序  </span></span><br><span class="line">    <span class="keyword">if</span> diff tmp.out tmp2.out; <span class="keyword">then</span> <span class="comment">#比较两个输出文件  </span></span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"AC\n"</span>  <span class="comment">#结果相同显示AC  </span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">elif</span> diff -B -b tmp.out tmp2.out; <span class="keyword">then</span>  </span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"PE\n"</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"WA\n"</span> <span class="comment">#结果不同显示WA，并退出  </span></span><br><span class="line">        <span class="built_in">exit</span> 0  </span><br><span class="line">    <span class="keyword">fi</span>  </span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="所需文件"><a href="#所需文件" class="headerlink" title="所需文件"></a>所需文件</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a+b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="keyword">while</span>(b--) a++;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//data_maker</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    a=rand();</span><br><span class="line">    b=rand();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">' '</span>&lt;&lt;b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -452,8 +451,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -472,7 +480,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
@@ -485,7 +493,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
@@ -524,6 +532,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows下脚本"><span class="nav-number">1.</span> <span class="nav-text">Windows下脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux下脚本"><span class="nav-number">2.</span> <span class="nav-text">linux下脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所需文件"><span class="nav-number">3.</span> <span class="nav-text">所需文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
