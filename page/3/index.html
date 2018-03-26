@@ -254,6 +254,498 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/09/11/随机数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/11/随机数/" itemprop="url">随机数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T17:44:20+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  70
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>int型:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">srand(time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,rand());</span><br></pre></td></tr></table></figure></p>
+<p><strong>给定范围:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> t=<span class="number">100</span>;</span><br><span class="line">srand(time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,rand()%t);</span><br></pre></td></tr></table></figure></p>
+<p><strong>double型:</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">srand(time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%.6lf\n"</span>,rand()*<span class="number">1.0</span>/<span class="number">100</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>字符串</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> len=<span class="number">100</span>;</span><br><span class="line">srand(time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="keyword">while</span>(len--)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%c\n"</span>,<span class="string">'A'</span>+rand()%<span class="number">26</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/09/11/输入挂/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/11/输入挂/" itemprop="url">输入挂</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T00:21:41+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  458
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>测试: hdu6208 青岛网络赛第三题的AC自动机,3000ms</p>
+<ul>
+<li>AC自动机:</li>
+<li>1.用<code>string+sync</code>            各种TLE</li>
+<li>2.改用<code>char ss[]</code>            刚好卡过去..2800ms</li>
+<li>3.加了个<code>fastIO</code>输入挂…    2400ms就过了</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> fastIO  </span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100000  </span></span><br><span class="line">    <span class="comment">//fread -&gt; read</span></span><br><span class="line">    <span class="keyword">bool</span> IOerror = <span class="number">0</span>;  </span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">nc</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[BUF_SIZE], *p1 = buf + BUF_SIZE, *pend = buf + BUF_SIZE;  </span><br><span class="line">        <span class="keyword">if</span>(p1 == pend) &#123;  </span><br><span class="line">            p1 = buf;  </span><br><span class="line">            pend = buf + fread(buf, <span class="number">1</span>, BUF_SIZE, <span class="built_in">stdin</span>);  </span><br><span class="line">            <span class="keyword">if</span>(pend == p1) &#123;  </span><br><span class="line">                IOerror = <span class="number">1</span>;<span class="keyword">return</span> <span class="number">-1</span>;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> *p1++;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">blank</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span> || ch == <span class="string">'\t'</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">char</span> x[])</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">char</span> ch;  </span><br><span class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </span><br><span class="line">        <span class="keyword">if</span>(IOerror)  </span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(x[k++] = ch; (ch = nc())&amp;&amp;(!blank(ch))&amp;&amp;(ch != EOF); x[k++] = ch);  </span><br><span class="line">        x[k]=<span class="string">'\0'</span>;  </span><br><span class="line">        <span class="keyword">return</span> k;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">readint</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">char</span> ch;  </span><br><span class="line">        <span class="keyword">while</span>(blank(ch = nc()));  </span><br><span class="line">        <span class="keyword">if</span>(IOerror)<span class="keyword">return</span>;  </span><br><span class="line">        <span class="keyword">for</span>(x = ch - <span class="string">'0'</span>; (ch = nc()) &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> BUF_SIZE  </span></span><br><span class="line">&#125;;  </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> fastIO;  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//how to use</span></span><br><span class="line"><span class="keyword">while</span>(read(n),!fastIO::IOerror)</span><br><span class="line">&#123;</span><br><span class="line">    readint(T);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        readint(a[i]);</span><br><span class="line">    <span class="keyword">char</span> str[maxn];</span><br><span class="line">    read(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>/<strong><strong>**</strong></strong>another<strong><strong>***</strong></strong>/</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//适用于正负整数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">bool</span> <span class="title">scan_d</span>(<span class="title">T</span> &amp;<span class="title">ret</span>) &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c; <span class="keyword">int</span> sgn;</span><br><span class="line">    <span class="keyword">if</span>(c=getchar(),c==EOF) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//EOF</span></span><br><span class="line">    <span class="keyword">while</span>(c!=<span class="string">'-'</span>&amp;&amp;(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)) c=getchar();</span><br><span class="line">    sgn=(c==<span class="string">'-'</span>)?<span class="number">-1</span>:<span class="number">1</span>;</span><br><span class="line">    ret=(c==<span class="string">'-'</span>)?<span class="number">0</span>:(c-<span class="string">'0'</span>);</span><br><span class="line">    <span class="keyword">while</span>(c=getchar(),c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>) ret=ret*<span class="number">10</span>+(c-<span class="string">'0'</span>);</span><br><span class="line">    ret*=sgn;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;<span class="number">9</span>) out(x/<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>/<strong><strong>**</strong></strong>another<strong><strong>***</strong></strong>/<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
+<p>/<strong><strong>**</strong></strong>test<strong><strong>***</strong></strong>/<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> start = clock();</span><br><span class="line">    <span class="comment">// do sth;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.3lf\n"</span>,<span class="keyword">double</span>(clock()-start)/CLOCKS_PRE_SEC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>//一开始测用  <code>for (int i=0;i&lt;maxn;i++) cin&gt;&gt;i;</code> 然后输入挂一直用不了…<br>int maxn = 1e7+5;</p>
+<p>//1.406s<br>while(maxn–) cin&gt;&gt;i;</p>
+<p>//0.552<br>while(maxn–) scanf(“%d”,&amp;i);</p>
+<p>//0.521<br>std::ios::sync_with_stdio(false);<br>while(maxn–) cin&gt;&gt;i;</p>
+<p>//0.427<br>std::ios::sync_with_stdio(false); cin.tie(0);<br>while(maxn–) cin&gt;&gt;i;</p>
+<p>//0.229 (kuangbin)<br>while(maxn–) scan_d()i;</p>
+<p>//0.165 (神奇FastIO挂)<br>while(maxn–) readint(i)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/09/09/最小生成树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MazicWong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mazicwong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/09/最小生成树/" itemprop="url">最小生成树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T10:53:08+08:00">
+                2017-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  495
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最小生成树:kruskal or Prim</p>
+<p>算法:<br>kruskal中,建图一般存边,然后可以sort所有边权,依次取入<code>n-1</code>条边,过程中用并查集判定不会构成回路</p>
+<hr>
+<p>kruskal模板:poj1287<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">50</span>+<span class="number">5</span>;<span class="comment">//point</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1500</span>+<span class="number">5</span>;<span class="comment">//edge</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * poj1287: 传入点,边,求最小生成树边权和</span></span><br><span class="line"><span class="comment"> * 复杂度: E*logV</span></span><br><span class="line"><span class="comment"> * point: [1..n]</span></span><br><span class="line"><span class="comment"> * edge: [0..m-1]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">int</span> n,m;<span class="comment">//点,边</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//建图(存边)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">int</span> d;</span><br><span class="line">&#125;E[maxm];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(edge a1,edge a2)</span></span>&#123;<span class="keyword">return</span> a1.d&lt;a2.d;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//并查集(判连通块)</span></span><br><span class="line"><span class="keyword">int</span> fa[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fa[i]=i;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;<span class="keyword">return</span> x==fa[x]?x:fa[x]=find(fa[x]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nx=find(x),ny=find(y);</span><br><span class="line">    <span class="keyword">if</span> (nx!=ny) fa[nx]=ny;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//kruskal(传入边数)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    sort(E,E+num,cmp);</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (find(E[i].x)!=find(E[i].y))</span><br><span class="line">        &#123;</span><br><span class="line">            ans += E[i].d;</span><br><span class="line">            unite(E[i].x,E[i].y);</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n<span class="number">-1</span>==cnt)</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen("in","r",stdin);</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) &amp;&amp; n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;E[i].x,&amp;E[i].y,&amp;E[i].d);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,kruskal(m));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>poj 1287 裸最小生成树</p>
+<p>题意:<br>给n点,m边,求最小生成树边权和</p>
+<hr>
+<p>hdu 1233 最小生成树边权和</p>
+<p>题意:<br><code>n</code>村庄,<code>n*(n-1)/2</code>路,输出最小公路总长度</p>
+<p>思路:<br>裸题</p>
+<hr>
+<p>hdu1301 &amp; poj1251</p>
+<p>题意:<br>n点,然后给边,按邻接表方式给,求最小生成树边权和</p>
+<hr>
+<p>hdu 1875</p>
+<p>题意:<br>给出所有点坐标,任意两点建路,要求距离在10到1000之间,目的是使n个点连通,问最少需要建多少</p>
+<p>思路:<br>求出所有边距离,判断是否符合,然后套一个kruskal</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/09/01/ruby(first)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1443,542 +1935,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/08/17/对拍程序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MazicWong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="mazicwong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/对拍程序/" itemprop="url">对拍程序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T01:13:16+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  291
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.cnblogs.com/qscqesze/p/4442527.html" target="_blank" rel="noopener">windows下参考</a></p>
-<h3 id="Windows下脚本"><a href="#Windows下脚本" class="headerlink" title="Windows下脚本"></a>Windows下脚本</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        system(<span class="string">"data &gt; a+b.in"</span>);</span><br><span class="line">        system(<span class="string">"zj &lt; a+b.in &gt; 1.out"</span>);</span><br><span class="line">        system(<span class="string">"duipai &lt; a+b.in &gt; 2.out"</span>);</span><br><span class="line">        <span class="keyword">if</span>(system(<span class="string">"fc 1.out 2.out"</span>)) &#123;<span class="built_in">printf</span>(<span class="string">"WA\n"</span>);<span class="keyword">break</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="linux下脚本"><a href="#linux下脚本" class="headerlink" title="linux下脚本"></a>linux下脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bash</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span>  </span><br><span class="line">    ./data_maker&gt;tmp.in <span class="comment">#出数据  </span></span><br><span class="line">    ./MyProg&lt;tmp.in&gt;tmp.out <span class="comment">#被测程序  </span></span><br><span class="line">    ./StdProg&lt;tmp.in&gt;tmp2.out <span class="comment">#正确（暴力）程序  </span></span><br><span class="line">    <span class="keyword">if</span> diff tmp.out tmp2.out; <span class="keyword">then</span> <span class="comment">#比较两个输出文件  </span></span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"AC\n"</span>  <span class="comment">#结果相同显示AC  </span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">elif</span> diff -B -b tmp.out tmp2.out; <span class="keyword">then</span>  </span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"PE\n"</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"WA\n"</span> <span class="comment">#结果不同显示WA，并退出  </span></span><br><span class="line">        <span class="built_in">exit</span> 0  </span><br><span class="line">    <span class="keyword">fi</span>  </span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<h3 id="所需文件"><a href="#所需文件" class="headerlink" title="所需文件"></a>所需文件</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a+b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="keyword">while</span>(b--) a++;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//data_maker</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    a=rand();</span><br><span class="line">    b=rand();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">' '</span>&lt;&lt;b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/08/17/各种数学/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MazicWong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="mazicwong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/各种数学/" itemprop="url">各种数学</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T01:08:19+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  712
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.cnblogs.com/qscqesze/p/5129856.html" target="_blank" rel="noopener">参考</a></p>
-<p><a href="http://blog.csdn.net/ACdreamers/article/category/1159392" target="_blank" rel="noopener">太菜了,开始系统学习下数论知识点 &amp; 整理模板</a></p>
-<p><a href="http://www.cnblogs.com/linyujun/category/784324.html" target="_blank" rel="noopener">http://www.cnblogs.com/linyujun/category/784324.html</a></p>
-<ul>
-<li><a href="#1">1.数论基础</a><ul>
-<li><a href="#1.1">1.1图片</a></li>
-<li><a href="#1.2">1.2换行</a></li>
-</ul>
-</li>
-</ul>
-<p>[欧几里得]<br>[扩展欧几里得]<br>[中国剩余定理]<br>[高斯消元法]<br>[卢卡斯定理]<br>[容斥原理]<br>[莫比乌斯反演]<br>[快速幂]<br>[素数筛选]<br>[分解质因数]<br>[求因子数]<br>[欧拉函数]</p>
-<hr>
-<h2 id="1">数论基础</h2>
-
-
-<hr>
-<h3 id="1.1">欧几里得:辗转相除法</h3>
-
-
-
-<hr>
-<p></p><h3 id="1.2">拓展欧几里得:</h3><p></p>
-<blockquote>
-<p>ax+by=gcd(a,b)<br>当gcd(a,b)=1,即a,b互质,方程的解是a关于模b的逆元</p>
-</blockquote>
-<hr>
-<p>中国剩余定理(CRT):</p>
-<blockquote>
-<p>“物不知其数问题”  N≡2 (mod 3)≡3 (mod 5)≡2 (mod 7)</p>
-</blockquote>
-<hr>
-<p>高斯消元法:</p>
-<blockquote>
-</blockquote>
-<hr>
-<p>卢卡斯定理:(Lucas)组合数取模</p>
-<blockquote>
-<p>模运算求二项式系数C(n,r)%p,</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">mod_pow</span><span class="params">(ll x,ll n,ll mod)</span></span>&#123;<span class="comment">//快速幂</span></span><br><span class="line">    ll res=<span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">while</span>(n&gt;<span class="number">0</span>)&#123;  </span><br><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>) res=(res*x)%mod;</span><br><span class="line">        x=x*x%mod;</span><br><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line">ll fac[<span class="number">100005</span>];  </span><br><span class="line"><span class="function">ll <span class="title">Get_Fact</span><span class="params">(ll p)</span></span>&#123;<span class="comment">//初始化</span></span><br><span class="line">    fac[<span class="number">0</span>]=<span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=p;i++)  </span><br><span class="line">        fac[i]=(fac[i<span class="number">-1</span>]*i)%p;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function">ll <span class="title">Lucas</span><span class="params">(ll n,ll m,ll p)</span></span>&#123;<span class="comment">//Lucas 定理</span></span><br><span class="line">    ll res=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(n&amp;&amp;m)&#123;</span><br><span class="line">        ll a=n%p,b=m%p;</span><br><span class="line">        <span class="keyword">if</span>(a&lt;b) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        res=(res*fac[a]*mod_pow(fac[b]*fac[a-b]%p,p<span class="number">-2</span>,p))%p;</span><br><span class="line">        n/=p;</span><br><span class="line">        m/=p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><a href="http://www.cppblog.com/vici/archive/2011/09/05/155103.html" target="_blank" rel="noopener">容斥原理:</a></p>
-<blockquote>
-</blockquote>
-<hr>
-<p><a href="https://www.zhihu.com/question/23764267/answer/26007647" target="_blank" rel="noopener">莫比乌斯反演:</a></p>
-<blockquote>
-</blockquote>
-<hr>
-<p>快速幂:(反复平方法降复杂度logn)</p>
-<blockquote>
-<p>x^n%mod,重复n次x的乘积,把n拆为多个2的幂形式(即直接判二进制位)<br>判n的每一位过程中,每次都更新x为x^2,对应上面的2的幂次  </p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">mod_pow</span><span class="params">(ll x, ll n,ll mod)</span><span class="comment">//x^n%mod</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll res=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(n&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n&amp;<span class="number">1</span>) res = res*x%mod;<span class="comment">//最低位1则要乘以x^(2^i)</span></span><br><span class="line">        x = x*x%mod;<span class="comment">//</span></span><br><span class="line">        n&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>素数筛选:</p>
-<blockquote>
-<p>i*i&lt;n筛素数</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> isprime[maxm];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getprime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxm;i++)</span><br><span class="line">        isprime[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="built_in">sqrt</span>(maxm);i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(isprime[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+i;j&lt;maxm;j+=i)</span><br><span class="line">                isprime[j]=<span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxm;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (isprime[i])</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>分解质因数:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_key</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(n!=i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (n%i==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d*"</span>,i);</span><br><span class="line">                n=n/i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><a href="http://blog.sina.com.cn/s/blog_818d3d9301017436.html" target="_blank" rel="noopener">求因子数d(n):</a></p>
-<blockquote>
-<p>n的因子数,分解质因数n=P1^x1 <em> P2^x2</em> …… <em> Pm^xm;<br>d(n)=(x1+1)</em>(x2+1)<em>…</em>(xm+1)<br>d(n^k)=(kx1+1)<em>(kx2+1)…(kxm+1)  n=p1^x1</em>p2^x2…pm^xm</p>
-</blockquote>
-<hr>
-<p>欧拉函数:</p>
-<blockquote>
-<p>[1,n]与n公约数为1的个数</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">euler</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll i,ans=x;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(x*<span class="number">1.0</span>)+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x%i==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans=ans/i*(i<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">while</span> (x%i==<span class="number">0</span>) x/=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x&gt;<span class="number">1</span>) ans=ans/x*(x<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="mazicwong.github.io/2017/08/17/博弈论/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MazicWong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="mazicwong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/博弈论/" itemprop="url">博弈论</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T01:02:41+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  5
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.51nod.com/blog/blog.html#!blogId=190" target="_blank" rel="noopener">51nod上博弈论</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2028,7 +1989,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2041,7 +2002,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
